@@ -1,0 +1,27 @@
+@import '~Assets/Theme/Fonts';
+@import '~Assets/Theme/Palette';
+
+html, body {
+	height: 100%;
+}
+
+html {
+	height: calc(100% - 32px);
+}
+
+* {
+	font-family: @font-text;
+
+	&:before, &:after {
+		box-sizing: border-box;
+	}
+}
+
+a {
+	color: @color-primary;
+	text-decoration: none;
+
+	&:hover {
+		color: @color-tertiary;
+	}
+}

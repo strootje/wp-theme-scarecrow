@@ -1,0 +1,28 @@
+@import '~Assets/Theme/index';
+
+.mainnav {
+	margin-bottom: @spacing-wide;
+
+	ul {
+		list-style: none;
+
+		.item {
+			a {
+				display: block;
+				font-size: @spacing;
+				font-weight: bold;
+				text-decoration: none;
+				text-transform: uppercase;
+				text-align: center;
+
+				&.active {
+					border-bottom: solid 1px @color-primary-darker;
+				}
+			}
+		}
+
+		.item, .search {
+			margin-top: @spacing;
+		}
+	}
+}

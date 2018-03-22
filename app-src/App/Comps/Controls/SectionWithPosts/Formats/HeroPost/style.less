@@ -1,0 +1,43 @@
+@import '~Assets/Theme/index';
+
+.postItemHero {
+	.inside {
+		footer {
+			.readmore {
+				width: 160px;
+				padding: calc(@spacing-dense / 2) @spacing-dense;
+				margin: @spacing-dense auto @spacing-wide auto;
+				display: block;
+				border: solid 2px @color-primary-lighter;
+				border-radius: 5px;;
+				text-align: center;
+				text-transform: uppercase;
+
+				a {
+					display: block;
+				}
+
+				&:hover {
+					border-color: @color-tertiary;
+				}
+			}
+
+			.postinfo {
+				border-top: double 1px @color-primary-lighter;
+				span {
+					color: @color-primary-lighter;
+
+					&::before {
+						content: " " attr(data-prefix) " ";
+						color: @color-primary-darker;
+					}
+				}
+			}
+		}
+	}
+
+	&:not(:first-child) {
+		padding-top: @spacing-wide;
+		margin-top: @spacing-wide;
+	}
+}

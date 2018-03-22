@@ -1,0 +1,24 @@
+@import '~Assets/Theme/Reset';
+@import '~Assets/Theme/index';
+
+@admin-bar-height: 32px;
+@border: calc(@spacing-dense / 2) solid @color-primary;
+
+.layout {
+	height: calc(100% + @admin-bar-height);
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+
+	.wrapper {
+		border-top: @border;
+	}
+
+	.footer {
+		border-bottom: @border;
+	}
+}
+
+.admin-bar .layout {
+	height: 100%;
+}

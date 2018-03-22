@@ -1,0 +1,16 @@
+@import '~Assets/Theme/index';
+
+.sidebar {
+	list-style: none;
+
+	li {
+		padding: 0;
+		margin: 0;
+
+		&:not(:first-child) {
+			margin-top: @spacing;
+			display: block;
+			border-top: solid 3px @color-primary-darker;
+		}
+	}
+}
