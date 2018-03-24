@@ -17,7 +17,7 @@ const defaults = state => merge({}, {
 		name: '...',
 		items: []
 	}
-}, state);
+}, theme.menus, state);
 
 export default ( oldstate, action ) => {
 	const state = defaults(oldstate);

@@ -7,6 +7,7 @@ import {
 const defaults = state => merge({}, {
 	title: '...',
 	tagline: '...',
+	baseurl: '',
 	logo: false,
 
 	support: {
@@ -15,7 +16,7 @@ const defaults = state => merge({}, {
 			configured: false
 		}
 	}
-}, state);
+}, theme.info, state);
 
 export default ( oldstate, action ) => {
 	const state = defaults(oldstate);
@@ -24,6 +25,7 @@ export default ( oldstate, action ) => {
 		case THEME_FETCH_SUCCESS:
 			state.title = action.info.title;
 			state.tagline = action.info.tagline;
+			state.baseurl = action.info.baseurl;
 			state.logo = action.info.logo;
 			state.support = action.info.support;
 			return state;

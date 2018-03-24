@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import types from 'prop-types';
 import names from 'classnames';
+import { IsMobile } from 'Assets/Helpers';
 
 import Link from 'Comps/Controls/Link';
 import List from 'Comps/Controls/List';
@@ -18,10 +19,10 @@ class SectionWithProjectsView extends Component {
 		return (
 			<List source={projects} filter={p => Object.values(p.projectsById)} fetch={fetchProjects} itemsPerPage={3} render={({ renderItems }) => (
 				<div class={styles.projects}>{renderItems(({ key, item }) => (
-					<article class={styles.item} style={{ order: key ? (10 * key) : 15 }}>
-						<div class={styles.inside}><Link to={`/projects/${item.slug}`}>
-							<ZoomImage header title={item.title} src={key ? item.thumbnail_banner : item.thumbnail_banner_hero} />
-						</Link></div>
+					<article class={names(styles.item, styles[`n${key+1}`])}>
+						<Link to={item.link}>
+							<ZoomImage header title={item.title} src={(IsMobile() || key) ? item.thumbnail_banner : item.thumbnail_banner_hero} />
+						</Link>
 					</article>
 				))}</div>
 			)} />

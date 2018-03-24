@@ -6,25 +6,25 @@
 
 	.label {
 		margin: 0;
-		color: @color-primary-darker;
+		color: @color-primary-lighter;
 		font-size: 2.6rem;
 		font-family: @font-header;
 		font-weight: bold;
 		text-transform: uppercase;
-		text-shadow: 2px 2px @color-primary-lighter;
+		text-shadow: 3px 3px @color-primary-darker;
 
 		&::first-letter {
 			margin-right: 3px;
 			font-size: 3.1rem;
 			font-family: @font-tertiary;
-			color: @color-primary-lighter;
-			text-shadow: 2px 2px @color-primary-darker;
+			// color: @color-primary-light;
+			// text-shadow: 2px 2px @color-primary-darker;
 		}
 	}
 
 	&.backdrop {
 		padding: @spacing-dense @spacing;
-		background-color: fade(@color-primary-light, 35%);
+		background-color: fade(@color-primary-darker, 65%);
 	}
 
 	&.topleft {

@@ -4,8 +4,9 @@ import SidebarStyle from './style';
 import { compose } from 'recompose';
 import { connect } from 'preact-redux';
 
-const mapState = ({ state: { menus, info: { support } } }) => ({
+const mapState = ({ state: { locales, menus, info: { support }}}) => ({
 	styles: SidebarStyle,
+	locale: locales.sidebar,
 	support: support,
 	menu: menus.sidebar
 });

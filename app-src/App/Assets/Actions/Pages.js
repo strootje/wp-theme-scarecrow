@@ -7,7 +7,7 @@ module.exports = {
 			pageBy(pageId: $pageId) {
 				pageId
 				title
-				slug
+				link
 				content
 			}
 		}`,

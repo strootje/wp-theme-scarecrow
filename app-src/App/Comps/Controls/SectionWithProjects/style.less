@@ -1,38 +1,24 @@
 @import '~Assets/Theme/index';
 
-@bigEnlargeBy: calc(@spacing * 4);
-
 .projects {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: row wrap;
+	justify-content: space-around;
 	align-items: center;
-	justify-content: space-between;
 
 	.item {
-		margin: 0 @spacing-dense;
-		flex-grow: 1;
-	
-		.inside {
-			overflow: hidden;
+		flex-shrink: 0;
+		flex-basis: 260px;
+		margin: @spacing-dense;
 
-			img {
-				width: 260px;
-				height: 140px;
-			}
-		}
+		&.n1 { order: 10; }
+		&.n2 { order: 20; }
+		&.n3 { order: 30; }
 
-		&:first-child {
-			flex-grow: 2;
-
-			.inside {
-				header {
-					bottom: calc(@bigEnlargeBy / 2);
-				}
-
-				img {
-					width: calc(260px + @bigEnlargeBy);
-					height: calc(140px + (@bigEnlargeBy / 2));
-				}
+		@media all and (min-width: 800px) {
+			&.n1 {
+				flex-grow: 1;
+				order: 25;
 			}
 		}
 	}

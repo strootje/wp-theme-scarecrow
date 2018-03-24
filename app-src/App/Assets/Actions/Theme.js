@@ -17,7 +17,8 @@ const _fetchThemeFailure = ( reason ) => ({
 
 export const FetchTheme = () => ( dispatch, getState, client ) => {
 	dispatch(_fetchThemeStart());
-	return fetch('/wp-json/scarecrow/v1/theme').then(resp => resp.json()).then(
+	// return fetch('/wp-json/scarecrow/v1/theme').then(resp => resp.json()).then(
+	return Promise.resolve(theme).then(
 		json => dispatch(_fetchThemeSuccess(json)),
 		erro => dispatch(_fetchThemeFailure(erro))
 	);

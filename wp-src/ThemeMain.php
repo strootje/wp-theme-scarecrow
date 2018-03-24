@@ -7,6 +7,7 @@ use Scarecrow\Customizers\ThemeCustomizer;
 use Scarecrow\Endpoints\v1\ThemeModsEndpoint;
 use Scarecrow\Graphql\Graphql;
 use Scarecrow\Helpers\DepChecker;
+use Scarecrow\Helpers\Localizer;
 use Scarecrow\PostTypes\ProjectType;
 use Scarecrow\PostTypes\RecipeType;
 
@@ -25,7 +26,7 @@ class ThemeMain {
 		self::$version = $theme->Version;
 
 		// Init other stuff
-		new ProjectType();
+		ProjectType::init();
 		// new RecipeType();
 
 		// Define theme support
@@ -56,6 +57,15 @@ class ThemeMain {
 		]);
 	}
 
+	public function enqueueScripts() {
+		$path = get_template_directory_uri();
+		wp_enqueue_script("app.bundle", "{$path}/dist/assets/js/app.bundle.js", [ "app.vendor" ], self::$version, true);
+		wp_enqueue_script("app.vendor", "{$path}/dist/assets/js/app.vendor.js", [], self::$version, true);
+
+		wp_localize_script("app.bundle", "theme", ThemeModsEndpoint::getThemeMods([]));
+		wp_localize_script("app.bundle", "locale", Localizer::getStrings());
+	}
+
 	public function init() {
 		// Options
 		// ColorCustomizer::register();
@@ -69,7 +79,7 @@ class ThemeMain {
 		Graphql::register();
 
 		// Register post types
-		register_post_type(ProjectType::$name, ProjectType::$options);
+		ProjectType::register();
 		// register_post_type(RecipeType::$name, RecipeType::$options);
 	}
 

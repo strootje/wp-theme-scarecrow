@@ -4,9 +4,9 @@ import LinkStyle from './style';
 import { compose } from 'recompose';
 import { connect } from 'preact-redux';
 
-const mapState = ({ state: { info: { baseurl }}}) => ({
+const mapState = ({ state: { locales } }) => ({
 	styles: LinkStyle,
-	baseUrl: baseurl
+	locale: locales.readMoreLink
 });
 
 const mapDispatch = ( dispatch ) => ({

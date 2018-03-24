@@ -4,8 +4,10 @@ import AppHeaderStyle from './style';
 import { compose } from 'recompose';
 import { connect } from 'preact-redux';
 
-const mapState = ( state ) => ({
-	styles: AppHeaderStyle
+const mapState = ({ state: { menus, info: { baseurl }}}) => ({
+	styles: AppHeaderStyle,
+	baseUrl: baseurl,
+	menu: menus.header
 });
 
 const mapDispatch = ( dispatch ) => ({

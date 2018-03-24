@@ -6,8 +6,9 @@ import { FetchTags } from 'Assets/Actions/Tags';
 import { compose } from 'recompose';
 import { connect } from 'preact-redux';
 
-const mapState = ({ state: { menus, pageIds }, store: { pages, tags } }) => ({
+const mapState = ({ state: { locales, menus, pageIds }, store: { pages, tags } }) => ({
 	styles: AppFooterStyle,
+	locales: locales.footer,
 	aboutPageId: pageIds.about,
 	aboutPage: pages.pagesById[pageIds.about],
 	tags: tags,

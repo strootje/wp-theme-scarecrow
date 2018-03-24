@@ -47,6 +47,7 @@ class ThemeModsEndpoint {
 		return [
 			"title" => get_bloginfo("name"),
 			"tagline" => get_bloginfo("description"),
+			"baseurl" => get_bloginfo("wpurl"),
 			"logo" => $logo,
 			"support" => [
 				"newsletter" => [
@@ -58,12 +59,15 @@ class ThemeModsEndpoint {
 	}
 
 	private static function menus() {
-		// return get_theme_mod("nav_menu_locations", []);
 		$menus = [];
 	
 		$locations = get_nav_menu_locations();
 		foreach($locations as $name => $menuId) {
 			$menu = wp_get_nav_menu_object($menuId);
+			if (!isset($menu->term_id)) {
+				continue;
+			}
+
 			$menu->items = wp_get_nav_menu_items($menu->term_id);
 			$menus[$name] = [
 				"term_id" => $menu->term_id,
@@ -75,6 +79,8 @@ class ThemeModsEndpoint {
 			foreach($menu->items as $item) {
 				$menus[$name]["items"][] = [
 					"title" => $item->title,
+					"slug" => $item->slug,
+					"target" => $item->target,
 					"classes" => $item->classes,
 					"url" => $item->url
 				];

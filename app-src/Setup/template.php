@@ -15,8 +15,6 @@
 	</head>
 
 	<body <?php body_class(); ?>>
-		<script src='<?php echo "{$tmpldir}/dist/assets/js/app.vendor.js"; ?>'></script>
-		<script src='<?php echo "{$tmpldir}/dist/assets/js/app.bundle.js"; ?>'></script>
 		<?php wp_print_footer_scripts(); ?>
 		<?php wp_footer(); ?>
 	</body>

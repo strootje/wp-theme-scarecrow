@@ -3,7 +3,9 @@ import types from 'prop-types';
 import names from 'classnames';
 import { RenderContent } from 'Assets/Helpers';
 
+import Content from 'Comps/Controls/Content';
 import Link from 'Comps/Controls/Link';
+import ReadMoreLink from 'Comps/Controls/ReadMoreLink';
 import ZoomImage from 'Comps/Controls/ZoomImage';
 
 class HeroPostView extends Component {
@@ -23,16 +25,14 @@ class HeroPostView extends Component {
 		return (
 			<article class={names(styles.postItemHero)}>
 				<div class={styles.inside}>
-					<Link to={`/posts/${item.slug}/`}>
+					<Link to={item.link}>
 						<ZoomImage header title={item.title} src={item.thumbnail_hero} />
 					</Link>
 
-					<div class={styles.content} dangerouslySetInnerHTML={{
-						__html: RenderContent(item.content)
-					}} />
+					<Content page={item} less />
 					
 					<footer>
-						<Link to={`/posts/${item.slug}`} classname={styles.readmore} label='read more' />
+						<ReadMoreLink to={item.link} />
 						<div class={styles.postinfo}>
 							<span data-prefix='Posted in'><Link label={'devlog'} /></span>
 							<span data-prefix='by'>bas@strootje.com</span>

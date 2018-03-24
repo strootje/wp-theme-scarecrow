@@ -9,16 +9,16 @@ class SidebarView extends Component {
 		menu: types.object.isRequired
 	}
 
-	render({ styles, menu, support: { newsletter } }) {
+	render({ styles, locale, menu, support: { newsletter } }) {
 		return (
 			<ul class={styles.sidebar}>
 				{(newsletter.enabled && newsletter.configured) && (
-					<li>__Newsletter__<NewsletterSignup /></li>
+					<li>{locale.newsletter.header}<NewsletterSignup /></li>
 				)}
 
 				{(menu.items.length > 0) && (
 					<li>
-						__{menu.name}__
+						{menu.name}
 						<List source={menu} filter={p => p.items} render={({ renderItems }) => (
 							<div>{renderItems(({ item }) => (<pre>{item.title}</pre>))}</div>
 						)} />

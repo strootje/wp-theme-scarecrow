@@ -5,9 +5,9 @@ use Scarecrow\ThemeMain;
 
 class ProjectType {
 	public static $name;
-	public static $options;
+	private static $options;
 
-	public function __construct() {
+	public static function init() {
 		self::$name = "project";
 		self::$options = [
 			"public" => true,
@@ -20,7 +20,7 @@ class ProjectType {
 			"description" => __("A portfolio filled with projects", ThemeMain::$name),
 			"menu_position" => 6,
 			"menu_icon" => "dashicons-book",
-			"register_meta_box_cb" => [ $this, 'callback' ],
+			"register_meta_box_cb" => [ get_called_class(), 'callback' ],
 
 			"taxonomies" => [
 				"category",
@@ -35,7 +35,8 @@ class ProjectType {
 			],
 	
 			"rewrite" => [
-				"slug" => "project"
+				"with_front" => false,
+				"slug" => "projects"
 			],
 	
 			"show_in_rest" => true,
@@ -45,7 +46,11 @@ class ProjectType {
 		];
 	}
 
-	public function callback() {
+	public static function register() {
+		register_post_type(self::$name, self::$options);
+	}
+
+	public static function callback() {
 		add_meta_box(
 			"repo",
 			"Repository",

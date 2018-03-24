@@ -11,9 +11,18 @@ class LinkView extends Component {
 		to: '#'
 	}
 
-	render({ styles, to, label, children, ...props }) {
+	parseUrl = ( baseUrl, to ) => {
+		if (baseUrl == to) {
+			return '/';
+		}
+
+		return to.replace(baseUrl, '');
+	}
+
+	render({ styles, baseUrl, to, label, children, ...props }) {
+
 		return (
-			<a href={to} {...props}>{(children.length > 0 && children) || label}</a>
+			<a href={this.parseUrl(baseUrl, to)} {...props}>{(children.length > 0 && children) || label}</a>
 		);
 	}
 }

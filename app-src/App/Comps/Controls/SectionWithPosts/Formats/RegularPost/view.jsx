@@ -3,8 +3,10 @@ import types from 'prop-types';
 import names from 'classnames';
 import { RenderContent } from 'Assets/Helpers';
 
+import Content from 'Comps/Controls/Content';
 import FancyHeader from 'Comps/Controls/FancyHeader';
 import Link from 'Comps/Controls/Link';
+import ReadMoreLink from 'Comps/Controls/ReadMoreLink';
 import ZoomImage from 'Comps/Controls/ZoomImage';
 
 class RegularPostView extends Component {
@@ -26,22 +28,19 @@ class RegularPostView extends Component {
 				<div class={styles.inside}>
 					<div class='row'>
 						<div class='columns four'>
-							<Link to={`/posts/${item.slug}/`}>
+							<Link to={item.link}>
 								<ZoomImage title={item.title} src={item.thumbnail} />
 							</Link>
 						</div>
 
 						<div class='columns eight'>
-							<Link to={`/posts/${item.slug}/`}><FancyHeader label={item.title} /></Link>
-
-							<div class={styles.content} dangerouslySetInnerHTML={{
-								__html: RenderContent(item.content)
-							}} />
+							<Link to={item.link}><FancyHeader label={item.title} /></Link>
+							<Content page={item} less />
 						</div>
 					</div>
 
 					<footer>
-						<Link to={`/posts/${item.slug}`} classname={styles.readmore} label='read more' />
+						<ReadMoreLink to={item.link} />
 						<div class={styles.postinfo}>
 							<span data-prefix='Posted in'><Link label={'devlog'} /></span>
 							<span data-prefix='by'>bas@strootje.com</span>

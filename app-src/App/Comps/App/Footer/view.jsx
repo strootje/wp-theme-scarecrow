@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import types from 'prop-types';
 import names from 'classnames';
 
+import Content from 'Comps/Controls/Content';
 import Icon from 'Comps/Controls/Icon';
 import Link from 'Comps/Controls/Link';
 import List from 'Comps/Controls/List';
@@ -28,19 +29,17 @@ class AppFooterView extends Component {
 		fetchTags();
 	}
 
-	render({ styles, aboutPage, tags, menu }) {
+	render({ styles, locales, aboutPage, tags, menu }) {
 		return (
 			<div>
 				{aboutPage && (<Section id="about-page" hero>
-					<div dangerouslySetInnerHTML={{
-						__html: aboutPage.content
-					}} />
+					<Content page={aboutPage} less more />
 				</Section>)}
 
 				<footer class={names('container', styles.footerWrapper)}>
 					<div class='row'>
 						<div class='columns eight'>
-							__TAGS__
+							{locales.tags.header}
 							<List source={tags} filter={p => Object.values(p.tagsById)} render={({ renderItems }) => (
 								<ul>{renderItems(({ item }) => (<li>{item.name}</li>))}</ul>
 							)} />
@@ -50,7 +49,7 @@ class AppFooterView extends Component {
 							<h4>{menu.name}</h4>
 							<List source={menu} filter={p => p.items} render={({ renderItems }) => (
 								<ul class='fa-ul'>{renderItems(({ key, item }) => (
-									<li><Link to={item.url}>
+									<li><Link to={item.url} target={item.target}>
 										<span class='fa-li'><Icon tag={item.classes.join(' ')} /></span>
 										{item.title}
 									</Link></li>
