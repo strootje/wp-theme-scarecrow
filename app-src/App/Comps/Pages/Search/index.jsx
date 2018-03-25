@@ -2,7 +2,7 @@ import PageSearchView from './view';
 import PageSearchStyle from './style';
 import { Search } from 'Actions/Search';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ( state ) => ({

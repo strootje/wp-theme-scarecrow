@@ -1,7 +1,7 @@
 import ZoomImageView from './view';
 import ZoomImageStyle from './style';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ( state ) => ({

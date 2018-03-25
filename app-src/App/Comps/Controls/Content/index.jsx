@@ -1,7 +1,7 @@
 import ContentView from './view';
 import ContentStyle from './style';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ( state ) => ({

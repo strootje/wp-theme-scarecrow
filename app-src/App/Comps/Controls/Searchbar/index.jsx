@@ -1,7 +1,7 @@
 import SearchbarView from './view';
 import SearchbarStyle from './style';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ( state ) => ({

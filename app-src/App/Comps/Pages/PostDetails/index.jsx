@@ -2,7 +2,7 @@ import PagePostDetailsView from './view';
 import PagePostDetailsStyle from './style';
 import { FetchPostDetails } from 'Actions/Posts';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ( state ) => ({

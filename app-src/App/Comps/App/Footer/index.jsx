@@ -3,7 +3,7 @@ import AppFooterStyle from './style';
 import { FetchPage } from 'Assets/Actions/Pages';
 import { FetchTags } from 'Assets/Actions/Tags';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ({ state: { locales, menus, pageIds }, store: { pages, tags } }) => ({

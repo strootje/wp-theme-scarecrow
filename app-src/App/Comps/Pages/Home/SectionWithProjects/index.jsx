@@ -2,7 +2,7 @@ import SectionWithProjectsView from './view';
 import SectionWithProjectsStyle from './style';
 import { FetchProjects } from 'Actions/Projects';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ( state ) => ({

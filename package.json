@@ -31,7 +31,6 @@
 		"preact-router": "*",
 		"prop-types": "*",
 		"react-apollo": "*",
-		"recompose": "*",
 		"redux": "*",
 		"redux-localstorage": "*",
 		"redux-logger": "*",

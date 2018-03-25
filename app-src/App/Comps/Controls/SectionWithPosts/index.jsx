@@ -2,7 +2,7 @@ import SectionWithPostsView from './view';
 import SectionWithPostsStyle from './style';
 import { FetchPosts } from 'Assets/Actions/Posts';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ({ store: { posts } }) => ({

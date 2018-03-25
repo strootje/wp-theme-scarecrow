@@ -2,7 +2,7 @@ import NewsletterSignupView from './view';
 import NewsletterSignupStyle from './style';
 import { Subscribe } from 'Assets/Actions/Newsletter';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ({ state }) => ({

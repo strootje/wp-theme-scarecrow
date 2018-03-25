@@ -1,7 +1,7 @@
 import AppHeaderView from './view';
 import AppHeaderStyle from './style';
 
-import { compose } from 'recompose';
+import { compose } from 'redux';
 import { connect } from 'preact-redux';
 
 const mapState = ({ state: { menus, info: { baseurl }}}) => ({
