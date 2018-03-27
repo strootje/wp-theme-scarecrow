@@ -1,2 +1,1 @@
-<?php define("WP_DEBUG", true); ?>
-<?php get_template_part("dist/index"); ?>
+<?php define("WP_DEBUG", true); get_template_part("dist/index"); ?>

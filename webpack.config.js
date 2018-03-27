@@ -6,19 +6,19 @@ const { join } = require('path');
 
 const paths = {
 	dist: ( ...paths ) => join(__dirname, 'dist', ...paths),
-	src: ( ...paths ) => join(__dirname, 'app-src', ...paths),
+	src: ( ...paths ) => join(__dirname, 'src', 'app', ...paths),
 };
 
 module.exports = {
 	mode: 'development',
 
 	entry: {
-		'app.bundle': [ paths.src('Shims', 'Polyfill'), paths.src('Setup', 'app.js') ]
+		'app.bundle': [ paths.src('polyfill'), paths.src('index') ]
 	},
 	
 	resolve: {
 		extensions: ['.js', '.jsx', '.less'],
-		modules: [paths.src('App'), "node_modules"],
+		modules: [paths.src(), "node_modules"],
 		alias: {
 			"react": "preact-compat",
 			"react-dom": "preact-compat",
@@ -59,13 +59,6 @@ module.exports = {
 						}
 					],
 				}),
-			},
-			{
-				test: /\.json$/,
-				exclude: /node_modules/,
-				use: [
-					'json-loader'
-				]
 			}
 		],
 	},
@@ -75,8 +68,7 @@ module.exports = {
 			cacheGroups: {
 				commons: {
 					test: /[\\/]node_modules[\\/]/,
-					name: 'vendor',
-					filename: 'app.vendor.js',
+					name: 'app.vendor',
 					chunks: 'all'
 				}
 			}
@@ -92,19 +84,21 @@ module.exports = {
 
 	output: {
 		path: paths.dist('assets', 'js'),
-		filename: '[name].js'
+		publicPath: '/wp-content/themes/wp-theme-scarecrow/dist/assets/js/',
+		filename: '[name].js',
+		chunkFilename: '[id].js'
 	},
 
 	plugins: [
-		new Webpack.SourceMapDevToolPlugin({
-			filename: '[name].js.map'
-		}),
 		new WebpackExtractTextPlugin(
 			join('..', 'css', 'app.bundle.css')
 		),
+		new Webpack.SourceMapDevToolPlugin({
+			filename: '[name].js.map'
+		}),
 		new WebpackHtmlPlugin({
 			inject: false,
-			template: paths.src('setup', 'template.php'),
+			template: paths.src('template.php'),
 			filename: paths.dist('index.php'),
 		})
 	]

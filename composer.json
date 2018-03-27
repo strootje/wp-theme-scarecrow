@@ -1,7 +1,7 @@
 {
 	"autoload": {
-		"psr-4": {"Scarecrow\\": "wp-src/"}
-  },
+		"psr-4": {"Scarecrow\\": "src/wp/"}
+	},
 
 	"require": {
 	}
