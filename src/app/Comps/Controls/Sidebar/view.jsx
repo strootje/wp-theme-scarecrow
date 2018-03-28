@@ -9,7 +9,7 @@ class SidebarView extends Component {
 		menu: types.object.isRequired
 	}
 
-	render({ styles, locale, menu, support: { newsletter = { enabled: true, configured: true } } }) {
+	render({ styles, locale, menu, support: { newsletter } }) {
 		return (
 			<ul class={styles.sidebar}>
 				{(newsletter.enabled && newsletter.configured) && (

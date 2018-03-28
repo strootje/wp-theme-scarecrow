@@ -1,7 +1,7 @@
 <?php
 
 namespace Scarecrow\Customizers;
-use Scarecrow\ThemeMain;
+use Scarecrow\WpTheme;
 
 class ThemeCustomizer {
 	private static $section = "theme-scarecrow";
@@ -9,7 +9,7 @@ class ThemeCustomizer {
 	public static function register() {
 		add_action("customize_register", function( $wp_customize ) {
 			$wp_customize->add_section(self::$section, [
-				"title" => __("Scarecrow Settings", ThemeMain::$name)
+				"title" => __("Scarecrow Settings", WpTheme::$name)
 			]);
 
 			self::setImageProviderOption($wp_customize);
@@ -27,11 +27,11 @@ class ThemeCustomizer {
 			"type" => "select",
 			"section" => self::$section,
 			"settings" => "providers[image]",
-			"label" => __("Image provider", ThemeMain::$name),
+			"label" => __("Image provider", WpTheme::$name),
 			"choices" => [
-				"https://placekitten.com/__width__/__height__" => __("Placekitten.com", ThemeMain::$name),
-				"https://placekitten.com/g/__width__/__height__" => __("Placekitten.com (grayscale)", ThemeMain::$name),
-				"https://dummyimage.com/__width__x__height__/00f.jpg&text=-----" => __("Dummyimage.com", ThemeMain::$name)
+				"https://placekitten.com/__width__/__height__" => __("Placekitten.com", WpTheme::$name),
+				"https://placekitten.com/g/__width__/__height__" => __("Placekitten.com (grayscale)", WpTheme::$name),
+				"https://dummyimage.com/__width__x__height__/00f.jpg&text=-----" => __("Dummyimage.com", WpTheme::$name)
 			]
 		]));
 	}
@@ -46,7 +46,7 @@ class ThemeCustomizer {
 			"type" => "dropdown-pages",
 			"section" => self::$section,
 			"settings" => "pages[about]",
-			"label" => __("About page", ThemeMain::$name)
+			"label" => __("About page", WpTheme::$name)
 		]));
 
 		$wp_customize->selective_refresh->add_partial("pages[about]", [

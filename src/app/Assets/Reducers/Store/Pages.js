@@ -1,5 +1,6 @@
-import { SimpleReducer, SimpleStore } from 'Modules/SimpleFetch';
+import { SimpleReducer, SimpleStore, SimpleStoreById } from 'Modules/SimpleFetch';
 
 export default SimpleReducer('page', {
-	...SimpleStore('page')
+	...SimpleStore('page'),
+	...SimpleStoreById('page')
 });

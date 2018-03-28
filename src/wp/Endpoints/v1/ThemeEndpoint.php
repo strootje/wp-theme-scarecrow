@@ -49,6 +49,10 @@ class ThemeEndpoint {
 			"baseurl" => get_bloginfo("wpurl"),
 			"logo" => $logo,
 			"support" => [
+				"newsletter" => [
+					"enabled" => class_exists("\WPNewsletterApi\Client\ClientFactory"),
+					"configured" => \WPNewsletterApi\Client\ClientFactory::canCreate("mailchimp")
+				]
 			]
 		];
 	}

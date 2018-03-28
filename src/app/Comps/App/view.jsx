@@ -1,12 +1,12 @@
 import { h, Component } from 'preact';
 import Router from 'preact-router';
 
-import Header from 'Comps/App/Header';
-import Footer from 'Comps/App/Footer';
+import Header from 'Comps/Partials/Header';
+import Footer from 'Comps/Partials/Footer';
 import PageHome from 'Comps/Pages/Home';
-// import PagePostDetails from 'Comps/Pages/PostDetails';
 import PagePosts from 'Comps/Pages/Posts';
-// import PageSearch from 'Comps/Pages/Search';
+import PageError404 from 'Comps/Pages/Error404';
+import Page from 'Comps/Partials/Page';
 
 class AppView extends Component {
 	render({ styles }) {
@@ -17,11 +17,10 @@ class AppView extends Component {
 
 					<Router>
 						<PageHome path='/' />
-						{/* <PageSearch path='/search/:query?' /> */}
-						{/* <PagePostDetails path='/posts/:postId' /> */}
 						<PagePosts path='/posts' />
 						<div path='/projects/:projectId?'>projects</div>
-						<div default>default 404?</div>
+						<Page path='/:pageSlug' />
+						<PageError404 default />
 					</Router>
 				</div>
 				<div class={styles.footer}>

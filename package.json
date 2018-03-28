@@ -23,6 +23,7 @@
 		"graphql": "*",
 		"graphql-tag": "*",
 		"lodash.merge": "*",
+		"lodash.find": "*",
 		"normalize.css": "*",
 		"preact": "*",
 		"preact-compat": "*",

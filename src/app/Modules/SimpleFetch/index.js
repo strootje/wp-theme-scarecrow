@@ -1,4 +1,7 @@
 import merge from 'lodash.merge';
+import find from 'lodash.find';
+import { compose } from 'redux';
+import { connect } from 'preact-redux';
 import { OrderById } from 'Assets/Helpers';
 
 const _capitalize = ( str ) => {
@@ -31,7 +34,11 @@ const _hasNextPage = ( plural ) => ({ store: { [plural]: { pageInfo }}}, paging)
 }
 
 const _hasInStore = ( plural ) => ({ store: { [plural]: { [`${plural}ById`]: nodes }}}, nodeId) => {
-	return nodes[nodeId];
+	if (isNaN(nodeId)) {
+		return nodes[nodeId];
+	} else {
+		return find(nodes, nodeId);
+	}
 };
 
 export const SimpleFetch = ( typeName, resolve ) => {
@@ -41,22 +48,22 @@ export const SimpleFetch = ( typeName, resolve ) => {
 	} = names(typeName);
 
 	const FETCH_REQUEST = `${ucSingular}_FETCH_REQUEST`;
-	const _fetchRequest = ( nodeId ) => ({
+	const _fetchRequest = ( params ) => ({
 		type: FETCH_REQUEST,
-		[singularId]: nodeId,
+		params: params,
 	});
 
 	const FETCH_SUCCESS = `${ucSingular}_FETCH_SUCCESS`;
-	const _fetchSuccess = ( nodeId, node ) => ({
+	const _fetchSuccess = ( params, node ) => ({
 		type: FETCH_SUCCESS,
-		[singularId]: nodeId,
+		params: params,
 		[singular]: node
 	});
 
 	const FETCH_FAILURE = `${ucSingular}_FETCH_FAILURE`;
-	const _fetchFailure = ( nodeId, reason ) => ({
+	const _fetchFailure = ( params, reason ) => ({
 		type: FETCH_FAILURE,
-		[singularId]: nodeId,
+		params: params,
 		reason: reason
 	});
 
@@ -64,7 +71,53 @@ export const SimpleFetch = ( typeName, resolve ) => {
 		[FETCH_REQUEST]: FETCH_REQUEST,
 		[FETCH_SUCCESS]: FETCH_SUCCESS,
 		[FETCH_FAILURE]: FETCH_FAILURE,
-		[`Fetch${capSingular}`]: ( nodeId ) => ( dispatch, getState, client ) => {
+		[`Fetch${capSingular}`]: ( params ) => ( dispatch, getState, client ) => {
+			if (!_canFetch(plural)(getState()) || _hasInStore(plural)(getState(), params)) {
+				return;
+			}
+			
+			dispatch(_fetchRequest(params));
+			return resolve({
+				params: params,
+				client: client,
+				resolve: (node ) => dispatch(_fetchSuccess(params, node)),
+				reject: ( reason ) => dispatch(_fetchFailure(params, reason))
+			});
+		}
+	};
+};
+
+export const SimpleFetchById = ( typeName, resolve ) => {
+	const {
+		singular, singularId, capSingular, ucSingular,
+		plural
+	} = names(typeName);
+
+	const FETCH_BY_ID_REQUEST = `${ucSingular}_FETCH_BY_ID_REQUEST`;
+	const _fetchRequest = ( nodeId ) => ({
+		type: FETCH_BY_ID_REQUEST,
+		[singularId]: nodeId,
+	});
+
+	const FETCH_BY_ID_SUCCESS = `${ucSingular}_FETCH_BY_ID_SUCCESS`;
+	const _fetchSuccess = ( nodeId, node ) => ({
+		type: FETCH_BY_ID_SUCCESS,
+		[singularId]: nodeId,
+		[singular]: node
+	});
+
+	const FETCH_BY_ID_FAILURE = `${ucSingular}_FETCH_BY_ID_FAILURE`;
+	const _fetchFailure = ( nodeId, reason ) => ({
+		type: FETCH_BY_ID_FAILURE,
+		[singularId]: nodeId,
+		reason: reason
+	});
+
+	return {
+		[FETCH_BY_ID_REQUEST]: FETCH_BY_ID_REQUEST,
+		[FETCH_BY_ID_SUCCESS]: FETCH_BY_ID_SUCCESS,
+		[FETCH_BY_ID_FAILURE]: FETCH_BY_ID_FAILURE,
+		[`Fetch${capSingular}ById`]: ( nodeId ) => ( dispatch, getState, client ) => {
 			nodeId = parseInt(nodeId);
 
 			if (isNaN(nodeId)) {
@@ -169,7 +222,7 @@ export const SimpleReducer = ( typeName, defstate, actions ) => {
 			? actions[action.type](_state, action)
 			: actions['default'](_state, action);
 	}
-}
+};
 
 export const SimpleStore = ( typeName ) => {
 	const {
@@ -200,7 +253,38 @@ export const SimpleStore = ( typeName ) => {
 			return state;
 		}
 	};
-}
+};
+
+export const SimpleStoreById = ( typeName ) => {
+	const {
+		singular, singularId, ucSingular,
+		pluralById
+	} = names(typeName);
+
+	const FETCH_REQUEST = `${ucSingular}_FETCH_BY_ID_REQUEST`;
+	const FETCH_SUCCESS = `${ucSingular}_FETCH_BY_ID_SUCCESS`;
+	const FETCH_FAILURE = `${ucSingular}_FETCH_BY_ID_FAILURE`;
+
+	return {
+		[FETCH_REQUEST]: ( state, action ) => {
+			state.working = true;
+			return state;
+		},
+
+		[FETCH_SUCCESS]: ( state, action ) => {
+			state.working = false;
+			state.errored = false;
+			state[pluralById][action[singularId]] = { ...state[pluralById][action[singularId]], ...action[singular] };
+			return state;
+		},
+
+		[FETCH_FAILURE]: ( state, action ) => {
+			state.working = false;
+			state.errored = true;
+			return state;
+		}
+	};
+};
 
 export const SimpleStoreAll = ( typeName ) => {
 	const {
@@ -231,4 +315,18 @@ export const SimpleStoreAll = ( typeName ) => {
 			return state;
 		}
 	};
-}
+};
+
+export const SimpleContainer = ( view, styles, args = {} ) => {
+	const {
+		mapState = () => ({}),
+		mapDispatch = () => ({}),
+		mapStateDispatch = () => ({})
+	} = args;
+
+	return compose(connect(
+		( ...args ) => merge({}, { styles: styles }, mapState(...args)),
+		( ...args ) => merge({}, mapDispatch(...args)),
+		( state, dispatch, props ) => merge({}, state, dispatch, props, mapStateDispatch(state, dispatch, props))
+	))(view);
+};

@@ -1,6 +1,6 @@
 import AppFooterView from './view';
 import AppFooterStyle from './style';
-import { FetchPage } from 'Assets/Actions/Pages';
+import { FetchPageById } from 'Assets/Actions/Pages';
 import { FetchTags } from 'Assets/Actions/Tags';
 
 import { compose } from 'redux';
@@ -16,13 +16,13 @@ const mapState = ({ state: { locales, menus, pageIds }, store: { pages, tags } }
 });
 
 const mapDispatch = ( dispatch ) => ({
-	fetchPage: ( pageId ) => dispatch(FetchPage(pageId)),
+	fetchPage: ( pageId ) => dispatch(FetchPageById(pageId)),
 	fetchTags: () => dispatch(FetchTags())
 });
 
-const mapStateDispatch = ({ aboutPageId, ...props }, { fetchPage, ...dispatches }) => {
+const mapStateDispatch = ({ aboutPageId, ...props }, { fetchPage, ...dispatches }, ownprops) => {
 	return {
-		...props, ...dispatches,
+		...props, ...dispatches, ...ownprops,
 		fetchPage: () => fetchPage(aboutPageId)
 	};
 }

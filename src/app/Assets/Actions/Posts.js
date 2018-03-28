@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
-import { SimpleFetch, SimpleFetchAll } from 'Modules/SimpleFetch';
+import { SimpleFetchById, SimpleFetchAll } from 'Modules/SimpleFetch';
 
 module.exports = {
-	...SimpleFetch('post', ({ postId, client, resolve, reject }) => client.query({
+	...SimpleFetchById('post', ({ postId, client, resolve, reject }) => client.query({
 		query: gql`query( $postId: Int! ) {
 			postBy(postId: $postId) {
 				postId

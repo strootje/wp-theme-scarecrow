@@ -41,7 +41,9 @@ class AppFooterView extends Component {
 						<div class='columns eight'>
 							{locales.tags.header}
 							<List source={tags} filter={p => Object.values(p.tagsById)} render={({ renderItems }) => (
-								<ul>{renderItems(({ item }) => (<li>{item.name}</li>))}</ul>
+								<ul class={styles.tags}>{renderItems(({ item }) => (
+									<li><Link to={item.link}><code>{item.name}</code></Link></li>
+								))}</ul>
 							)} />
 						</div>
 

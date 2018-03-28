@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
-import { SimpleFetch, SimpleFetchAll } from 'Modules/SimpleFetch';
+import { SimpleFetchById, SimpleFetchAll } from 'Modules/SimpleFetch';
 
 module.exports = {
-	...SimpleFetch('project', ({ projectId, client, resolve, reject }) => client.query({
+	...SimpleFetchById('project', ({ projectId, client, resolve, reject }) => client.query({
 		query: gql`query( $projectId: Int! ) {
 			projectBy(projectId: $projectId) {
 				projectId
