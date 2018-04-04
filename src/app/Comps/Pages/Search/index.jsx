@@ -1,20 +1,15 @@
-import PageSearchView from './view';
-import PageSearchStyle from './style';
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+
 import { Search } from 'Assets/Actions/Search';
 
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
+export default CreateContainer(view, styles, {
+	mapState: ({}, { query }) => ({
+		query: query
+	}),
 
-const mapState = ( state ) => ({
-	styles: PageSearchStyle,
-	loading: state.dbdata.search.loading,
-	results: state.dbdata.search.data
+	mapDispatch: ( dispatch ) => ({
+		search: ( query ) => dispatch(Search({ query: query }))
+	})
 });
-
-const mapDispatch = ( dispatch ) => ({
-	search: ( query ) => dispatch(Search(query))
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(PageSearchView);

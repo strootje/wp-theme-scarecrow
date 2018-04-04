@@ -1,54 +1,48 @@
-import { h, Component } from 'preact';
-import pt from 'prop-types';
+import { Component, h } from 'preact';
 
-import Section from 'Components/Controls/Section';
+import Section from 'Comps/Controls/Section';
+import PostList from 'Comps/Partials/PostList';
 
-class PageSearchView extends Component {
-	static propTypes = {
-		loading: pt.bool,
-		results: pt.arrayOf(pt.shape({
-			__typename: pt.string.isRequired
-		}))
+export default class extends Component {
+	state = {
+		working: false,
+		query: '',
+		pageInfo: {},
+		nodes: []
 	}
 
-	static defaultProps = {
-		loading: false
-	}
+	componentDidUpdate() {
+		const { query: prop } = this.props;
+		const { working, query: state } = this.state;
 
-	static = {
-		query: ''
-	}
-
-	searchIfNeeded = () => {
-		const { search, matches: { query } } = this.props;
-
-		if (query != this.query) {
-			this.query = query;
-			search(query);
+		if (!working && prop != state) {
+			this.search(prop);
 		}
 	}
 
-	componentDidMount = () => {
-		this.searchIfNeeded();
+	search = ( query, pageInfo ) => {
+		const { search } = this.props;
+		const { working } = this.state;
+
+		console.log(query);
+		if (!working) {
+			this.setState({ working: true });
+
+			search(query).then(action => this.setState({
+				working: false,
+				query: action.query,
+				pageInfo: action.pageInfo,
+				nodes: action.nodes || []
+			}));
+		}
 	}
 
-	componentWillReceiveProps = () => {
-		this.searchIfNeeded();
-	}
-
-	render({ styles, loading, results }) {
+	render({ styles, query }, { pageInfo, nodes }) {
 		return (
-			<Section header='search results'>
-				{(results.length > 0) ? (results.map(record => (
-					<div>{record.typeId}</div>
-				))) : (loading) ? (
-					<pre>laoding...</pre>
-				) : (
-					<pre>no results</pre>
-				)}
+			<Section>
+				<h2>__Search Results for "{query}":</h2>
+				<PostList source={nodes} filter={p => p} fetch={() => this.search(query)} />
 			</Section>
 		);
 	}
 }
-
-export default PageSearchView;

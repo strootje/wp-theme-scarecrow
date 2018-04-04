@@ -3,7 +3,7 @@ import names from 'classnames';
 
 import Ribbon from 'Comps/Controls/Logo/Ribbon';
 
-class LogoView extends Component {
+export default class extends Component {
 	render({ styles, info }) {
 		return (<div class={styles.logo}>
 			{info.logo ? (
@@ -14,5 +14,3 @@ class LogoView extends Component {
 		</div>);
 	}
 }
-
-export default LogoView;

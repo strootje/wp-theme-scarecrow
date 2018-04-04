@@ -1,16 +1,4 @@
-import ZoomImageView from './view';
-import ZoomImageStyle from './style';
-
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
-
-const mapState = ( state ) => ({
-	styles: ZoomImageStyle,
-});
-
-const mapDispatch = ( dispatch ) => ({
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(ZoomImageView);
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+export default CreateContainer(view, styles);

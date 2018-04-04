@@ -1,14 +1,18 @@
-import { h, Component } from 'preact';
-import Router from 'preact-router';
+import { Component, h } from 'preact';
+import { Router } from 'preact-router';
 
-import Header from 'Comps/Partials/Header';
-import Footer from 'Comps/Partials/Footer';
+import PageArchivePost from 'Comps/Pages/ArchivePost';
+import PageArchiveProject from 'Comps/Pages/ArchiveProject';
 import PageHome from 'Comps/Pages/Home';
+import PageNotFound from 'Comps/Pages/NotFound';
 import PagePosts from 'Comps/Pages/Posts';
-import PageError404 from 'Comps/Pages/Error404';
+import PageProjects from 'Comps/Pages/Projects';
+import PageSearch from 'Comps/Pages/Search';
+import Footer from 'Comps/Partials/Footer';
+import Header from 'Comps/Partials/Header';
 import Page from 'Comps/Partials/Page';
 
-class AppView extends Component {
+export default class extends Component {
 	render({ styles }) {
 		return (
 			<div class={styles.layout}>
@@ -16,13 +20,17 @@ class AppView extends Component {
 					<Header />
 
 					<Router>
-						<PageHome path='/' />
+						<PageSearch path='/search/:query?' />
 						<PagePosts path='/posts' />
-						<div path='/projects/:projectId?'>projects</div>
-						<Page path='/:pageSlug' />
-						<PageError404 default />
+						<PageProjects path='/projects' />
+						<PageArchivePost path='/posts/:postId' />
+						<PageArchiveProject path='/projects/:projectId' />
+						<Page path='/:pageId' />
+						<PageHome path='/' static={false} />{/* TODO: static / dynamic homepage switching */}
+						<PageNotFound default />
 					</Router>
 				</div>
+
 				<div class={styles.footer}>
 					<Footer />
 				</div>
@@ -30,5 +38,3 @@ class AppView extends Component {
 		);
 	}
 }
-
-export default AppView;

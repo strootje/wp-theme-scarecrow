@@ -1,18 +1,11 @@
-import NewsletterSignupView from './view';
-import NewsletterSignupStyle from './style';
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+
 import { Subscribe } from 'Assets/Actions/Newsletter';
 
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
-
-const mapState = ({ state }) => ({
-	styles: NewsletterSignupStyle,
+export default CreateContainer(view, styles, {
+	mapDispatch: () => ({
+		signup: ( email, member ) => dispatch(Subscribe({ email: email, member: member }))
+	})
 });
-
-const mapDispatch = ( dispatch ) => ({
-	signup: ( email, member ) => dispatch(Subscribe(email, member))
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(NewsletterSignupView);

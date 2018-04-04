@@ -3,7 +3,7 @@ import types from 'prop-types';
 
 import ReadMoreLink from 'Comps/Controls/ReadMoreLink';
 
-class ContentView extends Component {
+export default class extends Component {
 	static propTypes = {
 		less: types.bool,
 		more: types.bool,
@@ -33,5 +33,3 @@ class ContentView extends Component {
 		);
 	}
 }
-
-export default ContentView;

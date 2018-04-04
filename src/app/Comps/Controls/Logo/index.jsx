@@ -1,17 +1,8 @@
-import LogoView from './view';
-import LogoStyle from './style';
-
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
-
-const mapState = ({ state: { info } }) => ({
-	styles: LogoStyle,
-	info: info
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+export default CreateContainer(view, styles, {
+	mapState: ({ state: { info }}) => ({
+		info: info
+	})
 });
-
-const mapDispatch = ( dispatch ) => ({
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(LogoView);

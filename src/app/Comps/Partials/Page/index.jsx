@@ -1,13 +1,16 @@
-import { SimpleContainer } from 'Modules/SimpleFetch';
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
 import view from './view';
 import styles from './styles';
-import { FetchPage } from 'Assets/Actions/Pages';
-export default SimpleContainer(view, styles, {
-	mapState: ({ store: { pages: { pagesById } } }, { pageSlug }) => ({
-		page: Object.values(pagesById).find(p => p.slug = pageSlug)
+
+import find from 'lodash.find';
+import { FetchPageByUri } from 'Assets/Actions/Pages';
+
+export default CreateContainer(view, styles, {
+	mapState: ({ store: { pages: { nodesById }}}, { pageId }) => ({
+		page: find(Object.values(nodesById), { uri: pageId })
 	}),
 
-	mapDispatch: ( dispatch, { pageSlug } ) => ({
-		fetchPage: () => dispatch(FetchPage({ slug: pageSlug }))
+	mapDispatch: ( dispatch, { pageId }) => ({
+		fetchPage: () => dispatch(FetchPageByUri({ uri: pageId }))
 	})
 });

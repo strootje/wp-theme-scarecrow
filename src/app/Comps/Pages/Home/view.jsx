@@ -1,37 +1,29 @@
-import { h, Component } from 'preact';
+import { Component, h } from 'preact';
 import types from 'prop-types';
-import names from 'classnames';
 
+import ProjectList from 'Comps/Controls/ProjectList';
 import Section from 'Comps/Controls/Section';
-import SectionWithPosts from 'Comps/Controls/SectionWithPosts';
-import SectionWithProjects from 'Comps/Controls/SectionWithProjects';
-import Sidebar from 'Comps/Controls/Sidebar';
+import PostList from 'Comps/Partials/PostList';
+import Sidebar from 'Comps/Partials/Sidebar';
 
-class PageHomeView extends Component {
-	static propTypes = {
-	}
-
-	render({ styles }) {
+export default class extends Component {
+	render({ styles, projects, fetchProjects, posts, fetchPosts }) {
 		return (
 			<div>
 				<Section hero>
-					<SectionWithProjects />
+					<ProjectList source={projects} fetch={fetchProjects} />
 				</Section>
 
 				<Section>
-					<div className="row">
-						<div className="columns nine">
-							<SectionWithPosts heroItem={true} itemsPerPage={4} />
-						</div>
+					<div class='columns nine'>
+						<PostList heroItem source={posts} fetch={fetchPosts} />
+					</div>
 
-						<div className="columns three">
-							<Sidebar />
-						</div>
+					<div class='columns three'>
+						<Sidebar />
 					</div>
 				</Section>
 			</div>
 		);
 	}
 }
-
-export default PageHomeView;

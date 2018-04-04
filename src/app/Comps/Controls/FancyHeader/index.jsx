@@ -1,16 +1,4 @@
-import FancyHeaderView from './view';
-import FancyHeaderStyle from './style';
-
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
-
-const mapState = ( state ) => ({
-	styles: FancyHeaderStyle,
-});
-
-const mapDispatch = ( dispatch ) => ({
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(FancyHeaderView);
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+export default CreateContainer(view, styles);

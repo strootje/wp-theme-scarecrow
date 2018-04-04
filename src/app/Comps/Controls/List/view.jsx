@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import types from 'prop-types';
 import names from 'classnames';
 
-class ListView extends Component {
+export default class extends Component {
 	static propTypes = {
 		source: types.shape({
 			working: types.bool,
@@ -45,7 +45,7 @@ class ListView extends Component {
 		fetch({}, { last: itemsPerPage });
 	}
 
-	componentDidMount = () => {
+	componentWillMount = () => {
 		this.getFirstPage();
 	}
 
@@ -66,5 +66,3 @@ class ListView extends Component {
 		});
 	}
 }
-
-export default ListView;

@@ -1,16 +1,4 @@
-import ContentView from './view';
-import ContentStyle from './style';
-
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
-
-const mapState = ( state ) => ({
-	styles: ContentStyle
-});
-
-const mapDispatch = ( dispatch ) => ({
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(ContentView);
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+export default CreateContainer(view, styles);

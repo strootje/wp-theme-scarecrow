@@ -1,16 +1,15 @@
-import PagePostsView from './view';
-import PagePostsStyle from './style';
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
 
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
+import { FetchPosts } from 'Assets/Actions/Posts';
 
-const mapState = ({ store: { posts } }) => ({
-	styles: PagePostsStyle
+export default CreateContainer(view, styles, {
+	mapState: ({ store: { posts }}) => ({
+		posts: posts
+	}),
+
+	mapDispatch: ( dispatch ) => ({
+		fetchPosts: () => dispatch(FetchPosts())
+	})
 });
-
-const mapDispatch = ( dispatch, getState ) => ({
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(PagePostsView);

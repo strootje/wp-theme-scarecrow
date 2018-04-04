@@ -1,6 +1,5 @@
-import { h, Component } from 'preact';
+import { Component, h } from 'preact';
 import types from 'prop-types';
-import names from 'classnames';
 
 import Content from 'Comps/Controls/Content';
 import Icon from 'Comps/Controls/Icon';
@@ -8,64 +7,59 @@ import Link from 'Comps/Controls/Link';
 import List from 'Comps/Controls/List';
 import Section from 'Comps/Controls/Section';
 
-class AppFooterView extends Component {
+export default class extends Component {
 	static propTypes = {
-		aboutPge: types.shape({ content: types.string.isRequired }).isRequired,
-		tags: types.object,
-		menu: types.object,
-
-		fetchPage: types.func.isRequired,
-		fetchTags: types.func.isRequired
+		menu: types.shape({
+			name: types.string.isRequired,
+			items: types.array.isRequired
+		}).isRequireud,
+		fetchPage: types.func.isRequired
 	}
 
-	static defaultProps = {
-		tags: { tagsById: [] },
-		menu: { items: [] }
-	}
-
-	componentDidMount = () => {
-		const { fetchPage, fetchTags } = this.props;
+	componentWillMount() {
+		const { fetchPage } = this.props;
 		fetchPage();
-		fetchTags();
 	}
 
-	render({ styles, locales, aboutPage, tags, menu }) {
+	render({ styles, locale, aboutPage, tags, fetchTags, menu }) {
 		return (
-			<div>
-				{aboutPage && (<Section id="about-page" hero>
-					<Content page={aboutPage} less more />
-				</Section>)}
+			<footer>
+				{aboutPage && <Section hero>
+					<h4>{aboutPage.title}</h4>
+					<Content page={aboutPage} more less />
+				</Section>}
 
-				<footer class={names('container', styles.footerWrapper)}>
-					<div class='row'>
-						<div class='columns eight'>
-							{locales.tags.header}
-							<List source={tags} filter={p => Object.values(p.tagsById)} render={({ renderItems }) => (
-								<ul class={styles.tags}>{renderItems(({ item }) => (
-									<li><Link to={item.link}><code>{item.name}</code></Link></li>
-								))}</ul>
-							)} />
-						</div>
-
-						<div class='columns four'>
-							<h4>{menu.name}</h4>
-							<List source={menu} filter={p => p.items} render={({ renderItems }) => (
-								<ul class='fa-ul'>{renderItems(({ key, item }) => (
-									<li><Link to={item.url} target={item.target}>
-										<span class='fa-li'><Icon tag={item.classes.join(' ')} /></span>
-										{item.title}
-									</Link></li>
-								))}</ul>
-							)} />
-
-						</div>
+				<Section>
+					<div class='columns eight'>
+						<h4>{locale.tags.header}</h4>
+						<List source={tags} filter={p => Object.values(p.nodesById)} fetch={fetchTags} render={({ renderItems }) => (
+							<ul class={styles.tags}>{renderItems(({ item }) => (
+								<li><code><Link to={item.link}>{item.name}</Link></code></li>
+							))}</ul>
+						)} />
 					</div>
 
-					<div class={styles.legal}>Bas Stroosnijder &copy; 2018</div>
-				</footer>
-			</div>
+					<div class='columns four'>
+						<h4>{menu.name}</h4>
+						<List source={menu} filter={p => p.items} render={({ renderItems }) => (
+							<ul class='fa-ul'>{renderItems(({ item }) => (
+								<li><Link to={item.url} target={item.target}>
+									<span class='fa-li'><Icon tag={item.classes.join(' ')} /></span>
+									{item.title}
+								</Link></li>
+							))}</ul>
+						)} />
+					</div>
+				</Section>
+
+				<div class='container'>
+					<div class='row'>
+						<div class='columns twelve legal'>
+							Bas Stroosnijder &copy; 2018 - Powered by <Link to='http://wordpress.org/' target='blank'>Wordpress</Link> & <Link to='/projects/scarecrow'>Scarecrow</Link>
+						</div>
+					</div>
+				</div>
+			</footer>
 		);
 	}
 }
-
-export default AppFooterView;

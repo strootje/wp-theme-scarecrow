@@ -3,7 +3,7 @@ import types from 'prop-types';
 import names from 'classnames';
 import { NEWSLETTER_SUBSCRIBE_SUCCESS } from 'Assets/Actions/Newsletter';
 
-class NewsletterSignupView extends Component {
+export default class extends Component {
 	static propTypes = {
 	}
 
@@ -69,5 +69,3 @@ class NewsletterSignupView extends Component {
 		}
 	}
 }
-
-export default NewsletterSignupView;

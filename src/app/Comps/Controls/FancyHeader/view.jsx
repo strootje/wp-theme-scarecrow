@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import types from 'prop-types';
 import names from 'classnames';
 
-class FancyHeaderView extends Component {
+export default class extends Component {
 	static propTypes = {
 		position: types.oneOf(['topleft', 'topright', 'bottomleft', 'bottomright']),
 		label: types.string
@@ -21,5 +21,3 @@ class FancyHeaderView extends Component {
 		);
 	}
 }
-
-export default FancyHeaderView;

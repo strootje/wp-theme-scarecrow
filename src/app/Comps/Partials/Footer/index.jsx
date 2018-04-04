@@ -1,32 +1,25 @@
-import AppFooterView from './view';
-import AppFooterStyle from './style';
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+
 import { FetchPageById } from 'Assets/Actions/Pages';
 import { FetchTags } from 'Assets/Actions/Tags';
 
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
+export default CreateContainer(view, styles, {
+	mapState: ({ state: { locales, pageIds, menus: { footer }}, store: { tags, pages: { nodesById }}}) => ({
+		locale: locales.footer,
+		aboutPageId: pageIds.about,
+		aboutPage: nodesById[pageIds.about],
+		tags: tags,
+		menu: footer,
+	}),
 
-const mapState = ({ state: { locales, menus, pageIds }, store: { pages, tags } }) => ({
-	styles: AppFooterStyle,
-	locales: locales.footer,
-	aboutPageId: pageIds.about,
-	aboutPage: pages.pagesById[pageIds.about],
-	tags: tags,
-	menu: menus.footer
-});
+	mapDispatch: ( dispatch ) => ({
+		fetchPage: ( pageId ) => dispatch(FetchPageById({ pageId: pageId })),
+		fetchTags: () => dispatch(FetchTags())
+	}),
 
-const mapDispatch = ( dispatch ) => ({
-	fetchPage: ( pageId ) => dispatch(FetchPageById(pageId)),
-	fetchTags: () => dispatch(FetchTags())
-});
-
-const mapStateDispatch = ({ aboutPageId, ...props }, { fetchPage, ...dispatches }, ownprops) => {
-	return {
-		...props, ...dispatches, ...ownprops,
+	mergeProps: ({ aboutPageId }, { fetchPage }) => ({
 		fetchPage: () => fetchPage(aboutPageId)
-	};
-}
-
-export default compose(
-	connect(mapState, mapDispatch, mapStateDispatch)
-)(AppFooterView);
+	})
+});

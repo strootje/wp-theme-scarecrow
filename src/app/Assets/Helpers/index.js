@@ -1,3 +1,5 @@
+export * from './SimpleFetch';
+
 export const OrderById = ( nodes, id ) => {
 	return nodes.reduce(( cur, next ) => ({ ...cur, [id(next)]: next }), {});
 };

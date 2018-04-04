@@ -1,7 +1,9 @@
 import { h, Component } from 'preact';
 import types from 'prop-types';
 
-class LinkView extends Component {
+import Link from 'Comps/Controls/Link';
+
+export default class extends Component {
 	static propTypes = {
 		to: types.string.isRequired,
 		label: types.string,
@@ -9,9 +11,7 @@ class LinkView extends Component {
 
 	render({ styles, locale, to, label, ...props }) {
 		return (
-			<a href={to} class={styles.readmore} {...props}>{label || locale.button.text}</a>
+			<Link to={to} class={styles.readmore} {...props}>{label || locale.button.text}</Link>
 		);
 	}
 }
-
-export default LinkView;

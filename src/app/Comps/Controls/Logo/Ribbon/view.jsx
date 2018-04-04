@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import types from 'prop-types';
 
-class LogoView extends Component {
+export default class extends Component {
 	propTypes = {
 		title: types.string.isRequired,
 		tagline: types.string.isRequired
@@ -18,5 +18,3 @@ class LogoView extends Component {
 		);
 	}
 }
-
-export default LogoView;

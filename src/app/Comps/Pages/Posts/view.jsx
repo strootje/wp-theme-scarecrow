@@ -1,31 +1,14 @@
-import { h, Component } from 'preact';
-import types from 'prop-types';
+import { Component, h } from 'preact';
 
-import List from 'Comps/Controls/List';
-import NavItem from 'Comps/Controls/NavItem';
 import Section from 'Comps/Controls/Section';
-import SectionWithPosts from 'Comps/Controls/SectionWithPosts';
-import Sidebar from 'Comps/Controls/Sidebar';
+import PostList from 'Comps/Partials/PostList';
 
-class PagePostsView extends Component {
-	static propTypes = {
-	}
-
-	render({ styles }) {
+export default class extends Component {
+	render({ styles, posts, fetchPosts }) {
 		return (
 			<Section>
-				<div className="row">
-					<div className="columns nine">
-						<SectionWithPosts />
-					</div>
-
-					<div className="columns three">
-						<Sidebar />
-					</div>
-				</div>
+				<PostList heroItem source={posts} fetch={fetchPosts} />
 			</Section>
 		);
 	}
 }
-
-export default PagePostsView;

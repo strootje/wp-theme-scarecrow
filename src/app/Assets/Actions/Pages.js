@@ -1,38 +1,61 @@
 import gql from 'graphql-tag';
-import { SimpleFetch, SimpleFetchById, SimpleFetchAll } from 'Modules/SimpleFetch';
+import { BuildActions } from 'Assets/Helpers/SimpleFetch';
 
 module.exports = {
-	...SimpleFetch('page', ({ params, client, resolve, reject }) => client.query({
-		query: gql`query( $slug: String! ) {
-			pageBy(uri: $slug) {
-				pageId
-				title
-				link
-				content
-			}
-		}`,
-		variables: {
-			slug: params.slug
-		}
-	}).then(
-		({ data: { pageBy } }) => resolve(pageBy),
-		({ message }) => reject(message)
-	)),
+	...BuildActions('page', {
+		'FetchPageByUri': ({ params, client, resolve, reject }) => client.query({
+			variables: params,
+			query: gql`query($uri: String!) {
+				pageBy(uri: $uri) {
+					pageId
+					title
+					link
+					uri
+					content
+				}
+			}`
+		}).then(
+			({ data: { pageBy } }) => resolve({ nodes: [ pageBy ] }),
+			({ message }) => reject(message)
+		),
 
-	...SimpleFetchById('page', ({ pageId, client, resolve, reject }) => client.query({
-		query: gql`query( $pageId: Int! ) {
-			pageBy(pageId: $pageId) {
-				pageId
-				title
-				link
-				content
-			}
-		}`,
-		variables: {
-			pageId: pageId
-		}
-	}).then(
-		({ data: { pageBy } }) => resolve(pageBy),
-		({ message }) => reject(message)
-	))
+		'FetchPageById': ({ params, client, resolve, reject }) => client.query({
+			variables: { pageId: parseInt(params.pageId) },
+			query: gql`query($pageId: Int!) {
+				pageBy(pageId: $pageId) {
+					pageId
+					title
+					link
+					uri
+					content
+				}
+			}`
+		}).then(
+			({ data: { pageBy } }) => resolve({ nodes: [ pageBy ] }),
+			({ message }) => reject(message)
+		),
+
+		'FetchPages': ({ params, client, resolve, reject }) => client.query({
+			variables: params,
+			query: gql`query($after: String, $first: Int, $before: String, $last: Int) {
+				pages(after: $after, first: $first, $before: $before, last: $last) {
+					pageInfo {
+						hasNextPage
+						hasPreviousPage
+						startCursor
+						endCursor
+					}
+	
+					nodes {
+						pageId
+						title
+						uri
+					}
+				}
+			}`
+		}).then(
+			({ data: { pages: { pageInfo, nodes } }}) => resolve({ pageInfo: pageInfo, nodes: nodes }),
+			({ message }) => reject(message)
+		)
+	})
 };

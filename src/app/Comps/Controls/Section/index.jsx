@@ -1,16 +1,4 @@
-import SectionView from './view';
-import SectionStyle from './style';
-
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
-
-const mapState = ( state ) => ({
-	styles: SectionStyle
-});
-
-const mapDispatch = ( dispatch ) => ({
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(SectionView);
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+export default CreateContainer(view, styles);

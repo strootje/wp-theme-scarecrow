@@ -1,24 +1,20 @@
 import { Component, h } from 'preact';
-import types from 'prop-types';
-import names from 'classnames';
 
 import Content from 'Comps/Controls/Content';
 import Section from 'Comps/Controls/Section';
 
-class PageView extends Component {
+export default class extends Component {
 	componentWillMount() {
 		const { fetchPage } = this.props;
 		fetchPage();
 	}
 
-	render({ page = {} }) {
+	render({ styles, page }) {
 		return (
-			<Section>
-				<h2>{page.title}</h2>
+			page && (<Section>
+				<h1>{page.title}</h1>
 				<Content page={page} />
-			</Section>
+			</Section>)
 		);
 	}
 }
-
-export default PageView;

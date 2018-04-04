@@ -1,18 +1,4 @@
-import AppHeaderView from './view';
-import AppHeaderStyle from './style';
-
-import { compose } from 'redux';
-import { connect } from 'preact-redux';
-
-const mapState = ({ state: { menus, info: { baseurl }}}) => ({
-	styles: AppHeaderStyle,
-	baseUrl: baseurl,
-	menu: menus.header
-});
-
-const mapDispatch = ( dispatch ) => ({
-});
-
-export default compose(
-	connect(mapState, mapDispatch)
-)(AppHeaderView);
+import { CreateContainer } from 'Assets/Helpers/SimpleFetch';
+import view from './view';
+import styles from './styles';
+export default CreateContainer(view, styles);

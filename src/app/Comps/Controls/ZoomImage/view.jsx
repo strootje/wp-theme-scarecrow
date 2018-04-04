@@ -4,7 +4,7 @@ import names from 'classnames';
 
 import FancyHeader from 'Comps/Controls/FancyHeader';
 
-class ZoomImageView extends Component {
+export default class extends Component {
 	static propTypes = {
 		classes: types.shape({
 			wrapperClass: types.string,
@@ -36,5 +36,3 @@ class ZoomImageView extends Component {
 		);
 	}
 }
-
-export default ZoomImageView;
