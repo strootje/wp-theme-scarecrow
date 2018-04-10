@@ -2,9 +2,20 @@ language: node_js
 
 before_install:
   - yarn install
+
 install:
   - yarn build
+
 script:
   - yarn test
+
 after_success:
   - yarn bundle
+
+deploy:
+  provider: releases
+  api_key: "48da4cba612dad9c412f835f4c8219c68d4e3ba9"
+  file: "wp-theme-scarecrow.zip"
+  skip_cleanup: true
+  on:
+    tags: true
