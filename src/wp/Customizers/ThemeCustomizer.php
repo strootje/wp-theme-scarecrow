@@ -13,6 +13,7 @@ class ThemeCustomizer {
 			]);
 
 			self::setImageProviderOption($wp_customize);
+			self::setCaseCategory($wp_customize);
 			self::setAboutPageOption($wp_customize);
 		});
 	}
@@ -34,6 +35,35 @@ class ThemeCustomizer {
 				"https://dummyimage.com/__width__x__height__/00f.jpg&text=-----" => __("Dummyimage.com", WpTheme::$name)
 			]
 		]));
+	}
+
+	private static function setCaseCategory( $wp_customize ) {
+		$wp_customize->add_setting("categories[cases]" , [
+			"transport" => "postMessage",
+			"default" => 0
+		]);
+	
+		$wp_customize->add_control(new \WP_Customize_Control($wp_customize, "categories_cases_control", [
+			"type" => "number",
+			"section" => self::$section,
+			"settings" => "categories[cases]",
+			"label" => __("Cases Category", WpTheme::$name)
+		]));
+
+		// $wp_customize->selective_refresh->add_partial("categories[cases]", [
+		// 	"selector" => "#about-page .inside",
+		// 	"render_callback" => function() {
+		// 		$pages = get_theme_mod("pages", []);
+
+		// 		if (!array_key_exists("about", $pages) || $pages["about"] == 0) {
+		// 			return "";
+		// 		}
+
+		// 		$pageId = $pages["about"];
+		// 		$page = get_post($pageId);
+		// 		return apply_filters('the_content', $page->post_content);
+		// 	}
+		// ]);
 	}
 
 	private static function setAboutPageOption( $wp_customize ) {

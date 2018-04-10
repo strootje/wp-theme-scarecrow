@@ -9,6 +9,9 @@
 		"prewatch": "run-s clean:dist",
 		"watch": "webpack --progress --colors --watch",
 
+		"prebundle": "run-s build",
+		"bundle": "node ./scripts/bundle",
+
 		"compose:up": "docker-compose up -d",
 		"compose:down": "docker-compose down",
 		"composer": "docker run --rm -it -v u:\\projects\\blog-strootje\\wp-content\\themes\\wp-theme-scarecrow:/app composer install"
@@ -38,6 +41,7 @@
 		"skeleton-less": "*"
 	},
 	"devDependencies": {
+		"archiver": "*",
 		"babel-core": "*",
 		"babel-loader": "*",
 		"babel-plugin-transform-class-properties": "*",

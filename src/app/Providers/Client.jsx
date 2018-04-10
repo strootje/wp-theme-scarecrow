@@ -7,6 +7,14 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink, from as concat } from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http';
 
+const createSetHeaderLink = ( callback ) => new ApolloLink(( operation, forward ) => {
+	operation.setContext(({ headers = {} }) => ({
+		headers: { ...headers, ...callback() }
+	}));
+
+	return forward(operation);
+});
+
 class Client extends ApolloClient {
 	constructor( endpoint ) {
 		super({
@@ -15,15 +23,32 @@ class Client extends ApolloClient {
 
 			link: concat([
 				createHttpLink({
-					uri: `${endpoint}/graphql`,
-
-					fetch: async ( uri, options ) => {
-						// TODO: auto token call
-						return await fetch(uri, options);
-					}
+					uri: `${endpoint}/graphql`
 				})
 			])
 		});
+
+		this.github = new ApolloClient({
+			cache: new InMemoryCache({
+			}),
+
+			link: concat([
+				createSetHeaderLink(() => {
+					const token = '48da4cba612dad9c412f835f4c8219c68d4e3ba9';
+					return {
+						authorization: (token ? `Bearer ${token}` : null)
+					};
+				}),
+
+				createHttpLink({
+					uri: `https://api.github.com/graphql`
+				})
+			])
+		});
+	}
+
+	githubQuery = ( ...args ) => {
+		return this.github.query(...args);
 	}
 }
 

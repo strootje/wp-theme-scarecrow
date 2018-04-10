@@ -31,7 +31,7 @@ export default class extends Component {
 
 				<Section>
 					<div class='columns eight'>
-						<h4>{locale.tags.header}</h4>
+						<h5>{locale.tags.header}</h5>
 						<List source={tags} filter={p => Object.values(p.nodesById)} fetch={fetchTags} render={({ renderItems }) => (
 							<ul class={styles.tags}>{renderItems(({ item }) => (
 								<li><code><Link to={item.link}>{item.name}</Link></code></li>
@@ -40,7 +40,7 @@ export default class extends Component {
 					</div>
 
 					<div class='columns four'>
-						<h4>{menu.name}</h4>
+						<h5>{menu.name}</h5>
 						<List source={menu} filter={p => p.items} render={({ renderItems }) => (
 							<ul class='fa-ul'>{renderItems(({ item }) => (
 								<li><Link to={item.url} target={item.target}>

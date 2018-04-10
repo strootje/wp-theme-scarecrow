@@ -14,7 +14,7 @@ export default class extends Component {
 				</div>)}
 
 				<div>
-					<h4>{menu.name}</h4>
+					<h5>{menu.name}</h5>
 					<List source={menu} filter={p => p.items} render={({ renderItems }) => (
 						<ul>{renderItems(({ item }) => (
 							<li><Link to={item.url} target={item.target}>

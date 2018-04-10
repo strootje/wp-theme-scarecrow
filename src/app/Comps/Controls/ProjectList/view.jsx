@@ -15,9 +15,11 @@ export default class extends Component {
 		fetch: types.func.isRequired
 	}
 
-	render({ styles, source, fetch }) {
+	render({ styles, source, fetch, caseId }) {
+		const filter = p => Object.values(p.nodesById).filter(p => p.categoryId != caseId).slice(0, 3);
+
 		return (
-			<List source={source} filter={p => Object.values(p.nodesById)} fetch={fetch} itemsPerPage={3} render={({ renderItems }) => (
+			<List source={source} filter={filter} fetch={fetch} itemsPerPage={3} render={({ renderItems }) => (
 				<div class={styles.projects}>{renderItems(({ key, item }) => (
 					<article class={names(styles.item, styles[`n${key+1}`])}>
 						<Link to={item.link}>

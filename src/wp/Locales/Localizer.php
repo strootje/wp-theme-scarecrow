@@ -6,9 +6,18 @@ use Scarecrow\WpTheme;
 class Localizer {
 	public static function getStrings() {
 		return [
+			"archive" => self::getArchiveStrings(),
 			"footer" => self::getFooterStrings(),
 			"readMoreLink" => self::getReadMoreLinkStrings(),
 			"sidebar" => self::getSidebarStrings()
+		];
+	}
+
+	private static function getArchiveStrings() {
+		return [
+			"posts" => [
+				"header" => __("Posts", WpTheme::$name)
+			]
 		];
 	}
 
@@ -31,7 +40,10 @@ class Localizer {
 	private static function getSidebarStrings() {
 		return [
 			"newsletter" => [
-				"header" => __("Newsletter Signup", WpTheme::$name)
+				"header" => __("Newsletter Signup", WpTheme::$name),
+				"name" => __("Name ...", WpTheme::$name),
+				"email" => __("Email ...", WpTheme::$name),
+				"submit" => __("Subscribe", WpTheme::$name)
 			]
 		];
 	}

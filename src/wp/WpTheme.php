@@ -47,7 +47,7 @@ class WpTheme {
 			SidebarLocation::class,
 
 			// PostTypes
-			ProjectType::class
+			// ProjectType::class
 		];
 	}
 

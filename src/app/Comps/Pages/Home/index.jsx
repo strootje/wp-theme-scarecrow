@@ -3,16 +3,21 @@ import view from './view';
 import styles from './styles';
 
 import { FetchPosts } from 'Assets/Actions/Posts';
-import { FetchProjects } from 'Assets/Actions/Projects';
+import { FetchCategories } from 'Assets/Actions/Categories';
 
 export default CreateContainer(view, styles, {
-	mapState: ({ store: { posts, projects }}) => ({
-		posts: posts,
-		projects: projects
+	mapState: ({ state: { categoryIds }, store: { categories, posts }}) => ({
+		caseId: categoryIds.cases,
+		categories: categories,
+		posts: posts
 	}),
 
 	mapDispatch: ( dispatch ) => ({
-		fetchPosts: () => dispatch(FetchPosts()),
-		fetchProjects: () => dispatch(FetchProjects())
+		fetchCategories: ( caseId ) => dispatch(FetchCategories({ caseId: caseId })),
+		fetchPosts: () => dispatch(FetchPosts())
+	}),
+
+	mergeProps: ({ caseId }, { fetchCategories, fetchPosts }) => ({
+		fetchCategories: () => fetchCategories(parseInt(caseId)),
 	})
 });

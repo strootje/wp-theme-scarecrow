@@ -9,19 +9,25 @@ const _capitalize = ( str ) => {
 };
 
 const names = ( name ) => {
-	const singular = name;
-	const plural = `${name}s`;
+	const _name = {};
+	if (typeof name == 'string') {
+		_name.singular = name;
+		_name.plural = `${name}s`;
+	} else {
+		_name.singular = name.singular;
+		_name.plural = name.plural || `${name.singular}s`;
+	}
 
 	return {
-		singular: singular,
-		singularId: `${singular}Id`,
-		capSingular: _capitalize(singular),
-		ucSingular: singular.toUpperCase(),
+		singular: _name.singular,
+		singularId: `${_name.singular}Id`,
+		capSingular: _capitalize(_name.singular),
+		ucSingular: _name.singular.toUpperCase(),
 
-		plural: plural,
-		pluralById: `${plural}ById`,
-		capPlural: _capitalize(plural),
-		ucPlural: plural.toUpperCase()
+		plural: _name.plural,
+		pluralById: `${_name.plural}ById`,
+		capPlural: _capitalize(_name.plural),
+		ucPlural: _name.plural.toUpperCase()
 	};
 };
 

@@ -53,7 +53,7 @@ export default class extends Component {
 		}
 	}
 
-	render({ styles }, { status, missing }) {
+	render({ styles, locale }, { status, missing }) {
 		if (status == 'ok') {
 			return (<div>thanks! ;)</div>);
 		} else if (status == 'nok') {
@@ -61,9 +61,9 @@ export default class extends Component {
 		} else {
 			return (
 				<form onSubmit={this.handleSubmit}>
-					<input type='text' name='name' class={names('u-full-width', (missing.name && styles.error))} placeholder='name...' onChange={this.handleOnChange} />
-					<input type='email' name='email' class={names('u-full-width', (missing.email && styles.error))} placeholder='email...' onChange={this.handleOnChange} />
-					<input type='submit' class='u-full-width' value='testing' />
+					<input type='text' name='name' class={names('u-full-width', (missing.name && styles.error))} placeholder={locale.newsletter.name} onChange={this.handleOnChange} />
+					<input type='email' name='email' class={names('u-full-width', (missing.email && styles.error))} placeholder={locale.newsletter.email} onChange={this.handleOnChange} />
+					<input type='submit' class='u-full-width' value={locale.newsletter.submit} />
 				</form>
 			);
 		}

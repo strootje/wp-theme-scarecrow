@@ -8,10 +8,29 @@ module.exports = {
 			query: gql`query($slug: String!) {
 				postBy(slug: $slug) {
 					postId
-					slug
+					date
 					title
+					slug
 					link
+					format
 					content
+					thumbnail
+					thumbnail_hero
+					
+					featuredImage {
+						sourceUrl
+					 }
+					
+					categories(first: 1, where: { shouldOutputInFlatList: true }) {
+						nodes {
+							name
+							link
+						}
+					}
+
+					author {
+						username
+					}
 				}
 			}`
 		}).then(
@@ -20,14 +39,33 @@ module.exports = {
 		),
 
 		'FetchPostById': ({ params, client, resolve, reject }) => client.query({
-			variables: { pageId: parseInt(params.pageId) },
+			variables: params,
 			query: gql`query($postId: Int!) {
 				postBy(postId: $postId) {
 					postId
+					date
 					title
+					slug
 					link
-					uri
+					format
 					content
+					thumbnail
+					thumbnail_hero
+					
+					featuredImage {
+						sourceUrl
+					 }
+					
+					categories(first: 1, where: { shouldOutputInFlatList: true }) {
+						nodes {
+							name
+							link
+						}
+					}
+
+					author {
+						username
+					}
 				}
 			}`
 		}).then(
@@ -41,7 +79,7 @@ module.exports = {
 		'FetchPosts': ({ params, client, resolve, reject }) => client.query({
 			variables: params,
 			query: gql`query {
-				posts {
+				posts( where: { orderby: { field: DATE, order: DESC }}) {
 					pageInfo {
 						hasNextPage
 						hasPreviousPage
@@ -51,11 +89,29 @@ module.exports = {
 	
 					nodes {
 						postId
+						date
 						title
+						slug
 						link
+						format
 						content
 						thumbnail
 						thumbnail_hero
+						
+						featuredImage {
+							sourceUrl
+						 }
+						
+						categories(first: 1, where: { shouldOutputInFlatList: true }) {
+							nodes {
+								name
+								link
+							}
+						}
+
+						author {
+							username
+						}
 					}
 				}
 			}`

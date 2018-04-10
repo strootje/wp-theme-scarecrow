@@ -2,10 +2,9 @@ import { h, Component } from 'preact';
 import types from 'prop-types';
 import names from 'classnames';
 
+import Link from 'Comps/Controls/Link';
 import List from 'Comps/Controls/List';
-import HeroPost from './Formats/HeroPost';
-import ImagePost from './Formats/ImagePost';
-import RegularPost from './Formats/RegularPost';
+import ZoomImage from 'Comps/Controls/ZoomImage';
 
 export default class extends Component {
 	static propTypes = {
@@ -23,16 +22,10 @@ export default class extends Component {
 	render({ styles, heroItem, itemsPerPage, source, filter, fetch }) {
 		return (
 			<List source={source} filter={filter} fetch={fetch} itemsPerPage={itemsPerPage} render={({ renderItems }) => (
-				<div class={styles.posts}>{renderItems(({ key, item }) => (
-					(heroItem && !key) ? (
-						<HeroPost item={item} />
-					) : (
-						(item.format == 'image') ? (
-							<ImagePost item={item} />
-						) : (
-							<RegularPost item={item} />
-						)
-					)
+				<div class={styles.terms}>{renderItems(({ key, item }) => (
+					<Link class={styles.item} to={item.link}>
+						<ZoomImage header title={item.title} src={item.thumbnail_banner} />
+					</Link>
 				))}</div>
 			)} />
 		);

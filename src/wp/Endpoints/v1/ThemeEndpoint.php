@@ -17,6 +17,7 @@ class ThemeEndpoint {
 		try {
 			return [
 				"info" => self::info(),
+				"categories" => self::categories(),
 				"menus" => self::menus(),
 				"pages" => self::pages()
 			];
@@ -55,6 +56,10 @@ class ThemeEndpoint {
 				]
 			]
 		];
+	}
+
+	private static function categories() {
+		return get_theme_mod("categories", []);
 	}
 
 	private static function menus() {

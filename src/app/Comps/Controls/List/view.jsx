@@ -2,6 +2,8 @@ import { h, Component } from 'preact';
 import types from 'prop-types';
 import names from 'classnames';
 
+import Loader from 'Comps/Controls/Loader';
+
 export default class extends Component {
 	static propTypes = {
 		source: types.shape({
@@ -52,12 +54,8 @@ export default class extends Component {
 	render({ styles, source, filter, render }) {
 		const { working, errored } = source;
 
-		if (working) {
-			return (<pre>loading...</pre>);
-		}
-
-		if (errored) {
-			return (<pre>errored...</pre>);
+		if (working || errored) {
+			return (<Loader errored={errored} />)
 		}
 
 		return render({

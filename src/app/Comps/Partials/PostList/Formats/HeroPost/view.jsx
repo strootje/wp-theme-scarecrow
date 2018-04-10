@@ -34,10 +34,10 @@ export default class extends Component {
 					<footer>
 						<ReadMoreLink to={item.link} />
 						<div class={styles.postinfo}>
-							<span data-prefix='Posted in'><Link label={'devlog'} /></span>
-							<span data-prefix='by'>bas@strootje.com</span>
-							<span data-prefix='on'>15/03/18</span>
-							<span data-prefix='at'>09:00</span>
+							<span data-prefix='Posted'></span>
+							<span data-prefix='in'><Link to={item.categories.nodes[0].link}>{item.categories.nodes[0].name}</Link></span>
+							<span data-prefix='by'>{item.author.username}</span>
+							<span data-prefix='on'>{item.date}</span>
 						</div>
 					</footer>
 				</div>

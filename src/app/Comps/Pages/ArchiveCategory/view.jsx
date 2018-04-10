@@ -3,29 +3,28 @@ import { Component, h } from 'preact';
 import Content from 'Comps/Controls/Content';
 import Loader from 'Comps/Controls/Loader';
 import Section from 'Comps/Controls/Section';
-import ZoomImage from 'Comps/Controls/ZoomImage';
+import PostList from 'Comps/Partials/PostList';
 import Sidebar from 'Comps/Partials/Sidebar';
 
 export default class extends Component {
 	componentWillMount() {
-		const { fetchPost } = this.props;
-		fetchPost();
+		const { fetchCategory, fetchRepository } = this.props;
+		fetchCategory();
+		fetchRepository();
 	}
 
-	render({ styles, working, post }) {
-		const content = ((!post) ? (<Loader />) : (<div>
-			<h1>{post.title}</h1>
-			{(post.format == 'image' ? (
-				<ZoomImage src={post.featuredImage.sourceUrl} />
-			) : (
-				<Content page={post} />
-			))}
-		</div>));
-
+	render({ styles, locale, working, category, posts, fetchPosts }) {
 		return (
 			<Section>
 				<div class='columns nine'>
-					{content}
+					{category ? (
+						<h2>{category.title}</h2>
+					) : (
+						<Loader />
+					)}
+
+					<h4>{locale.posts.header}</h4>
+					<PostList source={posts} fetch={fetchPosts} />
 				</div>
 
 				<div class='columns three'>

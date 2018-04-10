@@ -7,11 +7,11 @@ import PostList from 'Comps/Partials/PostList';
 import Sidebar from 'Comps/Partials/Sidebar';
 
 export default class extends Component {
-	render({ styles, projects, fetchProjects, posts, fetchPosts }) {
+	render({ styles, categories, fetchCategories, posts, fetchPosts }) {
 		return (
 			<div>
 				<Section hero>
-					<ProjectList source={projects} fetch={fetchProjects} />
+					<ProjectList source={categories} fetch={fetchCategories} />
 				</Section>
 
 				<Section>
