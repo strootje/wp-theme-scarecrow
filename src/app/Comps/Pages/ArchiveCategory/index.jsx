@@ -5,7 +5,7 @@ import styles from './styles';
 import find from 'lodash.find';
 import { FetchCategoryBySlug } from 'Assets/Actions/Categories';
 import { FetchRepository } from 'Assets/Actions/Repositories';
-import { FetchPosts } from 'Assets/Actions/Posts';
+import { FetchPostsByCategory } from 'Assets/Actions/Posts';
 
 export default CreateContainer(view, styles, {
 	mapState: ({ state: { locales, categoryIds }, store: { categories: { working, nodesById }, posts }}, { categoryId }) => ({
@@ -19,11 +19,10 @@ export default CreateContainer(view, styles, {
 	mapDispatch: ( dispatch, { categoryId }) => ({
 		fetchCategory: ( caseId ) => dispatch(FetchCategoryBySlug({ caseId: caseId, slug: categoryId })),
 		fetchRepository: () => dispatch(FetchRepository({ owner: 'strootje', repo: 'wp-theme-scarecrow' })),
-		fetchPosts: ( caseId ) => dispatch(FetchPosts({ caseId: caseId, categoryId: categoryId }))
+		fetchPosts: () => dispatch(FetchPostsByCategory({ categoryId: categoryId }))
 	}),
 
 	mergeProps: ({ caseId }, { fetchCategory, fetchPosts }) => ({
-		fetchCategory: () => fetchCategory(parseInt(caseId)),
-		fetchPosts: () => fetchPosts(parseInt(caseId))
+		fetchCategory: () => fetchCategory(parseInt(caseId))
 	})
 });

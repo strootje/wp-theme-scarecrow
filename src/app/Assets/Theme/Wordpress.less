@@ -1,0 +1,20 @@
+@import '~Assets/Theme/index';
+
+.alignleft, .alignright, .aligncenter {
+	margin-bottom: @spacing-dense;
+
+	&.alignleft {
+		margin-right: @spacing-dense;
+		float: left;
+	}
+
+	&.alignright {
+		margin-left: @spacing-dense;
+		float: right;
+	}
+
+	&.aligncenter {
+		margin: inherit auto;
+		display: block;
+	}
+}

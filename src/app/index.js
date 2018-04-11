@@ -4,6 +4,7 @@ import Store, { StoreProvider } from './Providers/Store';
 import Client, { ClientProvider } from './Providers/Client';
 
 import 'Assets/Theme/Reset';
+import 'Assets/Theme/Wordpress';
 import App from 'Comps/App';
 const client = new Client(theme.info.baseurl);
 const store = (new Store(client)).create();

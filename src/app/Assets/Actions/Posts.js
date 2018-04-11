@@ -118,6 +118,53 @@ module.exports = {
 		}).then(
 			({ data: { posts: { pageInfo, nodes } }}) => resolve({ pageInfo: pageInfo, nodes: nodes }),
 			({ message }) => reject(message)
+		),
+
+		// TODO: reimplement these
+		// query: gql`query($after: String, $first: Int, $before: String, $last: Int) {
+		// posts(after: $after, first: $first, $before: $before, last: $last) {
+		'FetchPostsByCategory': ({ params, client, resolve, reject }) => client.query({
+			variables: params,
+			query: gql`query( $categoryId: String! ) {
+				posts( where: { categoryName: $categoryId, orderby: { field: DATE, order: DESC }}) {
+					pageInfo {
+						hasNextPage
+						hasPreviousPage
+						startCursor
+						endCursor
+					}
+	
+					nodes {
+						postId
+						date
+						title
+						slug
+						link
+						format
+						content
+						thumbnail
+						thumbnail_hero
+						
+						featuredImage {
+							sourceUrl
+						 }
+						
+						categories(first: 1, where: { shouldOutputInFlatList: true }) {
+							nodes {
+								name
+								link
+							}
+						}
+
+						author {
+							username
+						}
+					}
+				}
+			}`
+		}).then(
+			({ data: { posts: { pageInfo, nodes } }}) => resolve({ pageInfo: pageInfo, nodes: nodes }),
+			({ message }) => reject(message)
 		)
 	})
 };
