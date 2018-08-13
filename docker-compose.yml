@@ -1,34 +1,33 @@
 version: '3.3'
 
+volumes:
+    dbdata:
+
 services:
-  database:
-    image: mysql:latest
-    restart: always
-    volumes:
-      - u:/data/blog-strootje:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: reallyhardpassword
-      MYSQL_DATABASE: wp-blog-strootje
-      MYSQL_USER: wp-strootje
-      MYSQL_PASSWORD: test123123
+   database:
+     image: mysql:5.7
+     restart: always
 
-  adminer:
-    image: adminer:latest
-    restart: always
-    depends_on:
-      - database
-    ports:
-      - "8080:8080"
+     volumes:
+       - dbdata:/var/lib/mysql
 
-  server:
-    build:
-      context: ./
-      dockerfile: ./.docker/wp-php.dockerfile
-    image: wp-php
-    restart: always
-    depends_on:
-      - database
-    volumes:
-      - u:/projects/blog-strootje:/var/www/html
-    ports:
-      - "80:80"
+     environment:
+       MYSQL_ROOT_PASSWORD: wproot_pass
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wpuser
+       MYSQL_PASSWORD: wpuser_pass
+
+   wordpress:
+     image: wordpress:latest
+     restart: always
+
+     depends_on:
+       - database
+
+     ports:
+       - "8080:80"
+
+     environment:
+       WORDPRESS_DB_HOST: database:3306
+       WORDPRESS_DB_USER: wpuser
+       WORDPRESS_DB_PASSWORD: wpuser_pass
