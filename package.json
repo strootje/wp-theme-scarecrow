@@ -3,24 +3,40 @@
 	"name": "timber.web",
 	"version": "0.1.0",
 	"scripts": {
-		"clean:dist": "rimraf ./dist",
-
-		"prebuild": "yarn clean:dist",
 		"build": "webpack --progress --colors",
-
-		"prewatch": "yarn clean:dist",
-		"watch": "webpack --progress --colors --watch",
-
+		"serve": "ts-node ./src/app/server",
 		"prebundle": "yarn build",
 		"bundle": "node ./scripts/bundle",
-
 		"compose:up": "docker-compose up -d",
 		"compose:down": "docker-compose down",
 		"composer": "docker run --rm -it -v $PWD:/app composer install --ignore-platform-reqs --no-scripts"
 	},
 	"dependencies": {
+		"react": "*",
+		"react-dom": "*",
+		"react-redux": "*",
+		"redux": "*"
 	},
 	"devDependencies": {
-		"archiver": "*"
+		"@types/html-webpack-plugin": "*",
+		"@types/mini-css-extract-plugin": "*",
+		"@types/node": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"@types/react-redux": "*",
+		"@types/webpack": "*",
+		"@types/webpack-serve": "*",
+		"archiver": "*",
+		"css-loader": "*",
+		"html-webpack-plugin": "*",
+		"mini-css-extract-plugin": "*",
+		"sass-loader": "*",
+		"source-map-loader": "*",
+		"ts-loader": "*",
+		"ts-node": "*",
+		"typescript": "*",
+		"webpack": "*",
+		"webpack-cli": "*",
+		"webpack-serve": "*"
 	}
 }

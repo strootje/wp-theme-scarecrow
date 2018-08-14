@@ -1,0 +1,31 @@
+{
+	"include": [
+		"./types/*.d.ts",
+		"./src/**/*.ts",
+		"./src/**/*.tsx"
+	],
+
+	"exclude": [
+		"node_modules",
+		"./dist/**/*"
+	],
+
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+
+		"jsx": "react",
+		"jsxFactory": "React.createElement",
+
+		"baseUrl": ".",
+		"outDir": "./dist/",
+		"paths": { "*": [ "*", "src/app/Assets/*", "src/app/Comps/*" ]},
+
+		"strict": true,
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"experimentalDecorators": true
+	}
+}

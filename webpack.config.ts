@@ -1,76 +1,93 @@
+import * as Webpack from 'webpack';
+import * as HtmlPlugin from 'html-webpack-plugin';
+// import * as CssPlugin from 'mini-css-extract-plugin';
 import Paths from "./src/utils/Paths";
 
-// const Webpack = require('webpack');
-// const WebpackExtractTextPlugin = require('extract-text-webpack-plugin');
-// const WebpackHtmlPlugin = require('html-webpack-plugin');
 
-
-export default {
+const config: Webpack.Configuration = {
 	mode: 'development',
+	devtool: 'source-map',
 
 	entry: {
 		'app.bundle': [ Paths.Src('polyfill'), Paths.Src('index') ]
 	},
 
 	resolve: {
-		extensions: [
-			'.ts', '.tsx',
-			'.scss', '.json'
+		modules: [
+			Paths.Src('Assets'),
+			Paths.Src('Comps'),
+			'node_modules'
 		],
 
-		modules: [
-			Paths.Src('Comps'),
-			Paths.Src('Assets'),
-			"node_modules"
+		extensions: [
+			'.js', '.ts', '.tsx',
+			'.json', '.css', '.scss',
 		]
 	},
+
+	module: {
+		rules: [
+			{
+				enforce: 'pre',
+				test: /\.js$/,
+				use: [
+					{
+						loader: 'source-map-loader'
+					}
+				]
+			},
+			{
+				test: /\.[j|t]sx?$/,
+				exclude: /(node_modules|bower_components)/,
+				use: [
+					{
+						loader: 'ts-loader'
+					}
+				]
+			},
+			// {
+			// 	test: /\.s?css$/,
+			// 	use: [
+			// 		// {
+			// 		// 	loader: CssPlugin.loader
+			// 		// },
+			// 		{
+			// 			loader: 'css-loader',
+			// 			options: {
+			// 				modules: true,
+			// 				localIdentName: '[local]'
+			// 			}
+			// 		},
+			// 		{
+			// 			loader: 'sass-loader'
+			// 		}
+			// 	]
+			// }
+		]
+	},
+
+	plugins: [
+		new HtmlPlugin({
+			title: 'strootje blog',
+			filename: 'index.html',
+			template: Paths.Src('layout.html')
+		})
+
+		// new CssPlugin({
+		// 	filename: '[name].css'
+		// })
+	],
 
 	output: {
 		path: Paths.Dist(),
 		filename: '[name].js'
 	}
-}
+};
+
+export default config;
 
 
 // module.exports = {
-
-// 	module: {
-// 		rules: [
-// 			{
-// 				test: /\.(js|jsx)$/,
-// 				exclude: /node_modules/,
-// 				use: [
-// 					'babel-loader',
-// 				],
-// 			},
-// 			{
-// 				test: /\.less$/,
-// 				exclude: /node_modules/,
-// 				loader: WebpackExtractTextPlugin.extract({
-// 					use: [
-// 						{
-// 							loader: 'css-loader',
-// 							options: {
-// 								minimize: true,
-// 								sourceMap: true,
-// 								modules: true,
-// 								importLoaders: 1,
-// 								localIdentName: '[local]'
-// 							}
-// 						},
-// 						{
-// 							loader: 'less-loader',
-// 							options: {
-// 								minimize: true,
-// 								sourceMap: true
-// 							}
-// 						}
-// 					],
-// 				}),
-// 			}
-// 		],
-// 	},
-
 // 	optimization: {
 // 		splitChunks: {
 // 			cacheGroups: {
@@ -98,9 +115,6 @@ export default {
 // 	},
 
 // 	plugins: [
-// 		new WebpackExtractTextPlugin(
-// 			join('..', 'css', 'app.bundle.css')
-// 		),
 // 		new Webpack.SourceMapDevToolPlugin({
 // 			filename: '[name].js.map'
 // 		}),

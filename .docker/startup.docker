@@ -1,3 +1,0 @@
-docker run --rm --name blog.db -e MYSQL_ROOT_PASSWORD=test123 --publish 3306:3306 -v u:/data/myblog:/var/lib/mysql -d mysql:latest
-docker run --rm --name adminer --link blog.db --publish 8080:8080 -d adminer:latest
-docker run --rm --name blog.php --link blog.db --publish 80:80 -v u:/projects/myblog:/var/www/html -d local/phpwp
