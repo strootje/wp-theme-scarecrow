@@ -4,62 +4,23 @@
 	"version": "0.1.0",
 	"scripts": {
 		"clean:dist": "rimraf ./dist",
-		"prebuild": "run-s clean:dist",
+
+		"prebuild": "yarn clean:dist",
 		"build": "webpack --progress --colors",
-		"prewatch": "run-s clean:dist",
+
+		"prewatch": "yarn clean:dist",
 		"watch": "webpack --progress --colors --watch",
 
-		"prebundle": "run-s build",
+		"prebundle": "yarn build",
 		"bundle": "node ./scripts/bundle",
 
 		"compose:up": "docker-compose up -d",
 		"compose:down": "docker-compose down",
-		"composer": "docker run --rm -it -v u:\\projects\\blog-strootje\\wp-content\\themes\\wp-theme-scarecrow:/app composer install"
+		"composer": "docker run --rm -it -v $PWD:/app composer install --ignore-platform-reqs --no-scripts"
 	},
 	"dependencies": {
-		"apollo-cache-inmemory": "*",
-		"apollo-client": "*",
-		"apollo-link-context": "*",
-		"apollo-link-http": "*",
-		"babel-polyfill": "*",
-		"classnames": "*",
-		"graphql": "*",
-		"graphql-tag": "*",
-		"lodash.merge": "*",
-		"lodash.find": "*",
-		"normalize.css": "*",
-		"preact": "*",
-		"preact-compat": "*",
-		"preact-redux": "*",
-		"preact-router": "*",
-		"prop-types": "*",
-		"react-apollo": "*",
-		"redux": "*",
-		"redux-localstorage": "*",
-		"redux-logger": "*",
-		"redux-thunk": "*",
-		"skeleton-less": "*"
 	},
 	"devDependencies": {
-		"archiver": "*",
-		"babel-core": "*",
-		"babel-loader": "*",
-		"babel-plugin-transform-class-properties": "*",
-		"babel-plugin-transform-object-rest-spread": "*",
-		"babel-regenerator-runtime": "*",
-		"babel-preset-env": "*",
-		"babel-preset-react": "*",
-		"babel-preset-stage-2": "*",
-		"bundle-loader": "*",
-		"css-loader": "*",
-		"extract-text-webpack-plugin": "next",
-		"html-webpack-plugin": "*",
-		"less": "*",
-		"less-loader": "*",
-		"npm-run-all": "*",
-		"rimraf": "*",
-		"uglifyjs-webpack-plugin": "*",
-		"webpack": "*",
-		"webpack-cli": "*"
+		"archiver": "*"
 	}
 }
