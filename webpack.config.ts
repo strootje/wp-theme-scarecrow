@@ -1,6 +1,6 @@
 import * as Webpack from 'webpack';
 import * as HtmlPlugin from 'html-webpack-plugin';
-// import * as CssPlugin from 'mini-css-extract-plugin';
+import * as CssPlugin from 'mini-css-extract-plugin';
 import Paths from "./src/utils/Paths";
 
 
@@ -45,24 +45,24 @@ const config: Webpack.Configuration = {
 					}
 				]
 			},
-			// {
-			// 	test: /\.s?css$/,
-			// 	use: [
-			// 		// {
-			// 		// 	loader: CssPlugin.loader
-			// 		// },
-			// 		{
-			// 			loader: 'css-loader',
-			// 			options: {
-			// 				modules: true,
-			// 				localIdentName: '[local]'
-			// 			}
-			// 		},
-			// 		{
-			// 			loader: 'sass-loader'
-			// 		}
-			// 	]
-			// }
+			{
+				test: /\.s?css$/,
+				use: [
+					{
+						loader: (CssPlugin.loader as string)
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							localIdentName: '[local]'
+						}
+					},
+					{
+						loader: 'sass-loader'
+					}
+				]
+			}
 		]
 	},
 
@@ -71,11 +71,11 @@ const config: Webpack.Configuration = {
 			title: 'strootje blog',
 			filename: 'index.html',
 			template: Paths.Src('layout.html')
-		})
+		}),
 
-		// new CssPlugin({
-		// 	filename: '[name].css'
-		// })
+		new CssPlugin({
+			filename: '[name].css'
+		})
 	],
 
 	output: {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import StoreProvider from 'Providers/StoreProvider';
 
+import 'Theme';
 import App from 'App';
 
 const Bootstrap = () => (
