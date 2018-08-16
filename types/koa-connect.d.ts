@@ -1,3 +1,4 @@
 declare module 'koa-connect' {
-	export function convert( middleware: any ): any;
+	const convert: ( middleware: any ) => any;
+	export = convert;
 }

@@ -4,7 +4,7 @@
 	"version": "0.1.0",
 	"scripts": {
 		"build": "webpack --progress --colors",
-		"serve": "ts-node ./src/app/server",
+		"serve": "ts-node --files ./src/app/server",
 		"prebundle": "yarn build",
 		"bundle": "node ./scripts/bundle",
 		"compose:up": "docker-compose up -d",
