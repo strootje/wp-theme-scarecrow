@@ -4,30 +4,33 @@ volumes:
     dbdata:
 
 services:
-   database:
-     image: mysql:5.7
-     restart: always
+  database:
+    image: mysql:5.7
+    restart: always
 
-     volumes:
-       - dbdata:/var/lib/mysql
+    volumes:
+      - dbdata:/var/lib/mysql
 
-     environment:
-       MYSQL_ROOT_PASSWORD: wproot_pass
-       MYSQL_DATABASE: wordpress
-       MYSQL_USER: wpuser
-       MYSQL_PASSWORD: wpuser_pass
+    environment:
+      MYSQL_ROOT_PASSWORD: wproot_pass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wpuser_pass
 
-   wordpress:
-     image: wordpress:latest
-     restart: always
+  wordpress:
+    image: wordpress:latest
+    restart: always
 
-     depends_on:
-       - database
+    depends_on:
+      - database
 
-     ports:
-       - "8080:80"
+    ports:
+      - "8080:80"
 
-     environment:
-       WORDPRESS_DB_HOST: database:3306
-       WORDPRESS_DB_USER: wpuser
-       WORDPRESS_DB_PASSWORD: wpuser_pass
+    volumes:
+      - ./uploads.init:/usr/local/etc/php/conf.d/uploads.ini
+
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wpuser_pass

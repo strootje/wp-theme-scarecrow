@@ -20,7 +20,7 @@
 
 		"baseUrl": ".",
 		"outDir": "./dist/",
-		"paths": { "*": [ "*", "src/app/Assets/*", "src/app/Comps/*" ]},
+		"paths": { "*": [ "*", "src/app/Domain/*", "src/app/Assets/*", "src/app/Comps/*" ]},
 
 		"strict": true,
 		"sourceMap": true,

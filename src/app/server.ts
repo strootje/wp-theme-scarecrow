@@ -1,12 +1,21 @@
 import * as WebpackServe from 'webpack-serve';
-import config from './../../webpack.config';
+import WebpackConfig from './../../webpack.config';
 
-// set target for node
-config.target = 'node';
+// import * as convert from 'koa-connect';
+const convert = require('koa-connect') as any;
+import * as history from 'connect-history-api-fallback';
 
-const args = {
-	port: 9000
+
+
+const config: WebpackServe.Options = {
+	config: WebpackConfig,
+
+	port: 9000,
+
+	add: ( app, middleware ) => {
+		app.use(convert(history()));
+	}
 };
 
-WebpackServe(args, { config }).then(( result: WebpackServe.Result ) => {
+WebpackServe({}, config).then(( result: WebpackServe.Result ) => {
 });

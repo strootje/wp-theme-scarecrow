@@ -1,6 +1,6 @@
 {
 	"files.exclude": {
-		".*": true,
+		".*": false,
 		"dist": true,
 		"node_modules": true,
 		"vendor": true,

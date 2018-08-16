@@ -1,11 +1,12 @@
 import * as Webpack from 'webpack';
 import * as HtmlPlugin from 'html-webpack-plugin';
 import * as CssPlugin from 'mini-css-extract-plugin';
-import Paths from "./src/utils/Paths";
+import Paths from './src/app/Assets/Utils/Paths';
 
 
 const config: Webpack.Configuration = {
 	mode: 'development',
+	target: 'web',
 	devtool: 'source-map',
 
 	entry: {
@@ -14,6 +15,7 @@ const config: Webpack.Configuration = {
 
 	resolve: {
 		modules: [
+			Paths.Src('Domain'),
 			Paths.Src('Assets'),
 			Paths.Src('Comps'),
 			'node_modules'
@@ -30,6 +32,7 @@ const config: Webpack.Configuration = {
 			{
 				enforce: 'pre',
 				test: /\.js$/,
+				exclude: /(node_modules|bower_components)/,
 				use: [
 					{
 						loader: 'source-map-loader'
@@ -49,6 +52,7 @@ const config: Webpack.Configuration = {
 				test: /\.s?css$/,
 				use: [
 					{
+						/* weird hack for typescript */
 						loader: (CssPlugin.loader as string)
 					},
 					{
