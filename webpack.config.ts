@@ -1,11 +1,14 @@
 import * as Webpack from 'webpack';
+import * as CleanPlugin from 'clean-webpack-plugin';
 import * as HtmlPlugin from 'html-webpack-plugin';
 import * as CssPlugin from 'mini-css-extract-plugin';
-import Paths from './src/app/Assets/Utils/Paths';
 
+import Paths from './src/app/Assets/Utils/Paths';
+import Bundler from './scripts/Bundler';
+const devmode = (process.env.mode || 'development') == 'development';
 
 const config: Webpack.Configuration = {
-	mode: 'development',
+	mode: devmode ? 'development' : 'production',
 	target: 'web',
 	devtool: 'source-map',
 
@@ -58,8 +61,9 @@ const config: Webpack.Configuration = {
 					{
 						loader: 'css-loader',
 						options: {
+							sourceMap: true,
 							modules: true,
-							localIdentName: '[local]'
+							localIdentName: '[hash:base64:5]__[local]'
 						}
 					},
 					{
@@ -71,10 +75,19 @@ const config: Webpack.Configuration = {
 	},
 
 	plugins: [
-		new HtmlPlugin({
+		new CleanPlugin([
+			Paths.Dist(),
+			Bundler.OutPath
+		]),
+
+		devmode ? new HtmlPlugin({
 			title: 'strootje blog',
 			filename: 'index.html',
-			template: Paths.Src('layout.html')
+			template: Paths.Src('template.html')
+		}) : new HtmlPlugin({
+			title: 'strootje blog',
+			filename: 'index.php',
+			template: Paths.WpSrc('template.php')
 		}),
 
 		new CssPlugin({

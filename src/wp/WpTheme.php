@@ -10,7 +10,6 @@ use Scarecrow\Locales\Localizer;
 use Scarecrow\MenuLocations\FooterLocation;
 use Scarecrow\MenuLocations\HeaderLocation;
 use Scarecrow\MenuLocations\SidebarLocation;
-use Scarecrow\PostTypes\ProjectType;
 
 class WpTheme {
 	public static $name;
@@ -25,7 +24,7 @@ class WpTheme {
 
 		self::$support = [
 			"post-formats" => [ "gallery", "link", "image", "quote", "video", "audio" ],
-			"post-thumbnails" => [ "post", ProjectType::$name ],
+			"post-thumbnails" => [ "post" ],
 			"custom-logo" => [ "width" => 300, "height" => 80 ],
 			"html5" => [ "search-form" ],
 			"title-tag" => []
@@ -40,14 +39,11 @@ class WpTheme {
 			// Endpoints
 			GraphqlEndpoint::class,
 			ThemeEndpoint::class,
-			
+
 			// MenuLocations
 			HeaderLocation::class,
 			FooterLocation::class,
-			SidebarLocation::class,
-
-			// PostTypes
-			// ProjectType::class
+			SidebarLocation::class
 		];
 	}
 
@@ -66,7 +62,7 @@ class WpTheme {
 		wp_localize_script("app.bundle", "theme", ThemeEndpoint::getOptions([]));
 		wp_localize_script("app.bundle", "locale", Localizer::getStrings());
 	}
-	
+
 	public function setup() {
 		foreach(self::$support as $feature => $args) {
 			add_theme_support($feature, $args);

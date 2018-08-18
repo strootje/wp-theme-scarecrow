@@ -1,0 +1,27 @@
+@import 'Theme';
+@import '~skeleton-sass-official/skeleton/themes/fresh/_grid';
+
+.FooterMain {
+	@extend .container;
+}
+
+.FooterRow {
+	@extend .row;
+}
+
+.FooterTags {
+	@extend .columns;
+	@extend .eight;
+}
+
+.FooterSocial {
+	@extend .columns;
+	@extend .four;
+}
+
+.FooterLegal {
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-weight: lighter;
+	text-align: center;
+}

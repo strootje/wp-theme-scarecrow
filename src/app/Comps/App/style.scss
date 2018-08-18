@@ -1,0 +1,14 @@
+.LayoutMain {
+	height: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.LayoutWrapper {
+	flex-grow: 1;
+	// border-top: 3px solid #f00;
+}
+
+.LayoutFooter {
+	// border-bottom: 3px solid #f00;
+}

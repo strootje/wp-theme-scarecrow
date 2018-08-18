@@ -48,13 +48,7 @@ class ThemeEndpoint {
 			"title" => get_bloginfo("name"),
 			"tagline" => get_bloginfo("description"),
 			"baseurl" => get_bloginfo("wpurl"),
-			"logo" => $logo,
-			"support" => [
-				"newsletter" => [
-					"enabled" => class_exists("\WPNewsletterApi\Client\ClientFactory"),
-					"configured" => \WPNewsletterApi\Client\ClientFactory::canCreate("mailchimp")
-				]
-			]
+			"logo" => $logo
 		];
 	}
 
@@ -64,7 +58,7 @@ class ThemeEndpoint {
 
 	private static function menus() {
 		$menus = [];
-	
+
 		$locations = get_nav_menu_locations();
 		foreach($locations as $name => $menuId) {
 			$menu = wp_get_nav_menu_object($menuId);
@@ -79,7 +73,7 @@ class ThemeEndpoint {
 				"slug" => $menu->slug,
 				"items" => []
 			];
-	
+
 			foreach($menu->items as $item) {
 				$menus[$name]["items"][] = [
 					"title" => $item->title,
@@ -90,7 +84,7 @@ class ThemeEndpoint {
 				];
 			}
 		}
-		
+
 		return $menus;
 	}
 

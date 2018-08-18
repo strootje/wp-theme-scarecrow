@@ -1,0 +1,25 @@
+@import 'Theme';
+@import '~skeleton-sass-official/skeleton/themes/fresh/_grid';
+
+.AppHeader {
+	@extend .container;
+	@extend .row;
+}
+
+.AppNavigation {
+}
+
+.NavItemLink,
+.NavItemLogo,
+.NavItemSearch {
+	@extend .columns;
+}
+
+.NavItemLink {
+	@extend .two;
+}
+
+.NavItemLogo,
+.NavItemSearch {
+	@extend .four;
+}

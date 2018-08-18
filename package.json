@@ -1,12 +1,12 @@
 {
 	"private": true,
-	"name": "timber.web",
+	"name": "wp-theme-scarecrow",
 	"version": "0.1.0",
 	"scripts": {
 		"build": "webpack --progress --colors",
 		"serve": "ts-node --files ./src/app/server",
-		"prebundle": "yarn build",
-		"bundle": "node ./scripts/bundle",
+		"prebundle": "yarn build --mode production",
+		"bundle": "ts-node --files ./scripts/bundle",
 		"compose:up": "docker-compose up -d",
 		"compose:down": "docker-compose down",
 		"composer": "docker run --rm -it -v $PWD:/app composer install --ignore-platform-reqs --no-scripts"
@@ -24,12 +24,15 @@
 		"react-dom": "*",
 		"react-intl": "*",
 		"react-redux": "*",
+		"react-router": "*",
+		"react-router-dom": "*",
 		"redux": "*",
 		"redux-logger": "*",
 		"redux-thunk": "*"
 	},
 	"devDependencies": {
 		"@types/archiver": "*",
+		"@types/clean-webpack-plugin": "*",
 		"@types/connect-history-api-fallback": "*",
 		"@types/graphql": "*",
 		"@types/html-webpack-plugin": "*",
@@ -39,6 +42,8 @@
 		"@types/react-dom": "*",
 		"@types/react-intl": "*",
 		"@types/react-redux": "*",
+		"@types/react-router": "*",
+		"@types/react-router-dom": "*",
 		"@types/recompose": "*",
 		"@types/redux": "*",
 		"@types/redux-logger": "*",
@@ -46,6 +51,7 @@
 		"@types/webpack": "*",
 		"@types/webpack-serve": "*",
 		"archiver": "*",
+		"clean-webpack-plugin": "*",
 		"connect-history-api-fallback": "*",
 		"css-loader": "*",
 		"html-webpack-plugin": "*",

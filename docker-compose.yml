@@ -28,7 +28,12 @@ services:
       - "8080:80"
 
     volumes:
-      - ./uploads.init:/usr/local/etc/php/conf.d/uploads.ini
+      - ./scripts/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./vendor:/var/www/html/wp-content/themes/wp-theme-scarecrow/vendor
+      - ./src/wp:/var/www/html/wp-content/themes/wp-theme-scarecrow/src/wp
+      - ./src/wp/style.css:/var/www/html/wp-content/themes/wp-theme-scarecrow/style.css
+      - ./src/wp/functions.php:/var/www/html/wp-content/themes/wp-theme-scarecrow/functions.php
+      - ./src/wp/index.php:/var/www/html/wp-content/themes/wp-theme-scarecrow/index.php
 
     environment:
       WORDPRESS_DB_HOST: database:3306
