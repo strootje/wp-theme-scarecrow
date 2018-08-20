@@ -18,7 +18,6 @@ class ThemeEndpoint {
 			return [
 				"info" => self::info(),
 				"categories" => self::categories(),
-				"menus" => self::menus(),
 				"pages" => self::pages()
 			];
 		}
@@ -54,38 +53,6 @@ class ThemeEndpoint {
 
 	private static function categories() {
 		return get_theme_mod("categories", []);
-	}
-
-	private static function menus() {
-		$menus = [];
-
-		$locations = get_nav_menu_locations();
-		foreach($locations as $name => $menuId) {
-			$menu = wp_get_nav_menu_object($menuId);
-			if (!isset($menu->term_id)) {
-				continue;
-			}
-
-			$menu->items = wp_get_nav_menu_items($menu->term_id);
-			$menus[$name] = [
-				"term_id" => $menu->term_id,
-				"name" => $menu->name,
-				"slug" => $menu->slug,
-				"items" => []
-			];
-
-			foreach($menu->items as $item) {
-				$menus[$name]["items"][] = [
-					"title" => $item->title,
-					"slug" => $item->slug,
-					"target" => $item->target,
-					"classes" => $item->classes,
-					"url" => $item->url
-				];
-			}
-		}
-
-		return $menus;
 	}
 
 	private static function pages() {

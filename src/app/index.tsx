@@ -9,8 +9,9 @@ import RouterProvider from 'Providers/RouterProvider';
 import 'Theme';
 import App from 'App';
 
+const endpoint = 'localhost:8080';
 const Bootstrap = () => (
-	<ApiProvider>
+	<ApiProvider endpoint={endpoint}>
 		<StoreProvider>
 			<RouterProvider>
 				<LocaleProvider locale='en'>

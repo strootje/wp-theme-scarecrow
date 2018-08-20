@@ -2,35 +2,45 @@ import * as React from 'react';
 const style = require('./style');
 
 import { FormattedMessage } from 'react-intl';
+import { ViewDataState } from 'Actions/ViewData';
 
-export default class extends React.Component<{}, {}> {
+interface OwnProps {
+}
+
+interface StateProps {
+	GetMenu: () => void,
+	ViewData: ViewDataState
+}
+
+type Props = OwnProps & StateProps;
+
+export default class extends React.Component<OwnProps, {}> {
+	componentWillMount() {
+		const {
+			GetMenu
+		} = this.props as Props
+
+		GetMenu();
+	}
+
 	render(): JSX.Element {
-		const tags = [
-			{ name: 'git' },
-			{ name: 'test' }
-		]
-
-		const socialMenu = [
-			{ name: 'test1' },
-			{ name: 'test2' }
-		];
+		const {
+			ViewData: { menus: { footer }}
+		} = this.props as Props;
 
 		return (
 			<footer className={style.FooterMain}>
 				<div className={style.FooterRow}>
 					<div className={style.FooterTags}>
 						<h5><FormattedMessage id='footer.tags.title' /></h5>
-						<ul>{tags.map(tag => (
-							<li>{tag.name}</li>
-						))}</ul>
 					</div>
 
-					<div className={style.FooterSocial}>
-						<h5>===Social Menu===</h5>
-						<ul>{socialMenu.map(item => (
-							<li>{item.name}</li>
-						))}</ul>
-					</div>
+					{footer && <div className={style.FooterSocial}>
+						<h5><FormattedMessage id={footer.Name} /></h5>
+						<ul>{footer.Items.map(item =>
+							<li key={item.Key}>{item.Label}</li>
+						)}</ul>
+					</div>}
 				</div>
 
 				<div className={style.FooterRow}>

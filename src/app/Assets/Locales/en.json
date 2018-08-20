@@ -1,5 +1,6 @@
 {
 	"app.title": "Strootje Blog",
 
-	"footer.tags.title": "Tags"
+	"footer.tags.title": "Tags",
+	"footer.social.title": "Social Links"
 }

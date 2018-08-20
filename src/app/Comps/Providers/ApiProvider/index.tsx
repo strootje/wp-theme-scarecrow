@@ -3,6 +3,7 @@ import { ApolloProvider } from 'react-apollo';
 import WordpressClient from 'Clients/WordpressClient';
 
 interface OwnProps {
+	endpoint: string,
 	children: any
 }
 
@@ -12,7 +13,7 @@ export default class extends React.Component<OwnProps, {}> {
 	constructor( props: OwnProps ) {
 		super(props);
 
-		const endpoint = 'localhost:8080';
+		const endpoint = props.endpoint;
 		this.client = new WordpressClient(endpoint);
 	}
 
