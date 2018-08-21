@@ -7,10 +7,6 @@ module.exports = {
 
 			include: [
 				"./src/app/**/*.ts"
-			],
-
-			exclude: [
-				"./src/app.bak/*"
 			]
 		}
 	}

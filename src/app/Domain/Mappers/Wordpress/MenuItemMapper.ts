@@ -1,9 +1,9 @@
 import MenuItem from "Models/MenuItem";
-import { GetMenuByLocation_menus_nodes_menuItems_nodes } from "Entities/Wordpress/GetMenuByLocation";
+import { FetchMenuByLocation_menus_nodes_menuItems_nodes } from "Entities/Wordpress/FetchMenuByLocation";
 
 
 export default class {
-	static Map( menuItem: GetMenuByLocation_menus_nodes_menuItems_nodes ): MenuItem {
+	static Map( menuItem: FetchMenuByLocation_menus_nodes_menuItems_nodes ): MenuItem {
 		if (menuItem.label == null) { throw Error('label cannot be null') };
 
 		return new MenuItem(
@@ -15,7 +15,7 @@ export default class {
 		);
 	}
 
-	static MapAll( menuItems: GetMenuByLocation_menus_nodes_menuItems_nodes[] ): MenuItem[] {
+	static MapAll( menuItems: FetchMenuByLocation_menus_nodes_menuItems_nodes[] ): MenuItem[] {
 		const items: MenuItem[] = [];
 
 		menuItems.forEach(item => items.push(this.Map(item)));

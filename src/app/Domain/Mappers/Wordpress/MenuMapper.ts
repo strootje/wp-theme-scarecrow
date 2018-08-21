@@ -1,9 +1,9 @@
 import Menu from "Models/Menu";
 import MenuItemMapper from "Mappers/Wordpress/MenuItemMapper";
-import { GetMenuByLocation_menus_nodes } from "Entities/Wordpress/GetMenuByLocation";
+import { FetchMenuByLocation_menus_nodes } from "Entities/Wordpress/FetchMenuByLocation";
 
 export default class {
-	static Map( menu: GetMenuByLocation_menus_nodes ): Menu {
+	static Map( menu: FetchMenuByLocation_menus_nodes ): Menu {
 		if (menu.name == null) { throw Error('name cannot be null'); }
 		if (menu.menuItems == null) { throw Error('menuItems cannot be null'); }
 

@@ -50,10 +50,8 @@ class WpTheme {
 	public function scripts() {
 		$path = get_template_directory_uri();
 
-		wp_enqueue_style("normalize.css", "//unpkg.com/normalize.css/normalize.css", [], null);
-		wp_enqueue_style("skeleton.css", "//unpkg.com/skeleton.css/skeleton.css", [], null);
 		wp_enqueue_style("app.fonts", "//fonts.googleapis.com/css?family=Courgette|Righteous|Roboto", [], null);
-		wp_enqueue_style("app.icons", "//use.fontawesome.com/releases/v5.0.8/css/all.css", [], null);
+		wp_enqueue_style("app.icons", "//use.fontawesome.com/releases/v5.2.0/css/all.css", [], null);
 		wp_enqueue_style("app.styles", "{$path}/dist/assets/css/app.bundle.css", [ "normalize.css", "skeleton.css", "app.fonts", "app.icons" ], self::$version);
 
 		wp_enqueue_script("app.bundle", "{$path}/dist/assets/js/app.bundle.js", [ "app.vendor" ], self::$version, true);

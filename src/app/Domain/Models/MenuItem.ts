@@ -30,7 +30,7 @@ export default class MenuItem {
 		return this.target;
 	}
 
-	get CssClasses(): string[] {
-		return this.cssClasses;
+	get CssClasses(): string {
+		return this.cssClasses.join(' ');
 	}
 }

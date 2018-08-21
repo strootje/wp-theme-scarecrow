@@ -1,10 +1,10 @@
-import { FetchMenuReducer, FetchMenuState, FetchMenuAction } from './Fetch';
+import { FetchMenuByLocationReducer, FetchMenuByLocationState, FetchMenuByLocationAction } from './FetchByLocation';
 
-export type MenuState = FetchMenuState;
-export type MenuAction = FetchMenuAction;
+export type MenuState = FetchMenuByLocationState;
+export type MenuAction = FetchMenuByLocationAction;
 
 const reducers: (( state: MenuState, action: MenuAction ) => MenuState)[] = [
-	FetchMenuReducer
+	FetchMenuByLocationReducer
 ];
 
 const dstate: MenuState = {
