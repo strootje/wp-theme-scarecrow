@@ -18,8 +18,11 @@ export default class extends React.Component<OwnProps, {}> {
 			...rest
 		} = this.props;
 
-		return (to.search(/^https?/) == -1)
-			? <Link to={to} {...rest}>{label}</Link>
-			: <a href={to} {...rest}>{label}</a>
+		const localhost = 'localhost:9000';
+		const url = to.replace('http://localhost:8080', '');
+
+		return (url.search(localhost) > -1)
+			? <Link to={url} {...rest}>{label}</Link>
+			: <a href={url} {...rest}>{label}</a>
 	}
 }

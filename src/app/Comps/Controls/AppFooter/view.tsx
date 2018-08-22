@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { ViewDataState } from 'Actions/ViewData';
 import { TagsState } from 'Actions/Tags';
 import Link from 'Controls/Link';
+import Tag from 'Models/Tag';
 
 interface OwnProps {
 }
@@ -20,7 +21,7 @@ interface StateProps {
 type Props = OwnProps & StateProps;
 
 export default class extends React.Component<OwnProps, {}> {
-	componentWillMount() {
+	componentWillMount(): void {
 		const {
 			ViewData: { menus: { footer }},
 			Tags: { tags },
@@ -49,8 +50,8 @@ export default class extends React.Component<OwnProps, {}> {
 				<div className={style.FooterRow}>
 					{tags && <div className={style.FooterTags}>
 						<h5><FormattedMessage id='footer.tags.title' /></h5>
-						<ul>{tags.map(item =>
-							<li key={item.Key}>{item.Name}</li>
+						<ul className={style.FooterTagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
+							<li className={style.FooterTagsListItem} key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
 						)}</ul>
 					</div>}
 

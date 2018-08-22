@@ -1,9 +1,10 @@
 import * as React from 'react';
 const style = require('./style');
 
+import { Switch, Route } from 'react-router-dom';
 import AppHeader from 'Controls/AppHeader';
 import AppFooter from 'Controls/AppFooter';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Page from 'Views/Page';
 
 export default class extends React.Component<{}, {}> {
 	render(): JSX.Element {
@@ -13,7 +14,9 @@ export default class extends React.Component<{}, {}> {
 					<AppHeader />
 
 					<Switch>
-						<Route component={() => (<p>first route</p>)} />
+						{/* <Route path='/:postId' component={Page} /> */}
+						<Route path='/:pageSlug' component={Page} />
+						<Route path='/' component={() => (<p>home page</p>)} />
 					</Switch>
 				</div>
 

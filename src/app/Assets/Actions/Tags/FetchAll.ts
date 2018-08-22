@@ -36,7 +36,9 @@ export function FetchAllTags() {
 				tags {
 					nodes {
 						id
-						name
+						name,
+						link,
+						count
 					}
 				}
 			}`

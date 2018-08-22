@@ -14,6 +14,15 @@
 	@extend .eight;
 }
 
+.FooterTagsList {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.FooterTagsListItem {
+	list-style-type: none;
+}
+
 .FooterSocial {
 	@extend .columns;
 	@extend .four;

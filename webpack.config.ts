@@ -63,7 +63,7 @@ const config: Webpack.Configuration = {
 						options: {
 							sourceMap: true,
 							modules: true,
-							localIdentName: '[hash:base64:5]__[local]'
+							localIdentName: '[local]__[hash:base64:5]'
 						}
 					},
 					{
@@ -96,6 +96,7 @@ const config: Webpack.Configuration = {
 	],
 
 	output: {
+		publicPath: '/',
 		path: Paths.Dist(),
 		filename: '[name].js'
 	}

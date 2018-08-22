@@ -7,19 +7,27 @@
 }
 
 .AppNavigation {
+	display: flex;
+	flex-flow: row wrap;
 }
 
 .NavItemLink,
 .NavItemLogo,
 .NavItemSearch {
 	@extend .columns;
+
+	list-style-type: none;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .NavItemLink {
 	@extend .two;
+	// order: 1;
 }
 
 .NavItemLogo,
 .NavItemSearch {
 	@extend .four;
+	// order: 0;
 }

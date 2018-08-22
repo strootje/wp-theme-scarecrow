@@ -7,7 +7,9 @@ export default class {
 
 		return new Tag(
 			tag.id,
-			tag.name
+			tag.name,
+			tag.link || '',
+			tag.count || 0
 		);
 	}
 
