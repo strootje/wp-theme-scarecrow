@@ -1,10 +1,10 @@
-import { FetchAllTagsReducer, FetchAllTagsState, FetchAllTagsAction } from './FetchAll';
+import { FetchTagsReducer, FetchTagsState, FetchTagsAction } from './FetchTags';
 
-export type TagsState = FetchAllTagsState;
-export type TagsAction = FetchAllTagsAction;
+export type TagsState = FetchTagsState;
+export type TagsAction = FetchTagsAction;
 
 const reducers: (( state: TagsState, action: TagsAction ) => TagsState)[] = [
-	FetchAllTagsReducer
+	FetchTagsReducer
 ];
 
 const dstate: TagsState = {

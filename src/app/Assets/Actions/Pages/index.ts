@@ -1,4 +1,4 @@
-import { FetchPageByUriReducer, FetchPageByUriState, FetchPageByUriAction } from './FetchBySlug';
+import { FetchPageByUriReducer, FetchPageByUriState, FetchPageByUriAction } from './FetchPageByUri';
 
 export type PagesState = FetchPageByUriState;
 export type PagesAction = FetchPageByUriAction;

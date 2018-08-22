@@ -1,8 +1,9 @@
 import Tag from "Models/Tag";
-import { FetchAllTags_tags_nodes } from "Entities/Wordpress/FetchAllTags";
+import { WP_FetchTags_tags, WP_FetchTags_tags_nodes } from "Entities/Wordpress/WP_FetchTags";
 
 export default class {
-	static Map( tag: FetchAllTags_tags_nodes ): Tag {
+	static Map( tag: (WP_FetchTags_tags_nodes | null) ): Tag {
+		if (tag == null) { throw Error('tag cannot be null'); }
 		if (tag.name == null) { throw Error('name cannot be null'); }
 
 		return new Tag(
@@ -13,10 +14,12 @@ export default class {
 		);
 	}
 
-	static MapAll( tags: FetchAllTags_tags_nodes[] ): Tag[] {
-		const results: Tag[] = [];
+	static MapAll( tags: WP_FetchTags_tags | null ): Tag[] {
+		if (tags == null) { throw Error('tags cannot be null'); }
+		if (tags.nodes == null) { throw Error('nodes cannot be null'); }
 
-		tags.forEach(tag => results.push(this.Map(tag)));
+		const results: Tag[] = [];
+		tags.nodes.forEach(tag => results.push(this.Map(tag)));
 
 		return results;
 	}

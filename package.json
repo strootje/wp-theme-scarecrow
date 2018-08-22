@@ -5,7 +5,7 @@
 	"scripts": {
 		"graphql:download": "apollo schema:download",
 		"pregraphql:generate": "yarn graphql:download",
-		"graphql:generate": "apollo codegen:generate --target typescript --addTypename --outputFlat ./src/app/Domain/Entities/Wordpress",
+		"graphql:generate": "apollo codegen:generate --target=typescript --addTypename --outputFlat ./src/app/Domain/Entities/Wordpress",
 		"build": "webpack --progress --colors",
 		"serve": "ts-node --files ./src/app/server",
 		"prebundle": "yarn build --mode production",

@@ -1,4 +1,4 @@
-import { FetchMenuByLocationReducer, FetchMenuByLocationState, FetchMenuByLocationAction } from './FetchByLocation';
+import { FetchMenuByLocationReducer, FetchMenuByLocationState, FetchMenuByLocationAction } from './FetchMenuByLocation';
 
 export type MenuState = FetchMenuByLocationState;
 export type MenuAction = FetchMenuByLocationAction;

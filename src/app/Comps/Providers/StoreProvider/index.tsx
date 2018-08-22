@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 
 import { createStore, applyMiddleware } from 'redux';
-import Reducers from 'Actions/Reducers';
+import { AppReducer } from 'Actions/Reducers';
 import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
@@ -24,7 +24,7 @@ class StoreProvider extends React.Component<Props, {}> {
 			client
 		} = this.props as Props;
 
-		const store = createStore(Reducers, applyMiddleware(logger, thunk.withExtraArgument(client)));
+		const store = createStore(AppReducer, applyMiddleware(logger, thunk.withExtraArgument(client)));
 
 		return (
 			<Provider store={store}>

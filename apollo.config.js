@@ -1,4 +1,3 @@
-
 module.exports = {
 	schemas: {
 		Wordpress: {
@@ -6,7 +5,7 @@ module.exports = {
 			endpoint: "http://localhost:8080/graphql",
 
 			include: [
-				"./src/app/**/*.ts"
+				"./src/app/Domain/Queries/**/*.ts"
 			]
 		}
 	}
