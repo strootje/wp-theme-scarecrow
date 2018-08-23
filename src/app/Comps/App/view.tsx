@@ -4,16 +4,15 @@ const style = require('./style');
 import { Switch, Route } from 'react-router-dom';
 import AppHeader from 'Controls/AppHeader';
 import AppFooter from 'Controls/AppFooter';
-import Page from 'Views/Page';
+import GenericPage from 'Views/Page';
+import HomePage from 'Pages/Home';
 
 interface OwnProps {
-};
-
-interface StateProps {
-	GetSettings: () => void
 }
 
-type Props = OwnProps & StateProps;
+type Props = OwnProps & {
+	GetSettings: () => void
+};
 
 export default class extends React.Component<OwnProps, {}> {
 	componentWillMount(): void {
@@ -32,8 +31,8 @@ export default class extends React.Component<OwnProps, {}> {
 
 					<Switch>
 						{/* <Route path='/:postId' component={Page} /> */}
-						<Route path='/:pageSlug' component={Page} />
-						<Route path='/' component={() => (<p>home page</p>)} />
+						<Route path='/:pageSlug' component={GenericPage} />
+						<Route path='/' component={HomePage} />
 					</Switch>
 				</div>
 

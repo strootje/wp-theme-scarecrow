@@ -8,7 +8,8 @@ interface OwnProps {
 	className?: string
 }
 
-type Props = OwnProps;
+type Props = OwnProps & {
+};
 
 export default class extends React.Component<OwnProps, {}> {
 	render(): JSX.Element {

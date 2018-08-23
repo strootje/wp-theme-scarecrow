@@ -6,13 +6,11 @@ interface OwnProps {
 	match: match<{ pageSlug: string }>
 }
 
-interface StateProps {
+type Props = OwnProps & {
 	Pages: PagesState
 
 	GetPage: ( uri: string ) => void
-}
-
-type Props = OwnProps & StateProps;
+};
 
 export default class extends React.Component<OwnProps, {}> {
 	componentWillMount(): void {

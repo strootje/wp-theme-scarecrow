@@ -1,7 +1,7 @@
 import * as React from 'react';
 const style = require('./style');
 
-import { ViewDataState } from 'Actions/ViewData';
+import { MenuState } from 'Actions/Menus';
 import Logo from 'Controls/Logo';
 import SearchBar from 'Controls/SearchBar';
 import Link from 'Controls/Link';
@@ -9,18 +9,16 @@ import Link from 'Controls/Link';
 interface OwnProps {
 }
 
-interface StateProps {
-	ViewData: ViewDataState
+type Props = OwnProps & {
+	Menus: MenuState
 
 	GetMenu: () => void
-}
-
-type Props = OwnProps & StateProps;
+};
 
 export default class extends React.Component<OwnProps, {}> {
 	componentWillMount(): void {
 		const {
-			ViewData: { menus: { header }},
+			Menus: { header },
 			GetMenu
 		} = this.props as Props;
 
@@ -31,7 +29,7 @@ export default class extends React.Component<OwnProps, {}> {
 
 	render(): JSX.Element {
 		const {
-			ViewData: { menus: { header }},
+			Menus: { header }
 		} = this.props as Props;
 
 		return (

@@ -14,7 +14,7 @@ enum Actions {
 
 export interface FetchSettingsState {
 	loading: boolean,
-	settings?: Settings
+	settings: Settings
 };
 
 export type FetchSettingsAction =

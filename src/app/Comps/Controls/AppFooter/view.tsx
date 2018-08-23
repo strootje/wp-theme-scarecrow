@@ -1,29 +1,26 @@
 import * as React from 'react';
 const style = require('./style');
 
+import { MenuState } from 'Actions/Menus';
 import { FormattedMessage } from 'react-intl';
-import { ViewDataState } from 'Actions/ViewData';
 import { TagsState } from 'Actions/Tags';
 import Link from 'Controls/Link';
-import Tag from 'Models/Tag';
 
 interface OwnProps {
 }
 
-interface StateProps {
-	ViewData: ViewDataState
+type Props = OwnProps & {
+	Menus: MenuState
 	Tags: TagsState
 
 	GetMenu: () => void
 	GetTags: () => void
-}
-
-type Props = OwnProps & StateProps;
+};
 
 export default class extends React.Component<OwnProps, {}> {
 	componentWillMount(): void {
 		const {
-			ViewData: { menus: { footer }},
+			Menus: { footer },
 			Tags: { tags },
 
 			GetMenu,
@@ -41,7 +38,7 @@ export default class extends React.Component<OwnProps, {}> {
 
 	render(): JSX.Element {
 		const {
-			ViewData: { menus: { footer }},
+			Menus: { footer },
 			Tags: { tags }
 		} = this.props as Props;
 
