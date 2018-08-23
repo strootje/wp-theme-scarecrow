@@ -1,7 +1,6 @@
 import MenuItem from "Models/MenuItem";
 import { WP_FetchMenuByLocation_menus_nodes_menuItems_nodes } from "Entities/Wordpress/WP_FetchMenuByLocation";
 
-
 export default class {
 	static Map( menuItem: WP_FetchMenuByLocation_menus_nodes_menuItems_nodes | null ): MenuItem {
 		if (menuItem == null) { throw Error('menuItem cannot be null'); }
