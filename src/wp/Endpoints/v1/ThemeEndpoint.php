@@ -17,7 +17,6 @@ class ThemeEndpoint {
 		try {
 			return [
 				"info" => self::info(),
-				"categories" => self::categories(),
 				"pages" => self::pages()
 			];
 		}
@@ -44,15 +43,8 @@ class ThemeEndpoint {
 		}
 
 		return [
-			"title" => get_bloginfo("name"),
-			"tagline" => get_bloginfo("description"),
-			"baseurl" => get_bloginfo("wpurl"),
 			"logo" => $logo
 		];
-	}
-
-	private static function categories() {
-		return get_theme_mod("categories", []);
 	}
 
 	private static function pages() {
