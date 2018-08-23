@@ -1,8 +1,11 @@
 import Tag from "Models/Tag";
 import { WP_FetchTags_tags, WP_FetchTags_tags_nodes } from "Entities/Wordpress/WP_FetchTags";
 
+type WPTag = WP_FetchTags_tags_nodes | null;
+type WPTags = WP_FetchTags_tags | null;
+
 export default class {
-	static Map( tag: (WP_FetchTags_tags_nodes | null) ): Tag {
+	static Map( tag: WPTag ): Tag {
 		if (tag == null) { throw Error('tag cannot be null'); }
 		if (tag.name == null) { throw Error('name cannot be null'); }
 
@@ -14,7 +17,7 @@ export default class {
 		);
 	}
 
-	static MapAll( tags: WP_FetchTags_tags | null ): Tag[] {
+	static MapAll( tags: WPTags ): Tag[] {
 		if (tags == null) { throw Error('tags cannot be null'); }
 		if (tags.nodes == null) { throw Error('nodes cannot be null'); }
 

@@ -1,8 +1,11 @@
 import MenuItem from "Models/MenuItem";
 import { WP_FetchMenuByLocation_menus_nodes_menuItems_nodes } from "Entities/Wordpress/WP_FetchMenuByLocation";
 
+type WPMenuItem = WP_FetchMenuByLocation_menus_nodes_menuItems_nodes | null;
+type WPMenuItems = WPMenuItem[] | null;
+
 export default class {
-	static Map( menuItem: WP_FetchMenuByLocation_menus_nodes_menuItems_nodes | null ): MenuItem {
+	static Map( menuItem: WPMenuItem ): MenuItem {
 		if (menuItem == null) { throw Error('menuItem cannot be null'); }
 		if (menuItem.label == null) { throw Error('label cannot be null') };
 
@@ -15,7 +18,7 @@ export default class {
 		);
 	}
 
-	static MapAll( menuItems: (WP_FetchMenuByLocation_menus_nodes_menuItems_nodes | null)[] | null ): MenuItem[] {
+	static MapAll( menuItems: WPMenuItems ): MenuItem[] {
 		if (menuItems == null) { throw Error('menuItems cannot be null'); }
 
 		const results: MenuItem[] = [];
@@ -23,4 +26,4 @@ export default class {
 
 		return results;
 	}
-}
+};

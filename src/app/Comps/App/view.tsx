@@ -6,7 +6,24 @@ import AppHeader from 'Controls/AppHeader';
 import AppFooter from 'Controls/AppFooter';
 import Page from 'Views/Page';
 
-export default class extends React.Component<{}, {}> {
+interface OwnProps {
+};
+
+interface StateProps {
+	GetSettings: () => void
+}
+
+type Props = OwnProps & StateProps;
+
+export default class extends React.Component<OwnProps, {}> {
+	componentWillMount(): void {
+		const {
+			GetSettings
+		} = this.props as Props;
+
+		GetSettings();
+	}
+
 	render(): JSX.Element {
 		return (
 			<div className={style.LayoutMain}>
