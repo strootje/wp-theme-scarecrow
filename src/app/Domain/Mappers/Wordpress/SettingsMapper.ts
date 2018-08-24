@@ -10,11 +10,15 @@ export default class {
 		if (settings.generalSettingsDescription == null) { throw Error('settings.generalSettingsDescription cannot be null'); }
 		if (settings.generalSettingsUrl == null) { throw Error('settings.generalSettingsUrl cannot be null'); }
 		if (settings.readingSettingsIsStaticHomepage == null) { throw Error('settings.readingSettingsIsStaticHomepage cannot be null'); }
+		if (settings.readingSettingsPageOnFront == null) { throw Error('settings.readingSettingsPageOnFront cannot be null'); }
+		if (settings.readingSettingsPageForPosts == null) { throw Error('settings.readingSettingsPageForPosts cannot be null'); }
 
 		return new Settings(
 			settings.generalSettingsTitle,
 			settings.generalSettingsDescription,
 			settings.generalSettingsUrl,
-			settings.readingSettingsIsStaticHomepage);
+			settings.readingSettingsIsStaticHomepage,
+			settings.readingSettingsPageOnFront,
+			settings.readingSettingsPageForPosts);
 	}
 };

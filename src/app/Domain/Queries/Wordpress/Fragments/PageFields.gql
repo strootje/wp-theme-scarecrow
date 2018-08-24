@@ -1,0 +1,6 @@
+fragment WP_PageFields on Page {
+	id
+	pageId
+	title
+	uri
+}

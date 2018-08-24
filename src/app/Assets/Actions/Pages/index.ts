@@ -1,9 +1,16 @@
+import { FetchPageByPageIdReducer, FetchPageByPageIdState, FetchPageByPageIdAction } from 'Actions/Pages/FetchPageByPageId';
 import { FetchPageByUriReducer, FetchPageByUriState, FetchPageByUriAction } from './FetchPageByUri';
 
-export type PagesState = FetchPageByUriState;
-export type PagesAction = FetchPageByUriAction;
+export type PagesState =
+	& FetchPageByPageIdState
+	& FetchPageByUriState;
 
-const reducers: (( state: PagesState, action: PagesAction ) => PagesState)[] = [
+export type PagesAction =
+	| FetchPageByPageIdAction
+	| FetchPageByUriAction;
+
+const reducers: any[] = [
+	FetchPageByPageIdReducer,
 	FetchPageByUriReducer
 ];
 

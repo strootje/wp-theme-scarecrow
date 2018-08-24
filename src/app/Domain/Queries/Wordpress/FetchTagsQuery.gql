@@ -1,0 +1,10 @@
+query WP_FetchTags {
+	tags {
+		nodes {
+			id
+			name,
+			link,
+			count
+		}
+	}
+}

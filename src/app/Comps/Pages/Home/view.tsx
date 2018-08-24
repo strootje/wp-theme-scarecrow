@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { SettingsState } from 'Actions/Settings';
+import Page from 'Views/Page';
 
 interface OwnProps {
 }
@@ -11,14 +13,18 @@ type Props = OwnProps & {
 export default class extends React.Component<OwnProps, {}> {
 	render(): JSX.Element {
 		const {
-			Settings: { settings }
+			Settings
 		} = this.props as Props;
+
+		if (Settings.IsHomepageStatic) {
+			return (
+				<Page pageId={Settings.PageIdOnFront} />
+			);
+		}
 
 		return (
 			<div>
-				{settings.IsHomepageStatic
-					? <p>/static</p>
-					: <p>/dynamic</p>}
+				<p>/dynamic</p>
 			</div>
 		);
 	}

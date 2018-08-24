@@ -25,13 +25,22 @@ const config: Webpack.Configuration = {
 		],
 
 		extensions: [
-			'.js', '.ts', '.tsx',
+			'.js', '.ts', '.tsx', '.gql',
 			'.json', '.css', '.scss',
 		]
 	},
 
 	module: {
 		rules: [
+			{
+				test: /\.(gql)$/,
+				exclude: /(node_modules|bower_components)/,
+				use: [
+					{
+						loader: 'graphql-tag/loader'
+					}
+				]
+			},
 			{
 				enforce: 'pre',
 				test: /\.js$/,

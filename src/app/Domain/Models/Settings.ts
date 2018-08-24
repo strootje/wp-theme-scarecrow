@@ -1,5 +1,15 @@
 
-export default class {
+export interface ISettings {
+	Title: string
+	Description: string
+	Url: string
+
+	IsHomepageStatic: boolean
+	PageIdOnFront: number
+	PageIdForPosts: number
+}
+
+export default class implements ISettings {
 	// General Settings
 	private readonly title: string;
 	private readonly description: string;
@@ -7,13 +17,24 @@ export default class {
 
 	// Reading Settings
 	private readonly isHomepageStatic: boolean;
+	private readonly pageIdOnFront: number;
+	private readonly pageIdForPosts: number;
 
-	constructor( title: string, description: string, url: string, isHomepageStatic: boolean ) {
+	constructor(
+		title: string,
+		description: string,
+		url: string,
+		isHomepageStatic: boolean,
+		pageIdOnFront: any,
+		pageIdForPosts: any
+	) {
 		this.title = title;
 		this.description = description;
-		// TODO: fix
-		this.url = url.replace('http://localhost:8080', '');
+		this.url = url.replace('http://localhost:8080', ''); // TODO: fix this
+
 		this.isHomepageStatic = isHomepageStatic;
+		this.pageIdOnFront = pageIdOnFront;
+		this.pageIdForPosts = pageIdForPosts;
 	}
 
 	get Title(): string {
@@ -30,5 +51,24 @@ export default class {
 
 	get IsHomepageStatic(): boolean {
 		return this.isHomepageStatic;
+	}
+
+	get PageIdOnFront(): number {
+		return this.pageIdOnFront;
+	}
+
+	get PageIdForPosts(): number {
+		return this.pageIdForPosts;
+	}
+
+	get ToObject(): ISettings {
+		return {
+			Title: this.Title,
+			Description: this.Description,
+			Url: this.Url,
+			IsHomepageStatic: this.IsHomepageStatic,
+			PageIdOnFront: this.PageIdOnFront,
+			PageIdForPosts: this.PageIdForPosts
+		};
 	}
 }

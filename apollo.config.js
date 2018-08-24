@@ -5,7 +5,7 @@ module.exports = {
 			endpoint: "http://localhost:8080/graphql",
 
 			include: [
-				"./src/app/Domain/Queries/**/*.ts"
+				"./src/app/Domain/Queries/**/*.gql"
 			]
 		}
 	}

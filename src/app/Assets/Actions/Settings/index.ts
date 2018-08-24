@@ -10,7 +10,12 @@ const reducers: (( state: SettingsState, action: SettingsAction ) => SettingsSta
 
 const dstate: SettingsState = {
 	loading: false,
-	settings: new Settings('... title ...', '... description ...', '... url ...', false)
+	Title: '...',
+	Description: '...',
+	Url: '...',
+	IsHomepageStatic: false,
+	PageIdOnFront: 0,
+	PageIdForPosts: 0
 }
 
 export function SettingsReducer( state: SettingsState = dstate, action: SettingsAction ): SettingsState {

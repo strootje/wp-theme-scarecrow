@@ -1,0 +1,7 @@
+#import "./Fragments/PageFields.gql"
+
+query WP_FetchPageByPageId( $pageId: Int! ) {
+	pageBy( pageId: $pageId ) {
+		...WP_PageFields
+	}
+}

@@ -3,7 +3,7 @@ import { ApolloClient } from 'apollo-client';
 
 import { MenuLocation } from 'Entities/Wordpress/globalTypes';
 import { WP_FetchMenuByLocation } from 'Entities/Wordpress/WP_FetchMenuByLocation';
-import FetchMenuByLocationQuery from 'Queries/Wordpress/FetchMenuByLocationQuery';
+const FetchMenuByLocationQuery = require('Queries/Wordpress/FetchMenuByLocationQuery');
 import MenuMapper from 'Mappers/Wordpress/MenuMapper';
 import Menu from 'Models/Menu';
 

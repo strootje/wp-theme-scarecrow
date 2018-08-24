@@ -14,11 +14,11 @@ type Props = OwnProps & {
 export default class extends React.Component<OwnProps, {}> {
 	render(): JSX.Element {
 		const {
-			Settings: { settings }
+			Settings
 		} = this.props as Props;
 
 		return (
-			<Link to='/'>{settings.Title}</Link>
+			<Link to='/'>{Settings.Title}</Link>
 		);
 	}
 }

@@ -1,6 +1,6 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
-import FetchPageByUriQuery from 'Queries/Wordpress/FetchPageByUriQuery';
+const FetchPageByUriQuery = require('Queries/Wordpress/FetchPageByUriQuery');
 import { WP_FetchPageByUri } from 'Entities/Wordpress/WP_FetchPageByUri';
 import PageMapper from 'Mappers/Wordpress/PageMapper';
 import Page from 'Models/Page';
