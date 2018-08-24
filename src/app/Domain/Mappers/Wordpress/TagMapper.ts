@@ -7,7 +7,7 @@ type WPTags = WP_FetchTags_tags | null;
 export default class {
 	static Map( tag: WPTag ): Tag {
 		if (tag == null) { throw Error('tag cannot be null'); }
-		if (tag.name == null) { throw Error('name cannot be null'); }
+		if (tag.name == null) { throw Error('tag.name cannot be null'); }
 
 		return new Tag(
 			tag.id,
@@ -19,7 +19,7 @@ export default class {
 
 	static MapAll( tags: WPTags ): Tag[] {
 		if (tags == null) { throw Error('tags cannot be null'); }
-		if (tags.nodes == null) { throw Error('nodes cannot be null'); }
+		if (tags.nodes == null) { throw Error('tags.nodes cannot be null'); }
 
 		const results: Tag[] = [];
 		tags.nodes.forEach(tag => results.push(this.Map(tag)));

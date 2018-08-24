@@ -1,0 +1,10 @@
+query WP_FetchPosts {
+	posts( first: 9 ) {
+		nodes {
+			id
+			postId
+			title
+			uri
+		}
+	}
+}
