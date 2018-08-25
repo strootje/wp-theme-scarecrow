@@ -1,3 +1,4 @@
 import view from './view';
+import Connect from 'Hocs/Connect';
 
-export default view;
+export default Connect(view);

@@ -1,28 +1,33 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { SettingsState } from 'Actions/Settings';
+import { HtmlHTMLAttributes } from 'react';
 
 interface OwnProps {
 	to: string
 	title?: string
 	target?: string
 	className?: string
+	children: string
 }
 
-type Props = OwnProps & {
+type Props = React.HTMLAttributes<{}> & OwnProps & {
+	Settings: SettingsState
 };
 
 export default class extends React.Component<OwnProps, {}> {
 	render(): JSX.Element {
 		const {
-			to,
+			to, title, target, className,
 			children: label,
-			...rest
-		} = this.props;
+			Settings: { Url },
+		} = this.props as Props;
 
 		const localhost = 'localhost:9000';
+		const url = to.replace('http://localhost:8080', '');
 
-		return (to.search(localhost) > -1)
-			? <Link to={to} {...rest}>{label}</Link>
-			: <a href={to} {...rest}>{label}</a>
+		return (url.search(localhost) > -1)
+			? <Link to={url} {...{ title, target, className }}>{label}</Link>
+			: <a href={url} {...{ title, target, className }}>{label}</a>
 	}
 }
