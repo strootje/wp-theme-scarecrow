@@ -1,0 +1,6 @@
+fragment WP_CategoryFields on Category {
+	categoryId
+	name
+	link
+	count
+}

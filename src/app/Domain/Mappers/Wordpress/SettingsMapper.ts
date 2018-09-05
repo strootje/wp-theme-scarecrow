@@ -12,6 +12,8 @@ export default class {
 		if (settings.readingSettingsIsStaticHomepage == null) { throw Error('settings.readingSettingsIsStaticHomepage cannot be null'); }
 		if (settings.readingSettingsPageOnFront == null) { throw Error('settings.readingSettingsPageOnFront cannot be null'); }
 		if (settings.readingSettingsPageForPosts == null) { throw Error('settings.readingSettingsPageForPosts cannot be null'); }
+		if (settings.scarecrowSettingsImageProvider == null) { throw Error('settings.scarecrowSettingsImageProvider cannot be null'); }
+		if (settings.scarecrowSettingsFooterAbout == null) { throw Error('settings.scarecrowSettingsFooterAbout cannot be null'); }
 
 		return new Settings(
 			settings.generalSettingsTitle,
@@ -19,6 +21,8 @@ export default class {
 			settings.generalSettingsUrl,
 			settings.readingSettingsIsStaticHomepage,
 			settings.readingSettingsPageOnFront,
-			settings.readingSettingsPageForPosts);
+			settings.readingSettingsPageForPosts,
+			settings.scarecrowSettingsImageProvider,
+			settings.scarecrowSettingsFooterAbout);
 	}
 };

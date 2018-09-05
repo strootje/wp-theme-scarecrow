@@ -1,6 +1,7 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
 
+import { AppState } from 'Actions/Reducers';
 const FetchTagsQuery = require('Queries/Wordpress/FetchTagsQuery');
 import { WP_FetchTags } from 'Entities/Wordpress/WP_FetchTags';
 import TagMapper from 'Mappers/Wordpress/TagMapper';
@@ -27,7 +28,8 @@ const Result = ( tags: Tag[] ) => ({ type: Actions.Result, tags });
 const ErrorHandler = ( error: Error ) => ({ type: Actions.Error, error });
 
 export function FetchTags() {
-	return ( dispatch: Redux.Dispatch, getState: () => any, client: ApolloClient<{}> ) => {
+	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
+		if (getState().Tags.loading) { return; }
 		dispatch(Request());
 
 		client.query<WP_FetchTags>({ query: FetchTagsQuery }).then(

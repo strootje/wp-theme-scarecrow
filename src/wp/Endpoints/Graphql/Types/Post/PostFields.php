@@ -9,6 +9,7 @@ class PostFields {
 		$fields = self::addTypeField($fields);
 		$fields = self::addFormatField($fields);
 		$fields = self::addThumbnailFields($fields);
+
 		return $fields;
 	}
 
@@ -59,6 +60,7 @@ class PostFields {
 		$fields["typeIn"] = [
 			"type" => Types::list_of(Types::string()),
 		];
+
 		return $fields;
 	}
 
@@ -71,7 +73,7 @@ class PostFields {
 		if (isset($args["where"]["typeIn"])) {
 			$query["post_type"] = $args["where"]["typeIn"];
 		}
-		
+
 		return $query;
 	}
 }

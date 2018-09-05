@@ -1,15 +1,21 @@
+import Thumbnails from "Models/Thumbnails";
 
 export default class Page {
 	private readonly key: string;
 	private readonly pageId: number;
 	private readonly title: string;
 	private readonly uri: string;
+	private readonly content: string;
 
-	constructor( id: string, pageId: number, title: string, uri: string ) {
+	private readonly thumbnails: Thumbnails;
+
+	constructor( id: string, pageId: number, title: string, uri: string, content: string, thumbnails: Thumbnails ) {
 		this.key = id;
 		this.pageId = pageId;
 		this.title = title;
 		this.uri = uri;
+		this.content = content;
+		this.thumbnails = thumbnails;
 	}
 
 	get Key(): string {
@@ -26,5 +32,13 @@ export default class Page {
 
 	get Uri(): string {
 		return this.uri;
+	}
+
+	get Content(): string {
+		return this.content;
+	}
+
+	get Thumbnails(): Thumbnails {
+		return this.thumbnails;
 	}
 }

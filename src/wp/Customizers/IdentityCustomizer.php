@@ -4,14 +4,14 @@ namespace Scarecrow\Customizers;
 
 class IdentityCustomizer {
 	public static function register() {
-		add_action("customize_register", function( $wp_customize ) {
+		add_action("customize_register", function( \WP_Customize_Manager $wp_customize ) {
 			self::setBlognameOption($wp_customize);
 			self::setBlogdescriptionOption($wp_customize);
 			self::setCustomLogoOption($wp_customize);
 		});
 	}
 
-	private static function setBlognameOption( $wp_customize ) {
+	private static function setBlognameOption( \WP_Customize_Manager $wp_customize ) {
 		$wp_customize->get_setting('blogname')->transport = 'postMessage';
 
 		$wp_customize->selective_refresh->add_partial('blogname', [
@@ -22,7 +22,7 @@ class IdentityCustomizer {
 		]);
 	}
 
-	private static function setBlogdescriptionOption( $wp_customize ) {
+	private static function setBlogdescriptionOption( \WP_Customize_Manager $wp_customize ) {
 		$wp_customize->get_setting('blogdescription')->transport = 'postMessage';
 
 		$wp_customize->selective_refresh->add_partial('blogdescription', [
@@ -33,7 +33,7 @@ class IdentityCustomizer {
 		]);
 	}
 
-	private static function setCustomLogoOption( $wp_customize ) {
+	private static function setCustomLogoOption( \WP_Customize_Manager $wp_customize ) {
 		$wp_customize->get_setting('custom_logo')->transport = 'postMessage';
 
 		$wp_customize->selective_refresh->add_partial('custom_logo', [
@@ -42,7 +42,7 @@ class IdentityCustomizer {
 				if (!has_custom_logo()) {
 					return false;
 				}
-		
+
 				return get_custom_logo();
 			}
 		]);

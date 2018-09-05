@@ -1,3 +1,5 @@
+#import "./Fragments/CategoryFields.gql"
+
 query WP_FetchPosts {
 	posts( first: 9 ) {
 		nodes {
@@ -5,6 +7,15 @@ query WP_FetchPosts {
 			postId
 			title
 			uri
+			content
+
+			thumbnail
+
+			categories {
+				nodes {
+					...WP_CategoryFields
+				}
+			}
 		}
 	}
 }

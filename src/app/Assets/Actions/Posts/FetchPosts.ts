@@ -1,6 +1,7 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
 
+import { AppState } from 'Actions/Reducers';
 import { WP_FetchPosts } from 'Entities/Wordpress/WP_FetchPosts';
 const FetchPostsQuery = require('Queries/Wordpress/FetchPostsQuery');
 import PostMapper from 'Mappers/Wordpress/PostMapper';
@@ -27,7 +28,8 @@ const Result = ( posts: Post[] ) => ({ type: Actions.Result, posts });
 const ErrorHandler = ( error: Error ) => ({ type: Actions.Error, error });
 
 export function FetchPosts() {
-	return ( dispatch: Redux.Dispatch, getState: () => any, client: ApolloClient<{}> ) => {
+	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
+		if (getState().Posts.loading) { return; }
 		dispatch(Request());
 
 		client.query<WP_FetchPosts>({ query: FetchPostsQuery }).then(

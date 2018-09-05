@@ -2,7 +2,10 @@ import * as React from 'react';
 import { match } from 'react-router';
 
 import Page from 'Models/Page';
+import { SettingsState } from 'Actions/Settings';
 import { PagesState } from 'Actions/Pages';
+import PostsPage from 'Pages/Posts';
+import Loader from 'Controls/Loader';
 
 interface OwnProps {
 	pageId?: number
@@ -10,6 +13,7 @@ interface OwnProps {
 }
 
 type Props = OwnProps & {
+	Settings: SettingsState,
 	Pages: PagesState
 
 	GetPageByPageId: ( pageId: number ) => void
@@ -35,9 +39,14 @@ export default class extends React.Component<OwnProps, {}> {
 
 	render(): JSX.Element {
 		const {
-			Pages: { pages },
+			Settings: { PageIdForPosts },
+			Pages: { loading, pages },
 			pageId, match
 		} = this.props as Props;
+
+		if (loading) {
+			return (<Loader />);
+		}
 
 		let page: Page;
 		if (pageId && pages.some(page => page.PageId == pageId)) {
@@ -48,6 +57,10 @@ export default class extends React.Component<OwnProps, {}> {
 			return (
 				<p>no page found</p>
 			);
+		}
+
+		if (page.PageId == PageIdForPosts) {
+			return (<PostsPage />);
 		}
 
 		return (

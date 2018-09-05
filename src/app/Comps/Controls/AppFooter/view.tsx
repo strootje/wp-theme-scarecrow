@@ -1,75 +1,106 @@
 import * as React from 'react';
 const style = require('./style');
 
-import { MenuState } from 'Actions/Menus';
+import Page from 'Models/Page';
 import { FormattedMessage } from 'react-intl';
+import { SettingsState } from 'Actions/Settings';
+import { PagesState } from 'Actions/Pages';
 import { TagsState } from 'Actions/Tags';
+import { MenuState } from 'Actions/Menus';
 import Link from 'Controls/Link';
 
 interface OwnProps {
 }
 
 type Props = OwnProps & {
-	Menus: MenuState
+	Settings: SettingsState
+	Pages: PagesState
 	Tags: TagsState
+	Menus: MenuState
 
-	GetMenu: () => void
+	GetPageById: ( pageId: number ) => void
 	GetTags: () => void
+	GetMenu: () => void
 };
 
 export default class extends React.Component<OwnProps, {}> {
 	componentWillMount(): void {
 		const {
-			Menus: { footer },
+			Settings: { PageIdForFooterAboutSection },
+			Pages: { pages },
 			Tags: { tags },
+			Menus: { footer },
 
-			GetMenu,
-			GetTags
-		} = this.props as Props
+			GetPageById,
+			GetTags,
+			GetMenu
+		} = this.props as Props;
 
-		if (!footer) {
-			GetMenu();
+		if (!pages.some(page => page.PageId == PageIdForFooterAboutSection)) {
+			GetPageById(PageIdForFooterAboutSection);
 		}
 
 		if (tags.length == 0) {
 			GetTags();
 		}
+
+		if (!footer) {
+			GetMenu();
+		}
 	}
 
 	render(): JSX.Element {
 		const {
-			Menus: { footer },
-			Tags: { tags }
+			Settings: { PageIdForFooterAboutSection },
+			Pages: { pages },
+			Tags: { tags },
+			Menus: { footer }
 		} = this.props as Props;
 
+		let page: null | Page = null;
+		if (pages.some(page => page.PageId == PageIdForFooterAboutSection)) {
+			page = pages.filter(page => page.PageId == PageIdForFooterAboutSection)[0];
+		}
+
 		return (
-			<footer className={style.FooterMain}>
-				<div className={style.FooterRow}>
-					{tags && <div className={style.FooterTags}>
-						<h5><FormattedMessage id='footer.tags.title' /></h5>
-						<ul className={style.FooterTagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
-							<li className={style.FooterTagsListItem} key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
-						)}</ul>
+			<div>
+				<section className={style.FooterAbout}>
+					{page && <div className={style.FooterMain}>
+						<div className={style.FooterRow}>
+							<h3>{page.Title}</h3>
+							<div dangerouslySetInnerHTML={{ __html: page.Content }} />
+						</div>
 					</div>}
+				</section>
 
-					{footer && <div className={style.FooterSocial}>
-						<h5>{footer.Name}</h5>
-						<ul className='fa-ul'>{footer.Items.map(item =>
-							<li key={item.Key}>
-								<span className='fa-li'><i className={item.CssClasses}></i></span>
-								<Link to={item.Link} target={item.Target}>{item.Label}</Link>
-							</li>
-						)}</ul>
-					</div>}
-				</div>
+				<footer className={style.FooterMain}>
+					<div className={style.FooterRow}>
+						{tags && <div className={style.FooterTags}>
+							<h5><FormattedMessage id='footer.tags.title' /></h5>
+							<ul className={style.FooterTagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
+								<li className={style.FooterTagsListItem} key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
+							)}</ul>
+						</div>}
 
-				<div className={style.FooterRow}>
-					<div className={style.FooterLegal}>
-						Bas Stroosnijder &copy; 2018 -
-						Powered by <a href='https://wordpress.org/' target='blank'>Wordpress</a> &amp; <a href='https://github.com/strootje/wp-theme-scarecrow/' target='blank'>Scarecrow</a>
+						{footer && <div className={style.FooterSocial}>
+							<h5>{footer.Name}</h5>
+							<ul className='fa-ul'>{footer.Items.map(item =>
+								<li key={item.Key}>
+									<span className='fa-li'><i className={item.CssClasses}></i></span>
+									<Link to={item.Link} target={item.Target}>{item.Label}</Link>
+								</li>
+							)}</ul>
+						</div>}
 					</div>
-				</div>
-			</footer>
+
+					<div className={style.FooterRow}>
+						<div className={style.FooterLegal}>
+							Bas Stroosnijder &copy; 2018 -
+							Powered by <a href='https://wordpress.org/' target='blank'>Wordpress</a> &amp; <a href='https://github.com/strootje/wp-theme-scarecrow/' target='blank'>Scarecrow</a>
+						</div>
+					</div>
+				</footer>
+			</div>
 		);
 	}
 }

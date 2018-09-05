@@ -71,12 +71,22 @@ class WpTheme {
 		add_image_size("thumbnail_hero", 690, 240, true);
 		add_image_size("thumbnail_banner", 220, 120, true);
 		add_image_size("thumbnail_banner_hero", 420, 200, true);
+
+		foreach(self::$registers as $register) {
+			if (method_exists($register, "setup")) {
+				$register::setup();
+			}
+		}
 	}
 
 	public function register() {
 		// Register stuff like postTypes, customizers, etc...
 		foreach(self::$registers as $register) {
-			$register::register();
+			if (method_exists($register, "register")) {
+				$register::register();
+			}
 		}
+
+		register_setting("theme", "logo");
 	}
 }

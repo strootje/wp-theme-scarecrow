@@ -20,11 +20,10 @@ export default class extends React.Component<OwnProps, {}> {
 		const {
 			to, title, target, className,
 			children: label,
-			Settings: { Url },
 		} = this.props as Props;
 
 		const localhost = 'localhost:9000';
-		const url = to.replace('http://localhost:8080', '');
+		const url = to.replace(`http://${localhost}`, '');
 
 		return (url.search(localhost) > -1)
 			? <Link to={url} {...{ title, target, className }}>{label}</Link>

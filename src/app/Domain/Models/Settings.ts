@@ -7,6 +7,9 @@ export interface ISettings {
 	IsHomepageStatic: boolean
 	PageIdOnFront: number
 	PageIdForPosts: number
+
+	ProviderForImages: string
+	PageIdForFooterAboutSection: number
 }
 
 export default class implements ISettings {
@@ -20,13 +23,19 @@ export default class implements ISettings {
 	private readonly pageIdOnFront: number;
 	private readonly pageIdForPosts: number;
 
+	// Scarecrow Settings
+	private readonly providerForImages: string;
+	private readonly pageIdForFooterAboutSection: number;
+
 	constructor(
 		title: string,
 		description: string,
 		url: string,
 		isHomepageStatic: boolean,
-		pageIdOnFront: any,
-		pageIdForPosts: any
+		pageIdOnFront: number,
+		pageIdForPosts: number,
+		providerForImages: string,
+		pageIdForFooterAboutSection: number
 	) {
 		this.title = title;
 		this.description = description;
@@ -35,6 +44,9 @@ export default class implements ISettings {
 		this.isHomepageStatic = isHomepageStatic;
 		this.pageIdOnFront = pageIdOnFront;
 		this.pageIdForPosts = pageIdForPosts;
+
+		this.providerForImages = providerForImages;
+		this.pageIdForFooterAboutSection = pageIdForFooterAboutSection;
 	}
 
 	get Title(): string {
@@ -61,6 +73,14 @@ export default class implements ISettings {
 		return this.pageIdForPosts;
 	}
 
+	get ProviderForImages(): string {
+		return this.providerForImages;
+	}
+
+	get PageIdForFooterAboutSection(): number {
+		return this.pageIdForFooterAboutSection;
+	}
+
 	get ToObject(): ISettings {
 		return {
 			Title: this.Title,
@@ -68,7 +88,9 @@ export default class implements ISettings {
 			Url: this.Url,
 			IsHomepageStatic: this.IsHomepageStatic,
 			PageIdOnFront: this.PageIdOnFront,
-			PageIdForPosts: this.PageIdForPosts
+			PageIdForPosts: this.PageIdForPosts,
+			ProviderForImages: this.ProviderForImages,
+			PageIdForFooterAboutSection: this.PageIdForFooterAboutSection
 		};
 	}
 }

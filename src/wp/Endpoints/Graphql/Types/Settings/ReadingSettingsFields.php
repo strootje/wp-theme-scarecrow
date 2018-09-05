@@ -34,7 +34,7 @@ class ReadingSettingsFields {
 		$fields[($prepend ? 'readingSettingsP' : 'p') . 'ageOnFront'] = [
 			'type' => \WPGraphQL\Types::int(),
 			'resolve' => function( $post, $args, $context, $info ) {
-				return get_option("page_on_front", "");
+				return get_option("page_on_front", 0);
 			}
 		];
 
@@ -45,7 +45,7 @@ class ReadingSettingsFields {
 		$fields[($prepend ? 'readingSettingsP' : 'p') . 'ageForPosts'] = [
 			'type' => \WPGraphQL\Types::int(),
 			'resolve' => function( $post, $args, $context, $info ) {
-				return get_option("page_for_posts", "");
+				return get_option("page_for_posts", 0);
 			}
 		];
 

@@ -15,7 +15,9 @@ const dstate: SettingsState = {
 	Url: '...',
 	IsHomepageStatic: false,
 	PageIdOnFront: 0,
-	PageIdForPosts: 0
+	PageIdForPosts: 0,
+	ProviderForImages: '',
+	PageIdForFooterAboutSection: 0
 }
 
 export function SettingsReducer( state: SettingsState = dstate, action: SettingsAction ): SettingsState {

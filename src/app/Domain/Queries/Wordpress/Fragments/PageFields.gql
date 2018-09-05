@@ -3,4 +3,7 @@ fragment WP_PageFields on Page {
 	pageId
 	title
 	uri
+	content
+
+	thumbnail
 }

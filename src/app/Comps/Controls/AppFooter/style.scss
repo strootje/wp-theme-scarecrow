@@ -1,6 +1,10 @@
 @import 'Theme';
 @import '~skeleton-sass-official/skeleton/themes/fresh/_grid';
 
+.FooterAbout {
+	background-color: red;
+}
+
 .FooterMain {
 	@extend .container;
 }

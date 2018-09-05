@@ -1,5 +1,7 @@
 import Post from "Models/Post";
 import { WP_FetchPosts_posts, WP_FetchPosts_posts_nodes } from "Entities/Wordpress/WP_FetchPosts";
+import ThumbnailsMapper from "Mappers/Wordpress/ThumbnailsMapper";
+import CategoryMapper from "Mappers/Wordpress/CategoryMapper";
 
 type WPPost = WP_FetchPosts_posts_nodes | null;
 type WPPosts = WP_FetchPosts_posts | null;
@@ -14,7 +16,11 @@ export default class {
 			post.id,
 			post.postId,
 			post.title,
-			post.uri
+			post.uri,
+			CategoryMapper.MapAll(post.categories),
+			ThumbnailsMapper.Map({
+				normal: post.thumbnail
+			})
 		);
 	}
 

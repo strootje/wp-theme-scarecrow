@@ -1,5 +1,6 @@
 import Page from "Models/Page";
 import { WP_FetchPageByUri_pageBy } from "Entities/Wordpress/WP_FetchPageByUri";
+import ThumbnailsMapper from "Mappers/Wordpress/ThumbnailsMapper";
 
 type WPPage = WP_FetchPageByUri_pageBy | null;
 type WPPages = WPPage[] | null;
@@ -15,7 +16,11 @@ export default class {
 			page.id,
 			page.pageId,
 			page.title,
-			page.uri
+			page.uri,
+			page.content || '',
+			ThumbnailsMapper.Map({
+				normal: page.thumbnail
+			})
 		);
 	}
 
