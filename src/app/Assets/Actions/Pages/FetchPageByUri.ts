@@ -1,7 +1,9 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
+import { AppState } from 'Actions/Reducers';
+
+import { WP_FetchPageByUri } from 'Queries/Wordpress/__generated__/WP_FetchPageByUri';
 const FetchPageByUriQuery = require('Queries/Wordpress/FetchPageByUriQuery');
-import { WP_FetchPageByUri } from 'Entities/Wordpress/WP_FetchPageByUri';
 import PageMapper from 'Mappers/Wordpress/PageMapper';
 import Page from 'Models/Page';
 
@@ -26,7 +28,7 @@ const Result = ( uri: string, page: Page ) => ({ type: Actions.Result, uri, page
 const ErrorHandler = ( uri: string, error: Error ) => ({ type: Actions.Error, uri, error });
 
 export function FetchPageByUri( uri: string ) {
-	return ( dispatch: Redux.Dispatch, getState: () => any, client: ApolloClient<{}> ) => {
+	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
 		dispatch(Request(uri));
 
 		client.query<WP_FetchPageByUri>({ query: FetchPageByUriQuery, variables: { uri }}).then(

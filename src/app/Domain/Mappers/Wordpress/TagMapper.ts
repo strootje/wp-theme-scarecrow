@@ -1,5 +1,5 @@
 import Tag from "Models/Tag";
-import { WP_FetchTags_tags, WP_FetchTags_tags_nodes } from "Entities/Wordpress/WP_FetchTags";
+import { WP_FetchTags_tags_nodes, WP_FetchTags_tags } from "Queries/Wordpress/__generated__/WP_FetchTags";
 
 type WPTag = WP_FetchTags_tags_nodes | null;
 type WPTags = WP_FetchTags_tags | null;

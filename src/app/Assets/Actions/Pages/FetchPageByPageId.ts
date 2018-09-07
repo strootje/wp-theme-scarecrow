@@ -1,7 +1,9 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
+import { AppState } from 'Actions/Reducers';
+
+import { WP_FetchPageByPageId } from 'Queries/Wordpress/__generated__/WP_FetchPageByPageId';
 const FetchPageByPageIdQuery = require('Queries/Wordpress/FetchPageByPageIdQuery');
-import { WP_FetchPageByPageId } from 'Entities/Wordpress/WP_FetchPageByPageId';
 import PageMapper from 'Mappers/Wordpress/PageMapper';
 import Page from 'Models/Page';
 
@@ -26,7 +28,7 @@ const Result = ( pageId: number, page: Page ) => ({ type: Actions.Result, pageId
 const ErrorHandler = ( pageId: number, error: Error ) => ({ type: Actions.Error, pageId, error });
 
 export function FetchPageByPageId( pageId: number ) {
-	return ( dispatch: Redux.Dispatch, getState: () => any, client: ApolloClient<{}> ) => {
+	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
 		dispatch(Request(pageId));
 
 		client.query<WP_FetchPageByPageId>({ query: FetchPageByPageIdQuery, variables: { pageId }}).then(

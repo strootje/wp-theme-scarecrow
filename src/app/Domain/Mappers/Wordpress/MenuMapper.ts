@@ -1,6 +1,6 @@
 import Menu from "Models/Menu";
 import MenuItemMapper from "Mappers/Wordpress/MenuItemMapper";
-import { WP_FetchMenuByLocation_menus, WP_FetchMenuByLocation_menus_nodes } from "Entities/Wordpress/WP_FetchMenuByLocation";
+import { WP_FetchMenuByLocation_menus, WP_FetchMenuByLocation_menus_nodes } from "Queries/Wordpress/__generated__/WP_FetchMenuByLocation";
 
 type WPMenu = WP_FetchMenuByLocation_menus_nodes | null;
 type WPMenus = WP_FetchMenuByLocation_menus | null;

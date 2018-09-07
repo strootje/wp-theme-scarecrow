@@ -1,5 +1,5 @@
 import Settings from "Models/Settings";
-import { WP_FetchSettings_allSettings } from "Entities/Wordpress/WP_FetchSettings";
+import { WP_FetchSettings_allSettings } from "Queries/Wordpress/__generated__/WP_FetchSettings";
 
 type WPSettings = WP_FetchSettings_allSettings | null;
 

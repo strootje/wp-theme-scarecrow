@@ -1,5 +1,5 @@
 import MenuItem from "Models/MenuItem";
-import { WP_FetchMenuByLocation_menus_nodes_menuItems_nodes } from "Entities/Wordpress/WP_FetchMenuByLocation";
+import { WP_FetchMenuByLocation_menus_nodes_menuItems_nodes } from "Queries/Wordpress/__generated__/WP_FetchMenuByLocation";
 
 type WPMenuItem = WP_FetchMenuByLocation_menus_nodes_menuItems_nodes | null;
 type WPMenuItems = WPMenuItem[] | null;

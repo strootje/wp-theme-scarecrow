@@ -1,8 +1,8 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
-
 import { AppState } from 'Actions/Reducers';
-import { WP_FetchPosts } from 'Entities/Wordpress/WP_FetchPosts';
+
+import { WP_FetchPosts } from 'Queries/Wordpress/__generated__/WP_FetchPosts';
 const FetchPostsQuery = require('Queries/Wordpress/FetchPostsQuery');
 import PostMapper from 'Mappers/Wordpress/PostMapper';
 import Post from 'Models/Post';

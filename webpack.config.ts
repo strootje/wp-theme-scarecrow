@@ -18,6 +18,7 @@ const config: Webpack.Configuration = {
 
 	resolve: {
 		modules: [
+			Paths.Root(),
 			Paths.Src('Domain'),
 			Paths.Src('Assets'),
 			Paths.Src('Comps'),

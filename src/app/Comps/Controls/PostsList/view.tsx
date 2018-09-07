@@ -47,7 +47,7 @@ export default class extends React.Component<OwnProps, {}> {
 
 		return (
 			<section className={style.Posts}>
-				<div>{posts.map(( post, index ) => (
+				<div>{Object.keys(posts).map(key => posts[key]).map(( post, index ) => (
 					<article key={post.Key} className={style.Item}>
 						<header>
 							<h3>{post.Title}</h3>

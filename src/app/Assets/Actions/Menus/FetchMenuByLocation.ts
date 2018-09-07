@@ -1,8 +1,9 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
+import { AppState } from 'Actions/Reducers';
 
-import { MenuLocation } from 'Entities/Wordpress/globalTypes';
-import { WP_FetchMenuByLocation } from 'Entities/Wordpress/WP_FetchMenuByLocation';
+import { MenuLocation } from '__generated__/globalTypes';
+import { WP_FetchMenuByLocation } from 'Queries/Wordpress/__generated__/WP_FetchMenuByLocation';
 const FetchMenuByLocationQuery = require('Queries/Wordpress/FetchMenuByLocationQuery');
 import MenuMapper from 'Mappers/Wordpress/MenuMapper';
 import Menu from 'Models/Menu';
@@ -31,7 +32,7 @@ const Result = ( location: MenuLocation, menu: Menu ) => ({ type: Actions.Result
 const ErrorHandler = ( location: MenuLocation, error: Error ) => ({ type: Actions.Error, location, error });
 
 export function FetchMenuByLocation( location: MenuLocation ) {
-	return ( dispatch: Redux.Dispatch, getState: () => any, client: ApolloClient<{}> ) => {
+	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
 		dispatch(Request(location));
 
 		client.query<WP_FetchMenuByLocation>({ query: FetchMenuByLocationQuery, variables: { location }}).then(

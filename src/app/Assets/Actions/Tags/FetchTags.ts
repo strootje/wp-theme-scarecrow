@@ -1,9 +1,9 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
-
 import { AppState } from 'Actions/Reducers';
+
+import { WP_FetchTags } from 'Queries/Wordpress/__generated__/WP_FetchTags';
 const FetchTagsQuery = require('Queries/Wordpress/FetchTagsQuery');
-import { WP_FetchTags } from 'Entities/Wordpress/WP_FetchTags';
 import TagMapper from 'Mappers/Wordpress/TagMapper';
 import Tag from 'Models/Tag';
 

@@ -1,9 +1,9 @@
 import Category from "Models/Category";
-import { WP_CategoryFields } from "Entities/Wordpress/WP_CategoryFields";
-import { WP_FetchPosts_posts_nodes_categories } from "Entities/Wordpress/WP_FetchPosts";
+import { WP_CategoryFields } from "Queries/Wordpress/Fragments/__generated__/WP_CategoryFields";
+import { WP_FetchPosts_posts_edges_node_categories } from "Queries/Wordpress/__generated__/WP_FetchPosts";
 
 type WPCategory = WP_CategoryFields | null;
-type WPCategories = WP_FetchPosts_posts_nodes_categories | null;
+type WPCategories = WP_FetchPosts_posts_edges_node_categories | null;
 
 export default class {
 	static Map( category: WPCategory ): Category {

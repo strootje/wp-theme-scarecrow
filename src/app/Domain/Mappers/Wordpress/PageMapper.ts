@@ -1,6 +1,6 @@
 import Page from "Models/Page";
-import { WP_FetchPageByUri_pageBy } from "Entities/Wordpress/WP_FetchPageByUri";
 import ThumbnailsMapper from "Mappers/Wordpress/ThumbnailsMapper";
+import { WP_FetchPageByUri_pageBy } from "Queries/Wordpress/__generated__/WP_FetchPageByUri";
 
 type WPPage = WP_FetchPageByUri_pageBy | null;
 type WPPages = WPPage[] | null;

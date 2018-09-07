@@ -3,6 +3,7 @@
 		".*": false,
 		"dist": true,
 		"node_modules": true,
+		"__generated__": true,
 		"vendor": true,
 		"*.lock": true
 	}

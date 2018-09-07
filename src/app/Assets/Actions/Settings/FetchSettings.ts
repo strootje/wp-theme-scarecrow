@@ -1,7 +1,8 @@
 import * as Redux from 'redux';
 import { ApolloClient } from 'apollo-client';
+import { AppState } from 'Actions/Reducers';
 
-import { WP_FetchSettings } from 'Entities/Wordpress/WP_FetchSettings';
+import { WP_FetchSettings } from 'Queries/Wordpress/__generated__/WP_FetchSettings';
 const FetchSettingsQuery = require('Queries/Wordpress/FetchSettingsQuery');
 import SettingsMapper from 'Mappers/Wordpress/SettingsMapper';
 import Settings, { ISettings } from 'Models/Settings';
@@ -26,7 +27,7 @@ const Result = ( settings: Settings ) => ({ type: Actions.Result, settings });
 const ErrorHandler = ( error: Error ) => ({ type: Actions.Error, error });
 
 export function FetchSettings() {
-	return ( dispatch: Redux.Dispatch, getState: () => any, client: ApolloClient<{}> ) => {
+	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
 		dispatch(Request());
 
 		client.query<WP_FetchSettings>({ query: FetchSettingsQuery }).then(
