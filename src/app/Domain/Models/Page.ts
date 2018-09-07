@@ -1,6 +1,7 @@
 import Thumbnails from "Models/Thumbnails";
 
-export default class Page {
+
+export default class {
 	private readonly key: string;
 	private readonly pageId: number;
 	private readonly title: string;

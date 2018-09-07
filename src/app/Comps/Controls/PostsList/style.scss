@@ -1,17 +1,12 @@
 @import 'Theme';
 @import '~skeleton-sass-official/skeleton/themes/fresh/_grid';
 
-.Content {
+.Posts {
 	@extend .container;
 	@extend .row;
 }
 
-.Page {
+.Item {
 	@extend .columns;
-	@extend .nine;
-}
-
-.Sidebar {
-	@extend .columns;
-	@extend .three;
+	@extend .twelve;
 }

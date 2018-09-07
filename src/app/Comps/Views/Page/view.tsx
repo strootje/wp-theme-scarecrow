@@ -12,7 +12,7 @@ interface OwnProps {
 	match?: match<{ pageSlug: string }>
 }
 
-type Props = OwnProps & {
+type Props = React.HTMLAttributes<{}> & OwnProps & {
 	Settings: SettingsState,
 	Pages: PagesState
 

@@ -9,5 +9,6 @@ import { FetchMenuByLocation } from 'Actions/Menus/FetchMenuByLocation';
 export default Connect(view, dispatch => ({
 	GetPageById: ( pageId: number ) => dispatch(FetchPageByPageId(pageId)),
 	GetTags: () => dispatch(FetchTags()),
-	GetMenu: () => dispatch(FetchMenuByLocation(MenuLocation.FOOTER))
+	GetSitemap: () => dispatch(FetchMenuByLocation(MenuLocation.SITEMAP)),
+	GetSocialLinks: () => dispatch(FetchMenuByLocation(MenuLocation.FOOTER))
 }));

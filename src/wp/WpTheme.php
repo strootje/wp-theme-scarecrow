@@ -10,6 +10,7 @@ use Scarecrow\Locales\Localizer;
 use Scarecrow\MenuLocations\FooterLocation;
 use Scarecrow\MenuLocations\HeaderLocation;
 use Scarecrow\MenuLocations\SidebarLocation;
+use Scarecrow\MenuLocations\SitemapLocation;
 
 class WpTheme {
 	public static $name;
@@ -43,7 +44,8 @@ class WpTheme {
 			// MenuLocations
 			HeaderLocation::class,
 			FooterLocation::class,
-			SidebarLocation::class
+			SidebarLocation::class,
+			SitemapLocation::class
 		];
 	}
 

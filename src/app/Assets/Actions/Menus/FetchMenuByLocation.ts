@@ -17,7 +17,8 @@ export interface FetchMenuByLocationState {
 	loading: boolean,
 	header?: Menu,
 	sidebar?: Menu,
-	footer?: Menu
+	footer?: Menu,
+	sitemap?: Menu
 };
 
 export type FetchMenuByLocationAction =

@@ -13,14 +13,18 @@ enum Actions {
 	Error = 'FETCH_POSTS__ERROR'
 };
 
+interface Paged<T> {
+	[cursor: string]: T
+}
+
 export interface FetchPostsState {
 	loading: boolean,
-	posts: Post[]
+	posts: Paged<Post>
 };
 
 export type FetchPostsAction =
 	| { type: Actions.Request }
-	| { type: Actions.Result, posts: Post[] }
+	| { type: Actions.Result, posts: Paged<Post> }
 	| { type: Actions.Error, error: Error };
 
 const Request = () => ({ type: Actions.Request });
@@ -42,7 +46,7 @@ export function FetchPosts() {
 export function FetchPostsReducer( state: FetchPostsState, action: FetchPostsAction ): FetchPostsState {
 	switch (action.type) {
 		case Actions.Request: return { ...state, loading: true };
-		case Actions.Result: return { ...state, loading: false, posts: [ ...state.posts, ...action.posts ] };
+		case Actions.Result: return { ...state, loading: false, posts: { ...state.posts, ...action.posts }};
 		case Actions.Error: return { ...state, loading: false };
 		default: return state;
 	}

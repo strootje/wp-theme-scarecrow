@@ -9,7 +9,7 @@ import Link from 'Controls/Link';
 interface OwnProps {
 }
 
-type Props = OwnProps & {
+type Props = React.HTMLAttributes<{}> & OwnProps & {
 	Menus: MenuState
 
 	GetMenu: () => void

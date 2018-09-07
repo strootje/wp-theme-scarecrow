@@ -1,19 +1,27 @@
 #import "./Fragments/CategoryFields.gql"
 
-query WP_FetchPosts {
-	posts( first: 9 ) {
-		nodes {
-			id
-			postId
-			title
-			uri
-			content
+query WP_FetchPosts( $first: Int, $before: String, $last: Int, $after: String ) {
+	posts( first: $first, before: $before, last: $last, after: $after, where: { orderby: { order: DESC, field: DATE }}) {
+		pageInfo {
+			hasNextPage
+			hasPreviousPage
+		}
 
-			thumbnail
+		edges {
+			cursor
+			node {
+				id
+				postId
+				title
+				uri
+				content
 
-			categories {
-				nodes {
-					...WP_CategoryFields
+				thumbnail
+
+				categories {
+					nodes {
+						...WP_CategoryFields
+					}
 				}
 			}
 		}

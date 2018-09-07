@@ -1,5 +1,5 @@
 
-export default class MenuItem {
+export default class {
 	private readonly key: string;
 	private readonly label: string;
 	private readonly link: string;

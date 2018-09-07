@@ -37,4 +37,12 @@
 	font-size: 1rem;
 	font-weight: lighter;
 	text-align: center;
+
+	span {
+		&:not(:first-child) {
+			&::before {
+				content: " - ";
+			}
+		}
+	}
 }

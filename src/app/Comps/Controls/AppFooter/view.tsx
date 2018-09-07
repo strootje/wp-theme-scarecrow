@@ -12,7 +12,7 @@ import Link from 'Controls/Link';
 interface OwnProps {
 }
 
-type Props = OwnProps & {
+type Props = React.HTMLAttributes<{}> & OwnProps & {
 	Settings: SettingsState
 	Pages: PagesState
 	Tags: TagsState
@@ -20,7 +20,8 @@ type Props = OwnProps & {
 
 	GetPageById: ( pageId: number ) => void
 	GetTags: () => void
-	GetMenu: () => void
+	GetSitemap: () => void
+	GetSocialLinks: () => void
 };
 
 export default class extends React.Component<OwnProps, {}> {
@@ -29,11 +30,12 @@ export default class extends React.Component<OwnProps, {}> {
 			Settings: { PageIdForFooterAboutSection },
 			Pages: { pages },
 			Tags: { tags },
-			Menus: { footer },
+			Menus: { sitemap, footer },
 
 			GetPageById,
 			GetTags,
-			GetMenu
+			GetSitemap,
+			GetSocialLinks
 		} = this.props as Props;
 
 		if (!pages.some(page => page.PageId == PageIdForFooterAboutSection)) {
@@ -44,8 +46,12 @@ export default class extends React.Component<OwnProps, {}> {
 			GetTags();
 		}
 
+		if (!sitemap) {
+			GetSitemap();
+		}
+
 		if (!footer) {
-			GetMenu();
+			GetSocialLinks();
 		}
 	}
 
@@ -54,7 +60,7 @@ export default class extends React.Component<OwnProps, {}> {
 			Settings: { PageIdForFooterAboutSection },
 			Pages: { pages },
 			Tags: { tags },
-			Menus: { footer }
+			Menus: { sitemap, footer }
 		} = this.props as Props;
 
 		let page: null | Page = null;
@@ -95,8 +101,11 @@ export default class extends React.Component<OwnProps, {}> {
 
 					<div className={style.FooterRow}>
 						<div className={style.FooterLegal}>
-							Bas Stroosnijder &copy; 2018 -
-							Powered by <a href='https://wordpress.org/' target='blank'>Wordpress</a> &amp; <a href='https://github.com/strootje/wp-theme-scarecrow/' target='blank'>Scarecrow</a>
+							{sitemap && sitemap.Items.map(item => (
+								<span key={item.Key}><Link to={item.Link} target={item.Target}>{item.Label}</Link></span>
+							))}
+							<span>Bas Stroosnijder &copy; 2018</span>
+							<span>Powered by <a href='https://wordpress.org/' target='blank'>Wordpress</a> &amp; <a href='https://github.com/strootje/wp-theme-scarecrow/' target='blank'>Scarecrow</a></span>
 						</div>
 					</div>
 				</footer>

@@ -17,6 +17,7 @@ export default class {
 			post.postId,
 			post.title,
 			post.uri,
+			post.content || '',
 			CategoryMapper.MapAll(post.categories),
 			ThumbnailsMapper.Map({
 				normal: post.thumbnail

@@ -1,5 +1,4 @@
-
-export default class Category {
+export default class {
 	private readonly categoryId: number;
 	private readonly name: string;
 	private readonly link: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+
 import { SettingsState } from 'Actions/Settings';
-import { HtmlHTMLAttributes } from 'react';
+import { Link } from 'react-router-dom';
 
 interface OwnProps {
 	to: string

@@ -12,7 +12,7 @@ import HomePage from 'Pages/Home';
 interface OwnProps {
 }
 
-type Props = OwnProps & {
+type Props = React.HTMLAttributes<{}> & OwnProps & {
 	Settings: SettingsState
 	GetSettings: () => void
 };

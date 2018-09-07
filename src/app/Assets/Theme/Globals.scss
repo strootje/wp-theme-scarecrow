@@ -1,7 +1,29 @@
+// https://freefrontend.com/css-background-patterns/
+// Colors
+$bg-color: #efefef;
+$dot-color: #bfbfbf;
+
+// Dimensions
+$dot-size: 1px;
+$dot-space: 11px;
+
+body {
+	background:
+		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+		linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+		$dot-color;
+	background-size: $dot-space $dot-space;
+}
+
 * {
 	font-family: 'Roboto', sans-serif;
 }
 
 body {
-	background-color: #efefef;
+	// background-color: #efefef;
+	background:
+		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+		linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+		$dot-color;
+	background-size: $dot-space $dot-space;
 }

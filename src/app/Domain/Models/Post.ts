@@ -6,14 +6,16 @@ export default class {
 	private readonly postId: number;
 	private readonly title: string;
 	private readonly uri: string;
+	private readonly content: string;
 	private readonly categories: Category[];
 	private readonly thumbnails: Thumbnails;
 
-	constructor( id: string, postId: number, title: string, uri: string, categories: Category[], thumbnails: Thumbnails ) {
+	constructor( id: string, postId: number, title: string, uri: string, content: string, categories: Category[], thumbnails: Thumbnails ) {
 		this.key = id;
 		this.postId = postId;
 		this.title = title;
 		this.uri = uri;
+		this.content = content;
 		this.categories = categories;
 		this.thumbnails = thumbnails;
 	}
@@ -32,6 +34,17 @@ export default class {
 
 	get Uri(): string {
 		return this.uri;
+	}
+
+	get Content(): string {
+		return this.content;
+	}
+
+	get ShortContent(): string {
+		const moreTag = '<!--more-->';
+		const moreTagIndex = this.content.indexOf(moreTag);
+
+		return moreTagIndex > 0 ? this.content.substring(0, moreTagIndex) : this.Content;
 	}
 
 	get Categories(): Category[] {
