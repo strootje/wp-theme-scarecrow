@@ -5,4 +5,4 @@ yarn*
 *.lock
 wp-theme-scarecrow.zip
 schema.json
-**/__generated__
+__generated__
