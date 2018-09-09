@@ -23,7 +23,7 @@ type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
 
 export default class extends React.Component<OwnProps, {}> {
 	static defaultProps: OwnProps = {
-		perPage: 1
+		perPage: 2
 	}
 
 	get Sorted(): Paged<Post>[] {
@@ -62,7 +62,7 @@ export default class extends React.Component<OwnProps, {}> {
 			GetPosts
 		} = this.props as Props;
 
-		const current = this.Sorted[this.Sorted.length - 1].cursor;
+		const current = this.Sorted[0].cursor;
 		GetPosts({ last: perPage, before: current });
 	}
 
