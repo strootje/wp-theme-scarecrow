@@ -9,7 +9,7 @@ const reducers: (( state: PostsState, action: PostsAction ) => PostsState)[] = [
 
 const dstate: PostsState = {
 	loading: false,
-	posts: {}
+	posts: []
 }
 
 export function PostsReducer( state: PostsState = dstate, action: PostsAction ): PostsState {

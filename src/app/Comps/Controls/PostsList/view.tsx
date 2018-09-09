@@ -2,16 +2,23 @@ import * as React from 'react';
 import { bind } from 'decko';
 const style = require('./style');
 
+import { Location, History } from 'history';
 import { PostsState } from 'Actions/Posts';
+import Paged from 'Models/Paged';
+import Post from 'Models/Post';
 
 interface OwnProps {
 	perPage: number
 }
 
-type Props = React.HTMLAttributes<{}> & OwnProps & {
-	Posts: PostsState
+export type DispatchProps = {
+	GetPosts: ( pageInfo: { first?: number, last?: number, before?: string, after?: string } ) => void
+}
 
-	GetPosts: () => void
+type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
+	location: Location,
+	history: History,
+	Posts: PostsState
 };
 
 export default class extends React.Component<OwnProps, {}> {
@@ -19,20 +26,54 @@ export default class extends React.Component<OwnProps, {}> {
 		perPage: 1
 	}
 
-	@bind
-	FirstPage(): void {
+	get Sorted(): Paged<Post>[] {
+		const {
+			Posts: { posts }
+		} = this.props as Props;
+
+		return posts.sort((a, b) => b.node.Date.getTime() - a.node.Date.getTime());
 	}
 
 	@bind
-	PreviousPage(): void {
+	FirstPage(): void {
+		const {
+			perPage,
+			GetPosts
+		} = this.props as Props;
+
+		GetPosts({ first: perPage });
 	}
 
 	@bind
 	NextPage(): void {
+		const {
+			perPage,
+			GetPosts
+		} = this.props as Props;
+
+		const current = this.Sorted[this.Sorted.length - 1].cursor;
+		GetPosts({ first: perPage, after: current });
+	}
+
+	@bind
+	PreviousPage(): void {
+		const {
+			perPage,
+			GetPosts
+		} = this.props as Props;
+
+		const current = this.Sorted[this.Sorted.length - 1].cursor;
+		GetPosts({ last: perPage, before: current });
 	}
 
 	@bind
 	LastPage(): void {
+		const {
+			perPage,
+			GetPosts
+		} = this.props as Props;
+
+		GetPosts({ last: perPage });
 	}
 
 	componentWillMount(): void {
@@ -42,12 +83,16 @@ export default class extends React.Component<OwnProps, {}> {
 	render(): JSX.Element {
 		const {
 			perPage,
-			Posts: { posts },
+			Posts: { posts }
 		} = this.props as Props;
+
+		let index = 0;//sorted.indexOf(posts[this.state.current]);
+		if (index < 0) { index = 0; }
+		const slice = this.Sorted.map(paged => paged.node).slice(index, index + perPage);
 
 		return (
 			<section className={style.Posts}>
-				<div>{Object.keys(posts).map(key => posts[key]).map(( post, index ) => (
+				<div>{slice.map(post => (
 					<article key={post.Key} className={style.Item}>
 						<header>
 							<h3>{post.Title}</h3>

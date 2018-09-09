@@ -1,8 +1,8 @@
-import view from './view';
 import Connect from 'Hocs/Connect';
+import view, { DispatchProps } from './view';
 
 import { FetchPosts } from 'Actions/Posts/FetchPosts';
 
-export default Connect(view, dispatch => ({
-	GetPosts: () => dispatch(FetchPosts())
+export default Connect<DispatchProps>(view, dispatch => ({
+	GetPosts: ( pageInfo ) => dispatch(FetchPosts(pageInfo))
 }));
