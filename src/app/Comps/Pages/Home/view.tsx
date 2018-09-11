@@ -4,6 +4,7 @@ const style = require('./style');
 import { SettingsState } from 'Actions/Settings';
 import Page from 'Views/Page';
 import PostsList from 'Controls/PostsList';
+import Sidebar from 'Controls/Sidebar';
 
 interface OwnProps {
 }
@@ -26,7 +27,7 @@ export default class extends React.Component<OwnProps, {}> {
 				}</div>
 
 				<div className={style.Sidebar}>
-					i are Sidebar
+					<Sidebar />
 				</div>
 			</div>
 		);

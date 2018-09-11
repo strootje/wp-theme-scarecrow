@@ -4,5 +4,5 @@ import view, { DispatchProps } from './view';
 import { FetchPosts } from 'Actions/Posts/FetchPosts';
 
 export default Connect<DispatchProps>(view, dispatch => ({
-	GetPosts: ( pageInfo ) => dispatch(FetchPosts(pageInfo))
+	GetPosts: ( args ) => dispatch(FetchPosts(args))
 }));

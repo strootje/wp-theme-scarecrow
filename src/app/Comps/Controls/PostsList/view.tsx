@@ -6,13 +6,14 @@ import { Location, History } from 'history';
 import { PostsState } from 'Actions/Posts';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
+import MoreList from 'Controls/MoreList';
 
 interface OwnProps {
 	perPage: number
 }
 
 export type DispatchProps = {
-	GetPosts: ( pageInfo: { first?: number, last?: number, before?: string, after?: string } ) => void
+	GetPosts: ( vars: { first?: number, last?: number, before?: string, after?: string } ) => void
 }
 
 type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
@@ -21,12 +22,12 @@ type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
 	Posts: PostsState
 };
 
-export default class extends React.Component<OwnProps, {}> {
+export default class extends MoreList<Post, OwnProps, {}> {
 	static defaultProps: OwnProps = {
 		perPage: 2
 	}
 
-	get Sorted(): Paged<Post>[] {
+	protected get Sorted(): Paged<Post>[] {
 		const {
 			Posts: { posts }
 		} = this.props as Props;
@@ -34,85 +35,24 @@ export default class extends React.Component<OwnProps, {}> {
 		return posts.sort((a, b) => b.node.Date.getTime() - a.node.Date.getTime());
 	}
 
-	@bind
-	FirstPage(): void {
+	protected FetchPage( after?: string ) {
 		const {
 			perPage,
 			GetPosts
 		} = this.props as Props;
 
-		GetPosts({ first: perPage });
+		GetPosts({ first: perPage, after: after });
 	}
 
-	@bind
-	NextPage(): void {
-		const {
-			perPage,
-			GetPosts
-		} = this.props as Props;
-
-		const current = this.Sorted[this.Sorted.length - 1].cursor;
-		GetPosts({ first: perPage, after: current });
-	}
-
-	@bind
-	PreviousPage(): void {
-		const {
-			perPage,
-			GetPosts
-		} = this.props as Props;
-
-		const current = this.Sorted[0].cursor;
-		GetPosts({ last: perPage, before: current });
-	}
-
-	@bind
-	LastPage(): void {
-		const {
-			perPage,
-			GetPosts
-		} = this.props as Props;
-
-		GetPosts({ last: perPage });
-	}
-
-	componentWillMount(): void {
-		this.FirstPage();
-	}
-
-	render(): JSX.Element {
-		const {
-			perPage,
-			Posts: { posts }
-		} = this.props as Props;
-
-		let index = 0;//sorted.indexOf(posts[this.state.current]);
-		if (index < 0) { index = 0; }
-		const slice = this.Sorted.map(paged => paged.node).slice(index, index + perPage);
-
+	protected RenderItem( item: Post ): JSX.Element {
 		return (
-			<section className={style.Posts}>
-				<div>{slice.map(post => (
-					<article key={post.Key} className={style.Item}>
-						<header>
-							<h3>{post.Title}</h3>
-							{post.Thumbnails.Normal}
-						</header>
+			<article key={item.Key}>
+				<header>
+					<h3>{item.Title}</h3>
+				</header>
 
-						<div dangerouslySetInnerHTML={{ __html: post.ShortContent }} />
-
-						<footer>
-						</footer>
-					</article>
-				))}</div>
-
-				<footer>
-					<button onClick={this.FirstPage}>first</button>
-					<button onClick={this.PreviousPage}>previous</button>
-					<button onClick={this.NextPage}>next</button>
-					<button onClick={this.LastPage}>last</button>
-				</footer>
-			</section>
+				<div dangerouslySetInnerHTML={{ __html: item.ShortContent }} />
+			</article>
 		);
 	}
 }
