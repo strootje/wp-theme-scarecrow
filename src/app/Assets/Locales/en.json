@@ -1,6 +1,8 @@
 {
 	"app.title": "Strootje Blog",
 
+	"comp.morelist.showmore.title": "Show More",
+
 	"footer.tags.title": "Tags",
 	"footer.social.title": "Social Links"
 }

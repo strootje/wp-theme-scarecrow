@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { bind } from 'decko';
 import Paged from 'Models/Paged';
+import { FormattedMessage } from 'react-intl';
 
 interface OwnProps {
 }
@@ -30,7 +31,7 @@ export default abstract class<PagedType, TypedProps = {}, TypedState = {}> exten
 				)}</div>
 
 				<footer>
-					<button onClick={this.OnNextPageClick}>TODO HARD CODED___Show More___</button>
+					<button onClick={this.OnNextPageClick}><FormattedMessage id='comp.morelist.showmore.title' /></button>
 				</footer>
 			</section>
 		);
