@@ -14,7 +14,7 @@ query WP_FetchPosts( $first: Int, $before: String, $last: Int, $after: String ) 
 				postId
 				title
 				date
-				uri
+				link
 				content
 
 				thumbnail

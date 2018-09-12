@@ -13,14 +13,14 @@ export default class {
 		if (post == null) { throw Error('post cannot be null'); }
 		if (post.title == null) { throw Error('post.title cannot be null'); }
 		if (post.date == null) { throw Error('post.date cannot be null'); }
-		if (post.uri == null) { throw Error('post.uri cannot be null'); }
+		if (post.link == null) { throw Error('post.link cannot be null'); }
 
 		return new Post(
 			post.id,
 			post.postId,
 			post.title,
 			new Date(post.date),
-			post.uri,
+			post.link,
 			post.content || '',
 			CategoryMapper.MapAll(post.categories),
 			ThumbnailsMapper.Map({

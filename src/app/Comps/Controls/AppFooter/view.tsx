@@ -70,14 +70,20 @@ export default class extends React.Component<OwnProps, {}> {
 
 		return (
 			<div>
-				<section className={style.FooterAbout}>
-					{page && <div className={style.FooterMain}>
-						<div className={style.FooterRow}>
-							<h3>{page.Title}</h3>
+				{page && <section className={style.FooterAbout}>
+					<div className={style.FooterMain}>
+						<article className={style.FooterRow}>
+							<header>
+								<h3>{page.Title}</h3>
+							</header>
+
 							<div dangerouslySetInnerHTML={{ __html: page.Content }} />
-						</div>
-					</div>}
-				</section>
+
+							<footer>
+							</footer>
+						</article>
+					</div>
+				</section>}
 
 				<footer className={style.FooterMain}>
 					<div className={style.FooterRow}>

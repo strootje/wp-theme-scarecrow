@@ -1,8 +1,9 @@
 @import 'Theme';
-@import '~skeleton-sass-official/skeleton/themes/fresh/_grid';
 
 .FooterAbout {
-	background-color: red;
+	padding-top: 1rem;
+	background-color: $tertiary-color;
+	background-color: rgba($tertiary-color, .65);
 }
 
 .FooterMain {

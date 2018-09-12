@@ -73,7 +73,8 @@ const config: Webpack.Configuration = {
 						options: {
 							sourceMap: true,
 							modules: true,
-							localIdentName: '[local]__[hash:base64:5]'
+							// localIdentName: '[local]__[hash:base64:5]'
+							localIdentName: '[local]'
 						}
 					},
 					{

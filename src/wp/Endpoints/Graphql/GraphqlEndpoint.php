@@ -4,6 +4,7 @@ namespace Scarecrow\Endpoints\Graphql;
 use Scarecrow\Endpoints\Graphql\Types\Page\PageFields;
 use Scarecrow\Endpoints\Graphql\Types\Post\PostFields;
 use Scarecrow\Endpoints\Graphql\Types\Settings\ReadingSettingsFields;
+use Scarecrow\Endpoints\Graphql\Types\Settings\PermalinkSettingsFields;
 
 class GraphqlEndpoint {
 	public static function register() {
@@ -16,6 +17,8 @@ class GraphqlEndpoint {
 
 			add_filter("graphql_reading_fields", [ ReadingSettingsFields::class, "addFields" ]);
 			add_filter("graphql_settings_fields", [ ReadingSettingsFields::class, "addGlobalFields" ]);
+			add_filter("graphql_permalink_fields", [ PermalinkSettingsFields::class, "addFields" ]); // TODO: Fix permalink fields
+			add_filter("graphql_settings_fields", [ PermalinkSettingsFields::class, "addGlobalFields" ]);
 		}
 	}
 

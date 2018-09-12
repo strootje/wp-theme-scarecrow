@@ -34,6 +34,7 @@ services:
       - ./src/wp/style.css:/var/www/html/wp-content/themes/wp-theme-scarecrow/style.css
       - ./src/wp/functions.php:/var/www/html/wp-content/themes/wp-theme-scarecrow/functions.php
       - ./src/wp/index.php:/var/www/html/wp-content/themes/wp-theme-scarecrow/index.php
+      - ./../wp-graphql/:/var/www/html/wp-content/plugins/wp-graphql
 
     environment:
       WORDPRESS_DB_HOST: database:3306

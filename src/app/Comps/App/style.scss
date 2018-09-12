@@ -1,3 +1,5 @@
+@import 'Theme';
+
 .LayoutMain {
 	height: 100%;
 	display: flex;
@@ -6,9 +8,9 @@
 
 .LayoutWrapper {
 	flex-grow: 1;
-	// border-top: 3px solid #f00;
+	border-top: 3px solid $tertiary-color;
 }
 
 .LayoutFooter {
-	// border-bottom: 3px solid #f00;
+	border-bottom: 3px solid $tertiary-color;
 }

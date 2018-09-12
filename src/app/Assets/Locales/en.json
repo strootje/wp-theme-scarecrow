@@ -1,7 +1,9 @@
 {
 	"app.title": "Strootje Blog",
 
-	"comp.morelist.showmore.title": "Show More",
+	"morelist.showmore.title": "Show More",
+
+	"searchbar.input.placeholder": "Search ...",
 
 	"footer.tags.title": "Tags",
 	"footer.social.title": "Social Links"

@@ -8,6 +8,10 @@ export interface ISettings {
 	PageIdOnFront: number
 	PageIdForPosts: number
 
+	PermalinkStructure: string
+	CategoryBase: string
+	TagBase: string
+
 	ProviderForImages: string
 	PageIdForFooterAboutSection: number
 }
@@ -23,6 +27,11 @@ export default class implements ISettings {
 	private readonly pageIdOnFront: number;
 	private readonly pageIdForPosts: number;
 
+	// Permalink Settings
+	private readonly permalinkStructure: string;
+	private readonly categoryBase: string;
+	private readonly tagBase: string;
+
 	// Scarecrow Settings
 	private readonly providerForImages: string;
 	private readonly pageIdForFooterAboutSection: number;
@@ -34,6 +43,9 @@ export default class implements ISettings {
 		isHomepageStatic: boolean,
 		pageIdOnFront: number,
 		pageIdForPosts: number,
+		permalinkStructure: string,
+		categoryBase: string,
+		tagBase: string,
 		providerForImages: string,
 		pageIdForFooterAboutSection: number
 	) {
@@ -44,6 +56,10 @@ export default class implements ISettings {
 		this.isHomepageStatic = isHomepageStatic;
 		this.pageIdOnFront = pageIdOnFront;
 		this.pageIdForPosts = pageIdForPosts;
+
+		this.permalinkStructure = permalinkStructure;
+		this.categoryBase = categoryBase;
+		this.tagBase = tagBase;
 
 		this.providerForImages = providerForImages;
 		this.pageIdForFooterAboutSection = pageIdForFooterAboutSection;
@@ -73,6 +89,18 @@ export default class implements ISettings {
 		return this.pageIdForPosts;
 	}
 
+	get PermalinkStructure(): string {
+		return this.permalinkStructure;
+	}
+
+	get CategoryBase(): string {
+		return this.categoryBase;
+	}
+
+	get TagBase(): string {
+		return this.tagBase;
+	}
+
 	get ProviderForImages(): string {
 		return this.providerForImages;
 	}
@@ -89,6 +117,9 @@ export default class implements ISettings {
 			IsHomepageStatic: this.IsHomepageStatic,
 			PageIdOnFront: this.PageIdOnFront,
 			PageIdForPosts: this.PageIdForPosts,
+			PermalinkStructure: this.PermalinkStructure,
+			CategoryBase: this.CategoryBase,
+			TagBase: this.TagBase,
 			ProviderForImages: this.ProviderForImages,
 			PageIdForFooterAboutSection: this.PageIdForFooterAboutSection
 		};

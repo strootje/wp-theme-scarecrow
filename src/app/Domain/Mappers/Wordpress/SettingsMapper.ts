@@ -12,6 +12,9 @@ export default class {
 		if (settings.readingSettingsIsStaticHomepage == null) { throw Error('settings.readingSettingsIsStaticHomepage cannot be null'); }
 		if (settings.readingSettingsPageOnFront == null) { throw Error('settings.readingSettingsPageOnFront cannot be null'); }
 		if (settings.readingSettingsPageForPosts == null) { throw Error('settings.readingSettingsPageForPosts cannot be null'); }
+		if (settings.permalinkSettingsPermalinkStructure == null) { throw Error('settings.permalinkSettingsPermalinkStructure cannot be null'); }
+		if (settings.permalinkSettingsCategoryBase == null) { throw Error('settings.permalinkSettingsCategoryBase cannot be null'); }
+		if (settings.permalinkSettingsTagBase == null) { throw Error('settings.permalinkSettingsTagBase cannot be null'); }
 		if (settings.scarecrowSettingsImageProvider == null) { throw Error('settings.scarecrowSettingsImageProvider cannot be null'); }
 		if (settings.scarecrowSettingsFooterAbout == null) { throw Error('settings.scarecrowSettingsFooterAbout cannot be null'); }
 
@@ -22,6 +25,9 @@ export default class {
 			settings.readingSettingsIsStaticHomepage,
 			settings.readingSettingsPageOnFront,
 			settings.readingSettingsPageForPosts,
+			settings.permalinkSettingsPermalinkStructure,
+			settings.permalinkSettingsCategoryBase,
+			settings.permalinkSettingsTagBase,
 			settings.scarecrowSettingsImageProvider,
 			settings.scarecrowSettingsFooterAbout);
 	}

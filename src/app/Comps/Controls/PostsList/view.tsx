@@ -7,6 +7,7 @@ import { PostsState } from 'Actions/Posts';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
 import MoreList from 'Controls/MoreList';
+import Link from 'Controls/Link';
 
 interface OwnProps {
 	perPage: number
@@ -45,10 +46,11 @@ export default class extends MoreList<Post, OwnProps, {}> {
 	}
 
 	protected RenderItem( item: Post ): JSX.Element {
+		console.log(item);
 		return (
 			<article key={item.Key}>
 				<header>
-					<h3>{item.Title}</h3>
+					<h3><Link to={item.Link}>{item.Title}</Link></h3>
 				</header>
 
 				<div dangerouslySetInnerHTML={{ __html: item.ShortContent }} />

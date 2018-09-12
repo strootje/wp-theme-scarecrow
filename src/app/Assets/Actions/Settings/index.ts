@@ -16,6 +16,9 @@ const dstate: SettingsState = {
 	IsHomepageStatic: false,
 	PageIdOnFront: 0,
 	PageIdForPosts: 0,
+	PermalinkStructure: '/post/%postname%',
+	CategoryBase: '',
+	TagBase: '',
 	ProviderForImages: '',
 	PageIdForFooterAboutSection: 0
 }

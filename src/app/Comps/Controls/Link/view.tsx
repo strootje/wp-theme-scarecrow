@@ -23,7 +23,7 @@ export default class extends React.Component<OwnProps, {}> {
 		} = this.props as Props;
 
 		const localhost = 'localhost:9000';
-		const url = to.replace(`http://${localhost}`, '');
+		const url = to.replace(`http://${localhost}`, '').replace('http://localhost:8080', '');
 
 		return (url.search(localhost) > -1)
 			? <Link to={url} {...{ title, target, className }}>{label}</Link>

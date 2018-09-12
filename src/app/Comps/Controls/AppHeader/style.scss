@@ -1,5 +1,6 @@
 @import 'Theme';
-@import '~skeleton-sass-official/skeleton/themes/fresh/_grid';
+
+$height: 50px;;
 
 .AppHeader {
 	@extend .container;
@@ -16,18 +17,56 @@
 .NavItemSearch {
 	@extend .columns;
 
+	height: $height;
 	list-style-type: none;
 	text-align: center;
-	text-transform: uppercase;
+	line-height: $height;
+
+	border-top: 2px solid $tertiary-color;
+	margin-top: -2px;
+
+	&:hover, &:focus {
+		border-top: 2px solid lighten($tertiary-color, 10%);
+	}
 }
 
 .NavItemLink {
 	@extend .two;
-	// order: 1;
+	@media screen and (max-width: $tablet-width - 1) {
+		order: 1;
+	}
+
+	a {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+}
+
+.NavItemLogo {
+	height: $height + 20px;
+	line-height: $height + 20px;
+	font-size: 2.6rem !important;
+}
+
+.NavItemSearch {
+	input[type='search'] {
+		margin-bottom: 0;
+	}
+}
+
+.NavItemLink,
+.NavItemLogo {
+	font-size: 2rem;
+	font-family: $heading-family;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .NavItemLogo,
 .NavItemSearch {
 	@extend .four;
-	// order: 0;
+	@media screen and (max-width: $tablet-width - 1) {
+		order: 0;
+	}
 }

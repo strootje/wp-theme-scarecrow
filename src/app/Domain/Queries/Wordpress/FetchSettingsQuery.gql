@@ -8,6 +8,10 @@ query WP_FetchSettings {
 		readingSettingsPageOnFront
 		readingSettingsPageForPosts
 
+		permalinkSettingsPermalinkStructure
+		permalinkSettingsCategoryBase
+		permalinkSettingsTagBase
+
 		scarecrowSettingsImageProvider
 		scarecrowSettingsFooterAbout
 	}

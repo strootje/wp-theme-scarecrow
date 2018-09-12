@@ -6,17 +6,17 @@ export default class {
 	private readonly postId: number;
 	private readonly title: string;
 	private readonly date: Date;
-	private readonly uri: string;
+	private readonly link: string;
 	private readonly content: string;
 	private readonly categories: Category[];
 	private readonly thumbnails: Thumbnails;
 
-	constructor( id: string, postId: number, title: string, date: Date, uri: string, content: string, categories: Category[], thumbnails: Thumbnails ) {
+	constructor( id: string, postId: number, title: string, date: Date, link: string, content: string, categories: Category[], thumbnails: Thumbnails ) {
 		this.key = id;
 		this.postId = postId;
 		this.title = title;
 		this.date = date;
-		this.uri = uri;
+		this.link = link;
 		this.content = content;
 		this.categories = categories;
 		this.thumbnails = thumbnails;
@@ -38,8 +38,8 @@ export default class {
 		return this.date;
 	}
 
-	get Uri(): string {
-		return this.uri;
+	get Link(): string {
+		return this.link;
 	}
 
 	get Content(): string {

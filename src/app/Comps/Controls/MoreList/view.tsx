@@ -31,7 +31,7 @@ export default abstract class<PagedType, TypedProps = {}, TypedState = {}> exten
 				)}</div>
 
 				<footer>
-					<button onClick={this.OnNextPageClick}><FormattedMessage id='comp.morelist.showmore.title' /></button>
+					<button onClick={this.OnNextPageClick}><FormattedMessage id='morelist.showmore.title' /></button>
 				</footer>
 			</section>
 		);
