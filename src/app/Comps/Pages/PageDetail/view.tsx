@@ -39,7 +39,7 @@ export default class extends React.Component<OwnProps, {}> {
 
 	render(): JSX.Element {
 		const {
-			Settings: { PageIdForPosts },
+			Settings: { IsHomepageStatic, PageIdForPosts },
 			Pages: { loading, pages },
 			pageId, match
 		} = this.props as Props;
@@ -59,7 +59,7 @@ export default class extends React.Component<OwnProps, {}> {
 			);
 		}
 
-		if (page.PageId == PageIdForPosts) {
+		if (IsHomepageStatic && page.PageId == PageIdForPosts) {
 			return (<PostsPage />);
 		}
 

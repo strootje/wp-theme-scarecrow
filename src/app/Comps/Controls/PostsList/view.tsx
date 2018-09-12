@@ -46,7 +46,7 @@ export default class extends MoreList<Post, OwnProps, {}> {
 	}
 
 	protected RenderItem( item: Post ): JSX.Element {
-		console.log(item);
+		// console.log(item);
 		return (
 			<article key={item.Key}>
 				<header>

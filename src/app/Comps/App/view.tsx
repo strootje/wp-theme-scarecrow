@@ -6,8 +6,11 @@ import { Switch, Route } from 'react-router-dom';
 import Loader from 'Controls/Loader';
 import AppHeader from 'Controls/AppHeader';
 import AppFooter from 'Controls/AppFooter';
-import GenericPage from 'Views/Page';
 import HomePage from 'Pages/Home';
+import PostDetail from 'Pages/PostDetail';
+import CategoryDetail from 'Pages/CategoryDetail';
+import TagDetail from 'Pages/TagDetail';
+import PageDetail from 'Pages/PageDetail';
 
 interface OwnProps {
 }
@@ -47,10 +50,10 @@ export default class extends React.Component<OwnProps, {}> {
 					<AppHeader />
 
 					<Switch>
-						<Route path={postPath} component={() => (<p>post</p>)} />
-						<Route path={categoryPath} component={() => (<p>category</p>)} />
-						<Route path={tagPath} component={() => (<p>tag</p>)} />
-						<Route path='/:pageSlug' component={GenericPage} />
+						<Route path={postPath} component={PostDetail} />
+						<Route path={categoryPath} component={CategoryDetail} />
+						<Route path={tagPath} component={TagDetail} />
+						<Route path='/:pageSlug' component={PageDetail} />
 						<Route path='/' component={HomePage} />
 					</Switch>
 				</div>

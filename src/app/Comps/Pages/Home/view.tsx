@@ -2,7 +2,7 @@ import * as React from 'react';
 const style = require('./style');
 
 import { SettingsState } from 'Actions/Settings';
-import Page from 'Views/Page';
+import PageDetail from 'Pages/PageDetail';
 import PostsList from 'Controls/PostsList';
 import Sidebar from 'Controls/Sidebar';
 
@@ -22,7 +22,7 @@ export default class extends React.Component<OwnProps, {}> {
 		return (
 			<div className={style.Content}>
 				<div className={style.Page}>{IsHomepageStatic
-					? <Page pageId={PageIdOnFront} />
+					? <PageDetail pageId={PageIdOnFront} />
 					: <PostsList />
 				}</div>
 
