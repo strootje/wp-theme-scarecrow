@@ -1,0 +1,18 @@
+#import "./CategoryFields.gql"
+
+fragment WP_PostFields on Post {
+	id
+	postId
+	title
+	date
+	link
+	content
+
+	thumbnail
+
+	categories {
+		nodes {
+			...WP_CategoryFields
+		}
+	}
+}

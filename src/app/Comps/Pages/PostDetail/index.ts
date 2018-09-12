@@ -1,4 +1,7 @@
 import Connect from 'Hocs/Connect';
-import view from './view';
+import view, { DispatchProps } from './view';
+import { FetchPostByUri } from 'Actions/Posts/FetchPostByUri';
 
-export default Connect(view);
+export default Connect<DispatchProps>(view, dispatch => ({
+	GetPostByUri: ( postUri: string ) => dispatch(FetchPostByUri(postUri))
+}));

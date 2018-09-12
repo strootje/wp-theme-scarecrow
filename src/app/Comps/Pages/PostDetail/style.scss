@@ -1,0 +1,10 @@
+@import 'Theme';
+
+.PostSection {
+	@extend .container;
+	@extend .row;
+
+	header > h3 {
+		text-align: center;
+	}
+}

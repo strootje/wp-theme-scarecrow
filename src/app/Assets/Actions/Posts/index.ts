@@ -1,9 +1,15 @@
+import { FetchPostByUriReducer, FetchPostByUriState, FetchPostByUriAction } from 'Actions/Posts/FetchPostByUri';
 import { FetchPostsReducer, FetchPostsState, FetchPostsAction } from './FetchPosts';
 
-export type PostsState = FetchPostsState;
-export type PostsAction = FetchPostsAction;
+export type PostsState =
+	& FetchPostByUriState
+	& FetchPostsState;
+export type PostsAction =
+	| FetchPostByUriAction
+	| FetchPostsAction;
 
-const reducers: (( state: PostsState, action: PostsAction ) => PostsState)[] = [
+const reducers: any[] = [
+	FetchPostByUriReducer,
 	FetchPostsReducer
 ];
 

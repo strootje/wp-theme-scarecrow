@@ -38,11 +38,11 @@ export default class extends React.Component<OwnProps, {}> {
 			return (<Loader />);
 		}
 
-		const postPath = Settings.PermalinkStructure.replace('%postname%', ':postName');
-		const categoryPath = Settings.CategoryBase != '' ? `/${Settings.CategoryBase}/:categoryName`
-			: Settings.PermalinkStructure.replace('%postname%', ':categoryName');
-		const tagPath = Settings.TagBase != '' ? `/${Settings.TagBase}/:tagName`
-			: Settings.PermalinkStructure.replace('%postname%', ':tagName');
+		const postPath = Settings.PermalinkStructure.replace('%postname%', ':postUri');
+		const categoryPath = Settings.CategoryBase != '' ? `/${Settings.CategoryBase}/:categoryUri`
+			: Settings.PermalinkStructure.replace('%postname%', ':categoryUri');
+		const tagPath = Settings.TagBase != '' ? `/${Settings.TagBase}/:tagUri`
+			: Settings.PermalinkStructure.replace('%postname%', ':tagUri');
 
 		return (
 			<div className={style.LayoutMain}>
@@ -53,7 +53,7 @@ export default class extends React.Component<OwnProps, {}> {
 						<Route path={postPath} component={PostDetail} />
 						<Route path={categoryPath} component={CategoryDetail} />
 						<Route path={tagPath} component={TagDetail} />
-						<Route path='/:pageSlug' component={PageDetail} />
+						<Route path='/:pageUri' component={PageDetail} />
 						<Route path='/' component={HomePage} />
 					</Switch>
 				</div>

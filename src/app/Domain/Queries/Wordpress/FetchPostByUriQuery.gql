@@ -1,0 +1,7 @@
+#import "./Fragments/PostFields.gql"
+
+query WP_FetchPostByUri( $uri: String! ) {
+	postBy( uri: $uri ) {
+		...WP_PostFields
+	}
+}

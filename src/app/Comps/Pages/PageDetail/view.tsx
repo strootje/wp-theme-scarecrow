@@ -9,7 +9,7 @@ import Loader from 'Controls/Loader';
 
 interface OwnProps {
 	pageId?: number
-	match?: match<{ pageSlug: string }>
+	match?: match<{ pageUri: string }>
 }
 
 type Props = React.HTMLAttributes<{}> & OwnProps & {

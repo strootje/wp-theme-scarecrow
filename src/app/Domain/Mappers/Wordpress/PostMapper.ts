@@ -1,9 +1,9 @@
 import Post from "Models/Post";
-import Paged from "Models/Paged";
 import NoNull from "Helpers/NoNull";
 import ThumbnailsMapper from "Mappers/Wordpress/ThumbnailsMapper";
 import CategoryMapper from "Mappers/Wordpress/CategoryMapper";
 import { WP_FetchPosts_posts, WP_FetchPosts_posts_edges_node } from "Queries/Wordpress/__generated__/WP_FetchPosts";
+import Paged from "Models/Paged";
 
 type WPPost = WP_FetchPosts_posts_edges_node | null;
 type WPPosts = WP_FetchPosts_posts | null;
@@ -27,6 +27,13 @@ export default class {
 				normal: post.thumbnail
 			})
 		);
+	}
+
+	static MapSingle( post: WPPost ): Paged<Post> {
+		return {
+			cursor: '',
+			node: this.Map(post)
+		};
 	}
 
 	static MapAll( posts: WPPosts ): Paged<Post>[] {

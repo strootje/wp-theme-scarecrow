@@ -1,4 +1,4 @@
-#import "./Fragments/CategoryFields.gql"
+#import "./Fragments/PostFields.gql"
 
 query WP_FetchPosts( $first: Int, $before: String, $last: Int, $after: String ) {
 	posts( first: $first, before: $before, last: $last, after: $after, where: { orderby: { field: DATE, order: DESC }}) {
@@ -10,20 +10,7 @@ query WP_FetchPosts( $first: Int, $before: String, $last: Int, $after: String ) 
 		edges {
 			cursor
 			node {
-				id
-				postId
-				title
-				date
-				link
-				content
-
-				thumbnail
-
-				categories {
-					nodes {
-						...WP_CategoryFields
-					}
-				}
+				...WP_PostFields
 			}
 		}
 	}

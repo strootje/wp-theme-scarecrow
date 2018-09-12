@@ -5,10 +5,8 @@ import { AppState } from 'Actions/Reducers';
 import { WP_FetchPosts } from 'Queries/Wordpress/__generated__/WP_FetchPosts';
 const FetchPostsQuery = require('Queries/Wordpress/FetchPostsQuery');
 import PostMapper from 'Mappers/Wordpress/PostMapper';
-import PageInfoMapper from 'Mappers/Wordpress/PageInfoMapper';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
-import PageInfo from 'Models/PageInfo';
 
 enum Actions {
 	Request = 'FETCH_POSTS__REQUEST',

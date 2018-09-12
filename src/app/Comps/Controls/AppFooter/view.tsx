@@ -8,6 +8,7 @@ import { PagesState } from 'Actions/Pages';
 import { TagsState } from 'Actions/Tags';
 import { MenuState } from 'Actions/Menus';
 import Link from 'Controls/Link';
+import { Location } from 'history';
 
 interface OwnProps {
 }
@@ -17,6 +18,7 @@ type Props = React.HTMLAttributes<{}> & OwnProps & {
 	Pages: PagesState
 	Tags: TagsState
 	Menus: MenuState
+	location: Location
 
 	GetPageById: ( pageId: number ) => void
 	GetTags: () => void
@@ -60,11 +62,12 @@ export default class extends React.Component<OwnProps, {}> {
 			Settings: { PageIdForFooterAboutSection },
 			Pages: { pages },
 			Tags: { tags },
-			Menus: { sitemap, footer }
+			Menus: { sitemap, footer },
+			location
 		} = this.props as Props;
 
 		let page: null | Page = null;
-		if (pages.some(page => page.PageId == PageIdForFooterAboutSection)) {
+		if (pages.some(page => page.PageId == PageIdForFooterAboutSection && location.pathname.search(page.Uri) < 0)) {
 			page = pages.filter(page => page.PageId == PageIdForFooterAboutSection)[0];
 		}
 
