@@ -4,7 +4,7 @@ export default class {
 	private readonly link: string;
 	private readonly count: number;
 
-	constructor( categoryId: number, name: string, link: string, count: number ) {
+	constructor(categoryId: number, name: string, link: string, count: number) {
 		this.categoryId = categoryId;
 		this.name = name;
 		this.link = link;

@@ -1,14 +1,14 @@
-import * as React from 'react';
-const style = require('./style');
-
-import Page from 'Models/Page';
-import { FormattedMessage } from 'react-intl';
-import { SettingsState } from 'Actions/Settings';
-import { PagesState } from 'Actions/Pages';
-import { TagsState } from 'Actions/Tags';
 import { MenuState } from 'Actions/Menus';
+import { PagesState } from 'Actions/Pages';
+import { SettingsState } from 'Actions/Settings';
+import { TagsState } from 'Actions/Tags';
 import Link from 'Controls/Link';
+import Page from 'Models/Page';
 import { Location } from 'history';
+import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import * as Styles from './style.scss';
 
 interface OwnProps {
 }
@@ -20,7 +20,7 @@ type Props = React.HTMLAttributes<{}> & OwnProps & {
 	Menus: MenuState
 	location: Location
 
-	GetPageById: ( pageId: number ) => void
+	GetPageById: (pageId: number) => void
 	GetTags: () => void
 	GetSitemap: () => void
 	GetSocialLinks: () => void
@@ -73,9 +73,9 @@ export default class extends React.Component<OwnProps, {}> {
 
 		return (
 			<div>
-				{page && <section className={style.FooterAbout}>
-					<div className={style.FooterMain}>
-						<article className={style.FooterRow}>
+				{page && <section className={Styles.FooterAbout}>
+					<div className={Styles.FooterMain}>
+						<article className={Styles.FooterRow}>
 							<header>
 								<h3>{page.Title}</h3>
 							</header>
@@ -88,16 +88,16 @@ export default class extends React.Component<OwnProps, {}> {
 					</div>
 				</section>}
 
-				<footer className={style.FooterMain}>
-					<div className={style.FooterRow}>
-						{tags && <div className={style.FooterTags}>
+				<footer className={Styles.FooterMain}>
+					<div className={Styles.FooterRow}>
+						{tags && <div className={Styles.FooterTags}>
 							<h5><FormattedMessage id='footer.tags.title' /></h5>
-							<ul className={style.FooterTagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
-								<li className={style.FooterTagsListItem} key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
+							<ul className={Styles.FooterTagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
+								<li className={Styles.FooterTagsListItem} key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
 							)}</ul>
 						</div>}
 
-						{footer && <div className={style.FooterSocial}>
+						{footer && <div className={Styles.FooterSocial}>
 							<h5>{footer.Name}</h5>
 							<ul className='fa-ul'>{footer.Items.map(item =>
 								<li key={item.Key}>
@@ -108,8 +108,8 @@ export default class extends React.Component<OwnProps, {}> {
 						</div>}
 					</div>
 
-					<div className={style.FooterRow}>
-						<div className={style.FooterLegal}>
+					<div className={Styles.FooterRow}>
+						<div className={Styles.FooterLegal}>
 							{sitemap && sitemap.Items.map(item => (
 								<span key={item.Key}><Link to={item.Link} target={item.Target}>{item.Label}</Link></span>
 							))}

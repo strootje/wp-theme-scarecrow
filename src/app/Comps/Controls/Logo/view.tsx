@@ -1,8 +1,8 @@
-import * as React from 'react';
-const style = require('./style');
-
 import { SettingsState } from 'Actions/Settings';
 import Link from 'Controls/Link';
+import * as React from 'react';
+
+const style = require('./style');
 
 interface OwnProps {
 }

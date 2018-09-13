@@ -1,10 +1,10 @@
-import * as React from 'react';
-const style = require('./style');
-
 import { MenuState } from 'Actions/Menus';
+import Link from 'Controls/Link';
 import Logo from 'Controls/Logo';
 import SearchBar from 'Controls/SearchBar';
-import Link from 'Controls/Link';
+import * as React from 'react';
+
+const style = require('./style');
 
 interface OwnProps {
 }

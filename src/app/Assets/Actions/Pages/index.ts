@@ -1,5 +1,8 @@
-import { FetchPageByPageIdReducer, FetchPageByPageIdState, FetchPageByPageIdAction } from 'Actions/Pages/FetchPageByPageId';
-import { FetchPageByUriReducer, FetchPageByUriState, FetchPageByUriAction } from './FetchPageByUri';
+import {
+	FetchPageByPageIdAction, FetchPageByPageIdReducer, FetchPageByPageIdState
+} from 'Actions/Pages/FetchPageByPageId';
+
+import { FetchPageByUriAction, FetchPageByUriReducer, FetchPageByUriState } from './FetchPageByUri';
 
 export type PagesState =
 	& FetchPageByPageIdState
@@ -19,6 +22,6 @@ const dstate: PagesState = {
 	pages: []
 }
 
-export function PagesReducer( state: PagesState = dstate, action: PagesAction ): PagesState {
-	return reducers.reduce(( state, reducer ) => reducer(state, action), state);
+export function PagesReducer(state: PagesState = dstate, action: PagesAction): PagesState {
+	return reducers.reduce((state, reducer) => reducer(state, action), state);
 }

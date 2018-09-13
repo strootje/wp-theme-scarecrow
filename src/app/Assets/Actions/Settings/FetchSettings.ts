@@ -1,12 +1,11 @@
-import * as Redux from 'redux';
-import { ApolloClient } from 'apollo-client';
 import { AppState } from 'Actions/Reducers';
-
-import { WP_FetchSettings } from 'Queries/Wordpress/__generated__/WP_FetchSettings';
-const FetchSettingsQuery = require('Queries/Wordpress/FetchSettingsQuery');
 import SettingsMapper from 'Mappers/Wordpress/SettingsMapper';
 import Settings, { ISettings } from 'Models/Settings';
+import { WP_FetchSettings } from 'Queries/Wordpress/__generated__/WP_FetchSettings';
+import { ApolloClient } from 'apollo-client';
+import * as Redux from 'redux';
 
+const FetchSettingsQuery = require('Queries/Wordpress/FetchSettingsQuery');
 enum Actions {
 	Request = 'FETCH_SETTINGS__REQUEST',
 	Result = 'FETCH_SETTINGS__RESULT',
@@ -23,21 +22,21 @@ export type FetchSettingsAction =
 	| { type: Actions.Error, error: Error };
 
 const Request = () => ({ type: Actions.Request });
-const Result = ( settings: Settings ) => ({ type: Actions.Result, settings });
-const ErrorHandler = ( error: Error ) => ({ type: Actions.Error, error });
+const Result = (settings: Settings) => ({ type: Actions.Result, settings });
+const ErrorHandler = (error: Error) => ({ type: Actions.Error, error });
 
 export function FetchSettings() {
-	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
+	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
 		dispatch(Request());
 
 		client.query<WP_FetchSettings>({ query: FetchSettingsQuery }).then(
-			({ data: { allSettings }}) => dispatch(Result(SettingsMapper.Map(allSettings))),
-			( error ) => dispatch(ErrorHandler(error))
+			({ data: { allSettings } }) => dispatch(Result(SettingsMapper.Map(allSettings))),
+			(error) => dispatch(ErrorHandler(error))
 		);
 	}
 };
 
-export function FetchSettingsReducer( state: FetchSettingsState, action: FetchSettingsAction ): FetchSettingsState {
+export function FetchSettingsReducer(state: FetchSettingsState, action: FetchSettingsAction): FetchSettingsState {
 	switch (action.type) {
 		case Actions.Request: return { ...state, loading: true };
 		case Actions.Result: return { ...state, loading: false, ...action.settings.ToObject };

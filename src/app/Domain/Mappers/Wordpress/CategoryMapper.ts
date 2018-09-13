@@ -1,12 +1,14 @@
-import Category from "Models/Category";
-import { WP_CategoryFields } from "Queries/Wordpress/Fragments/__generated__/WP_CategoryFields";
-import { WP_FetchPosts_posts_edges_node_categories } from "Queries/Wordpress/__generated__/WP_FetchPosts";
+import Category from 'Models/Category';
+import { WP_CategoryFields } from 'Queries/Wordpress/Fragments/__generated__/WP_CategoryFields';
+import {
+	WP_FetchPosts_posts_edges_node_categories
+} from 'Queries/Wordpress/__generated__/WP_FetchPosts';
 
 type WPCategory = WP_CategoryFields | null;
 type WPCategories = WP_FetchPosts_posts_edges_node_categories | null;
 
 export default class {
-	static Map( category: WPCategory ): Category {
+	static Map(category: WPCategory): Category {
 		if (category == null) { throw Error('category cannot be null'); }
 		if (category.categoryId == null) { throw Error('category.categoryId cannot be null'); }
 		if (category.name == null) { throw Error('category.name cannot be null'); }
@@ -19,7 +21,7 @@ export default class {
 			category.count || 0);
 	}
 
-	static MapAll( categories: WPCategories ): Category[] {
+	static MapAll(categories: WPCategories): Category[] {
 		if (categories == null) { throw Error('categories cannot be null'); }
 		if (categories.nodes == null) { throw Error('categories.nodes cannot be null'); }
 

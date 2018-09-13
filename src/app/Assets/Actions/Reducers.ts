@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { MenuReducer, MenuState, MenuAction } from './Menus';
-import { PagesReducer, PagesState, PagesAction } from './Pages';
-import { PostsReducer, PostsState, PostsAction } from './Posts';
-import { SettingsReducer, SettingsState, SettingsAction } from './Settings';
-import { TagsReducer, TagsState, TagsAction } from './Tags';
+import { MenuAction, MenuReducer, MenuState } from './Menus';
+import { PagesAction, PagesReducer, PagesState } from './Pages';
+import { PostsAction, PostsReducer, PostsState } from './Posts';
+import { SettingsAction, SettingsReducer, SettingsState } from './Settings';
+import { TagsAction, TagsReducer, TagsState } from './Tags';
 
 export type AppState = {
 	Menus: MenuState,

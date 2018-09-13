@@ -1,5 +1,4 @@
-import Thumbnails from "Models/Thumbnails";
-
+import Thumbnails from 'Models/Thumbnails';
 
 export default class {
 	private readonly key: string;
@@ -10,7 +9,7 @@ export default class {
 
 	private readonly thumbnails: Thumbnails;
 
-	constructor( id: string, pageId: number, title: string, uri: string, content: string, thumbnails: Thumbnails ) {
+	constructor(id: string, pageId: number, title: string, uri: string, content: string, thumbnails: Thumbnails) {
 		this.key = id;
 		this.pageId = pageId;
 		this.title = title;

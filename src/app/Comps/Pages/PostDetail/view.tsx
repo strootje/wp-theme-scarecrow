@@ -1,16 +1,16 @@
-import * as React from 'react';
-const style = require('./style');
-
-import Post from 'Models/Post';
-import { match } from 'react-router';
 import { PostsState } from 'Actions/Posts';
 import Loader from 'Controls/Loader';
+import Post from 'Models/Post';
+import * as React from 'react';
+import { match } from 'react-router';
+
+const style = require('./style');
 
 interface OwnProps {
 }
 
 export interface DispatchProps {
-	GetPostByUri: ( postTitle: string ) => void
+	GetPostByUri: (postTitle: string) => void
 }
 
 type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {

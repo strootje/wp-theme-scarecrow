@@ -1,12 +1,11 @@
-import * as Redux from 'redux';
-import { ApolloClient } from 'apollo-client';
 import { AppState } from 'Actions/Reducers';
-
-import { WP_FetchPageByPageId } from 'Queries/Wordpress/__generated__/WP_FetchPageByPageId';
-const FetchPageByPageIdQuery = require('Queries/Wordpress/FetchPageByPageIdQuery');
 import PageMapper from 'Mappers/Wordpress/PageMapper';
 import Page from 'Models/Page';
+import { WP_FetchPageByPageId } from 'Queries/Wordpress/__generated__/WP_FetchPageByPageId';
+import { ApolloClient } from 'apollo-client';
+import * as Redux from 'redux';
 
+const FetchPageByPageIdQuery = require('Queries/Wordpress/FetchPageByPageIdQuery');
 enum Actions {
 	Request = 'FETCH_PAGE_BY_PAGE_ID__REQUEST',
 	Result = 'FETCH_PAGE_BY_PAGE_ID__RESULT',
@@ -23,25 +22,25 @@ export type FetchPageByPageIdAction =
 	| { type: Actions.Result, pageId: number, page: Page }
 	| { type: Actions.Error, pageId: number, error: Error };
 
-const Request = ( pageId: number ) => ({ type: Actions.Request, pageId });
-const Result = ( pageId: number, page: Page ) => ({ type: Actions.Result, pageId, page });
-const ErrorHandler = ( pageId: number, error: Error ) => ({ type: Actions.Error, pageId, error });
+const Request = (pageId: number) => ({ type: Actions.Request, pageId });
+const Result = (pageId: number, page: Page) => ({ type: Actions.Result, pageId, page });
+const ErrorHandler = (pageId: number, error: Error) => ({ type: Actions.Error, pageId, error });
 
-export function FetchPageByPageId( pageId: number ) {
-	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
+export function FetchPageByPageId(pageId: number) {
+	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
 		dispatch(Request(pageId));
 
-		client.query<WP_FetchPageByPageId>({ query: FetchPageByPageIdQuery, variables: { pageId }}).then(
+		client.query<WP_FetchPageByPageId>({ query: FetchPageByPageIdQuery, variables: { pageId } }).then(
 			({ data: { pageBy } }) => dispatch(Result(pageId, PageMapper.Map(pageBy))),
-			( error ) => dispatch(ErrorHandler(pageId, error))
+			(error) => dispatch(ErrorHandler(pageId, error))
 		);
 	}
 };
 
-export function FetchPageByPageIdReducer( state: FetchPageByPageIdState, action: FetchPageByPageIdAction ): FetchPageByPageIdState {
+export function FetchPageByPageIdReducer(state: FetchPageByPageIdState, action: FetchPageByPageIdAction): FetchPageByPageIdState {
 	switch (action.type) {
 		case Actions.Request: return { ...state, loading: true };
-		case Actions.Result: return { ...state, loading: false, pages: [ ...state.pages, action.page ] };
+		case Actions.Result: return { ...state, loading: false, pages: [...state.pages, action.page] };
 		case Actions.Error: return { ...state, loading: false };
 		default: return state;
 	}

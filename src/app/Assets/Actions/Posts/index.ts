@@ -1,5 +1,8 @@
-import { FetchPostByUriReducer, FetchPostByUriState, FetchPostByUriAction } from 'Actions/Posts/FetchPostByUri';
-import { FetchPostsReducer, FetchPostsState, FetchPostsAction } from './FetchPosts';
+import {
+	FetchPostByUriAction, FetchPostByUriReducer, FetchPostByUriState
+} from 'Actions/Posts/FetchPostByUri';
+
+import { FetchPostsAction, FetchPostsReducer, FetchPostsState } from './FetchPosts';
 
 export type PostsState =
 	& FetchPostByUriState
@@ -18,6 +21,6 @@ const dstate: PostsState = {
 	posts: []
 }
 
-export function PostsReducer( state: PostsState = dstate, action: PostsAction ): PostsState {
-	return reducers.reduce(( state, reducer ) => reducer(state, action), state);
+export function PostsReducer(state: PostsState = dstate, action: PostsAction): PostsState {
+	return reducers.reduce((state, reducer) => reducer(state, action), state);
 }

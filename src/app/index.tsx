@@ -1,13 +1,12 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
+import 'Theme';
 
+import App from 'App';
 import ApiProvider from 'Providers/ApiProvider';
-import StoreProvider from 'Providers/StoreProvider';
 import LocaleProvider from 'Providers/LocaleProvider';
 import RouterProvider from 'Providers/RouterProvider';
-
-import 'Theme';
-import App from 'App';
+import StoreProvider from 'Providers/StoreProvider';
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
 
 const endpoint = 'localhost:8080';
 const Bootstrap = () => (

@@ -1,13 +1,12 @@
-import * as Redux from 'redux';
-import { ApolloClient } from 'apollo-client';
 import { AppState } from 'Actions/Reducers';
-
-import { MenuLocation } from '__generated__/globalTypes';
-import { WP_FetchMenuByLocation } from 'Queries/Wordpress/__generated__/WP_FetchMenuByLocation';
-const FetchMenuByLocationQuery = require('Queries/Wordpress/FetchMenuByLocationQuery');
 import MenuMapper from 'Mappers/Wordpress/MenuMapper';
 import Menu from 'Models/Menu';
+import { WP_FetchMenuByLocation } from 'Queries/Wordpress/__generated__/WP_FetchMenuByLocation';
+import { MenuLocation } from '__generated__/globalTypes';
+import { ApolloClient } from 'apollo-client';
+import * as Redux from 'redux';
 
+const FetchMenuByLocationQuery = require('Queries/Wordpress/FetchMenuByLocationQuery');
 enum Actions {
 	Request = 'FETCH_MENU_BY_LOCATION__REQUEST',
 	Result = 'FETCH_MENU_BY_LOCATION__RESULT',
@@ -27,22 +26,22 @@ export type FetchMenuByLocationAction =
 	| { type: Actions.Result, location: MenuLocation, menu: Menu }
 	| { type: Actions.Error, location: MenuLocation, error: Error };
 
-const Request = ( location: MenuLocation ) => ({ type: Actions.Request, location });
-const Result = ( location: MenuLocation, menu: Menu ) => ({ type: Actions.Result, location, menu });
-const ErrorHandler = ( location: MenuLocation, error: Error ) => ({ type: Actions.Error, location, error });
+const Request = (location: MenuLocation) => ({ type: Actions.Request, location });
+const Result = (location: MenuLocation, menu: Menu) => ({ type: Actions.Result, location, menu });
+const ErrorHandler = (location: MenuLocation, error: Error) => ({ type: Actions.Error, location, error });
 
-export function FetchMenuByLocation( location: MenuLocation ) {
-	return ( dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}> ) => {
+export function FetchMenuByLocation(location: MenuLocation) {
+	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
 		dispatch(Request(location));
 
-		client.query<WP_FetchMenuByLocation>({ query: FetchMenuByLocationQuery, variables: { location }}).then(
-			({ data: { menus }}) => dispatch(Result(location, MenuMapper.MapSingle(menus))),
-			( error ) => dispatch(ErrorHandler(location, error))
+		client.query<WP_FetchMenuByLocation>({ query: FetchMenuByLocationQuery, variables: { location } }).then(
+			({ data: { menus } }) => dispatch(Result(location, MenuMapper.MapSingle(menus))),
+			(error) => dispatch(ErrorHandler(location, error))
 		);
 	}
 };
 
-export function FetchMenuByLocationReducer( state: FetchMenuByLocationState, action: FetchMenuByLocationAction ): FetchMenuByLocationState {
+export function FetchMenuByLocationReducer(state: FetchMenuByLocationState, action: FetchMenuByLocationAction): FetchMenuByLocationState {
 	switch (action.type) {
 		case Actions.Request: return { ...state, loading: true };
 		case Actions.Result: return { ...state, loading: false, [action.location.toLowerCase()]: action.menu };

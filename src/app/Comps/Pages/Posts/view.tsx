@@ -1,7 +1,7 @@
-import * as React from 'react';
-const style = require('./style');
-
 import PostsList from 'Controls/PostsList';
+import * as React from 'react';
+
+const style = require('./style');
 
 interface OwnProps {
 }

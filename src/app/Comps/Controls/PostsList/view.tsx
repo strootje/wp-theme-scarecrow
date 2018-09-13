@@ -1,19 +1,19 @@
-import * as React from 'react';
-import * as Styles from './style.scss';
-
+import { PostsState } from 'Actions/Posts';
+import Link from 'Controls/Link';
+import MoreList from 'Controls/MoreList';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
-import { PostsState } from 'Actions/Posts';
-import { FormattedMessage, FormattedDate } from 'react-intl';
-import MoreList from 'Controls/MoreList';
-import Link from 'Controls/Link';
+import * as React from 'react';
+import { FormattedDate, FormattedMessage } from 'react-intl';
+
+import * as Styles from './style.scss';
 
 interface OwnProps {
 	perPage: number
 }
 
 export type DispatchProps = {
-	GetPosts: ( vars: { first?: number, last?: number, before?: string, after?: string } ) => void
+	GetPosts: (vars: { first?: number, last?: number, before?: string, after?: string }) => void
 }
 
 type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
@@ -33,7 +33,7 @@ export default class extends MoreList<Post, OwnProps, {}> {
 		return posts.sort((a, b) => b.node.Date.getTime() - a.node.Date.getTime());
 	}
 
-	protected FetchPage( after?: string ) {
+	protected FetchPage(after?: string) {
 		const {
 			perPage,
 			GetPosts
@@ -42,7 +42,7 @@ export default class extends MoreList<Post, OwnProps, {}> {
 		GetPosts({ first: perPage, after: after });
 	}
 
-	protected RenderItem( item: Post ): JSX.Element {
+	protected RenderItem(item: Post): JSX.Element {
 		return (
 			<article key={item.Key} className={Styles.PostListItem}>
 				<div className={Styles.PostListItem__Content}>

@@ -1,6 +1,7 @@
-import { createWriteStream } from 'fs';
-import Paths from './../src/app/Assets/Utils/Paths';
 import * as Archiver from 'archiver';
+import { createWriteStream } from 'fs';
+
+import Paths from '../src/app/Assets/Utils/Paths';
 
 interface PackageConfig {
 	name: string,

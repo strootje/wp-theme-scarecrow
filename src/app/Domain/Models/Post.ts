@@ -1,5 +1,5 @@
-import Thumbnails from "Models/Thumbnails";
-import Category from "Models/Category";
+import Category from 'Models/Category';
+import Thumbnails from 'Models/Thumbnails';
 
 export default class {
 	private readonly key: string
@@ -11,7 +11,7 @@ export default class {
 	private readonly categories: Category[];
 	private readonly thumbnails: Thumbnails;
 
-	constructor( id: string, postId: number, title: string, date: Date, link: string, content: string, categories: Category[], thumbnails: Thumbnails ) {
+	constructor(id: string, postId: number, title: string, date: Date, link: string, content: string, categories: Category[], thumbnails: Thumbnails) {
 		this.key = id;
 		this.postId = postId;
 		this.title = title;

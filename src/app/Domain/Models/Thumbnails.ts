@@ -2,7 +2,7 @@
 export default class Thumbnails {
 	private readonly normal: string;
 
-	constructor( normal: string ) {
+	constructor(normal: string) {
 		this.normal = normal;
 	}
 

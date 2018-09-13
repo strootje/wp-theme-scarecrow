@@ -2,7 +2,7 @@ export default class PageInfo {
 	private hasPreviousPage: boolean;
 	private hasNextPage: boolean;
 
-	constructor( hasPreviousPage: boolean, hasNextPage: boolean ) {
+	constructor(hasPreviousPage: boolean, hasNextPage: boolean) {
 		this.hasPreviousPage = hasPreviousPage;
 		this.hasNextPage = hasNextPage;
 	}
@@ -15,7 +15,7 @@ export default class PageInfo {
 		return this.hasNextPage;
 	}
 
-	Update( pageInfo: PageInfo ) {
+	Update(pageInfo: PageInfo) {
 		this.hasPreviousPage = pageInfo.HasPreviousPage;
 		this.hasNextPage = pageInfo.HasNextPage;
 	}

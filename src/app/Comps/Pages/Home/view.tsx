@@ -1,10 +1,10 @@
-import * as React from 'react';
-const style = require('./style');
-
 import { SettingsState } from 'Actions/Settings';
-import PageDetail from 'Pages/PageDetail';
 import PostsList from 'Controls/PostsList';
 import Sidebar from 'Controls/Sidebar';
+import PageDetail from 'Pages/PageDetail';
+import * as React from 'react';
+
+const style = require('./style');
 
 interface OwnProps {
 }

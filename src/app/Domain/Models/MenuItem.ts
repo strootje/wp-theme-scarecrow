@@ -1,4 +1,3 @@
-
 export default class {
 	private readonly key: string;
 	private readonly label: string;
@@ -6,7 +5,7 @@ export default class {
 	private readonly target: string;
 	private readonly cssClasses: string[];
 
-	constructor( key: string, label: string, link: string, target: string, cssClasses: string[] ) {
+	constructor(key: string, label: string, link: string, target: string, cssClasses: string[]) {
 		this.key = key;
 		this.label = label;
 		this.link = link;

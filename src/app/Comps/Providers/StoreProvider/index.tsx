@@ -1,10 +1,9 @@
-import * as React from 'react';
-import { Provider } from 'react-redux';
-import { withApollo } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-
-import { createStore, applyMiddleware } from 'redux';
 import { AppReducer } from 'Actions/Reducers';
+import { ApolloClient } from 'apollo-client';
+import * as React from 'react';
+import { withApollo } from 'react-apollo';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
 import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
 

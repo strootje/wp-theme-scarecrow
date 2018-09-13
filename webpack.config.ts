@@ -1,10 +1,11 @@
-import * as Webpack from 'webpack';
 import * as CleanPlugin from 'clean-webpack-plugin';
 import * as HtmlPlugin from 'html-webpack-plugin';
 import * as CssPlugin from 'mini-css-extract-plugin';
+import * as Webpack from 'webpack';
 
-import Paths from './src/app/Assets/Utils/Paths';
 import Bundler from './scripts/Bundler';
+import Paths from './src/app/Assets/Utils/Paths';
+
 const devmode = (process.env.mode || 'development') == 'development';
 
 const config: Webpack.Configuration = {
@@ -13,7 +14,7 @@ const config: Webpack.Configuration = {
 	devtool: 'source-map',
 
 	entry: {
-		'app.bundle': [ Paths.Src('polyfill'), Paths.Src('index') ]
+		'app.bundle': [Paths.Src('polyfill'), Paths.Src('index')]
 	},
 
 	resolve: {

@@ -1,9 +1,9 @@
-import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client';
 import { ApolloLink, from as concat } from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http';
 
-const createSetHeaderLink = ( callback: () => {} ) => new ApolloLink(( operation, forward ) => {
+const createSetHeaderLink = (callback: () => {}) => new ApolloLink((operation, forward) => {
 	operation.setContext(({ headers = {} }) => ({
 		headers: { ...headers, ...callback() }
 	}));
@@ -16,7 +16,7 @@ const createSetHeaderLink = ( callback: () => {} ) => new ApolloLink(( operation
 });
 
 export default class extends ApolloClient<{}> {
-	constructor( endpoint: string = 'https://api.github.com', token: string ) {
+	constructor(endpoint: string = 'https://api.github.com', token: string) {
 		super({
 			cache: new InMemoryCache({
 			}),

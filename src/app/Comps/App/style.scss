@@ -1,16 +1,16 @@
 @import 'Theme';
 
-.LayoutMain {
+.App {
 	height: 100%;
 	display: flex;
 	flex-flow: column nowrap;
 }
 
-.LayoutWrapper {
+.App__Content {
 	flex-grow: 1;
 	border-top: 3px solid $tertiary-color;
 }
 
-.LayoutFooter {
+.App__Footer {
 	border-bottom: 3px solid $tertiary-color;
 }

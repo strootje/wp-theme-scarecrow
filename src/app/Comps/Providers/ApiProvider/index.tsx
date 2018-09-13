@@ -1,6 +1,6 @@
+import WordpressClient from 'Clients/WordpressClient';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import WordpressClient from 'Clients/WordpressClient';
 
 interface OwnProps {
 	endpoint: string,
@@ -10,7 +10,7 @@ interface OwnProps {
 export default class extends React.Component<OwnProps, {}> {
 	private readonly client: WordpressClient;
 
-	constructor( props: OwnProps ) {
+	constructor(props: OwnProps) {
 		super(props);
 
 		const endpoint = props.endpoint;
