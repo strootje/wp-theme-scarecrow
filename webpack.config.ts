@@ -94,7 +94,8 @@ const config: Webpack.Configuration = {
 
 		new CleanPlugin([
 			Paths.Dist(),
-			Bundler.OutPath
+			Bundler.OutPath,
+			"*.scss.d.ts"
 		]),
 
 		devmode ? new HtmlPlugin({

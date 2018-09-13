@@ -1,8 +1,8 @@
 import { PostsState } from 'Actions/Posts';
 import Link from 'Controls/Link';
-import MoreList from 'Controls/MoreList';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
+import MoreList from 'Partials/MoreList';
 import * as React from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 

@@ -1,6 +1,6 @@
 import { SettingsState } from 'Actions/Settings';
-import Footer from 'Controls/Footer';
-import Header from 'Controls/Header';
+import Footer from 'App/Footer';
+import Header from 'App/Header';
 import Loader from 'Controls/Loader';
 import CategoryDetail from 'Pages/CategoryDetail';
 import HomePage from 'Pages/Home';
