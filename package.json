@@ -57,7 +57,6 @@
 		"archiver": "*",
 		"clean-webpack-plugin": "*",
 		"connect-history-api-fallback": "*",
-		"css-loader": "*",
 		"decko": "*",
 		"html-webpack-plugin": "*",
 		"koa-connect": "*",
@@ -70,6 +69,7 @@
 		"ts-loader": "*",
 		"ts-node": "*",
 		"typescript": "*",
+		"typings-for-css-modules-loader": "*",
 		"webpack": "*",
 		"webpack-cli": "*",
 		"webpack-serve": "*"

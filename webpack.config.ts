@@ -69,11 +69,12 @@ const config: Webpack.Configuration = {
 						loader: (CssPlugin.loader as string)
 					},
 					{
-						loader: 'css-loader',
+						loader: 'typings-for-css-modules-loader',
 						options: {
 							sourceMap: true,
+							namedExport: true,
+							camelCase: true,
 							modules: true,
-							// localIdentName: '[local]__[hash:base64:5]'
 							localIdentName: '[local]'
 						}
 					},
@@ -86,6 +87,10 @@ const config: Webpack.Configuration = {
 	},
 
 	plugins: [
+		new Webpack.WatchIgnorePlugin([
+			/css\.d\.ts$/
+		]),
+
 		new CleanPlugin([
 			Paths.Dist(),
 			Bundler.OutPath

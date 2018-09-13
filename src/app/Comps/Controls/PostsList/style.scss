@@ -1,11 +1,53 @@
 @import 'Theme';
 
-.Posts {
-	@extend .container;
-	@extend .row;
-}
+$imageWidth: 220;
+$imageHeight: 140;
 
-.Item {
+.PostListItem {
 	@extend .columns;
 	@extend .twelve;
+
+	.PostListItem__Content {
+		clear: both;
+		min-height: $imageHeight;
+		position: relative;
+
+		img:first-child {
+			float: left;
+			width: $imageWidth;
+			height: $imageHeight;
+			margin: { right: 1rem; bottom: 1rem }
+		}
+
+		aside {
+			$width: 200px;
+			top: 0;
+			left: 0;
+			width: $width;
+			margin: { left: -$width; }
+			position: absolute;
+			text: { align: right; }
+		}
+
+		header {
+			margin-bottom: 1rem;
+		}
+	}
+
+	footer {
+		.PostListItem__ReadMore {
+			margin: { top: 2rem };
+			text-align: center;
+
+			a {
+				@extend .button;
+				margin: 0 auto;
+			}
+		}
+
+		.PostListItem__Stats {
+			margin: { top: 2rem; bottom: 5rem; }
+			border-top: 1px dashed $tertiary-color;
+		}
+	}
 }

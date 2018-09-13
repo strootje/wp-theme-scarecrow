@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { bind } from 'decko';
-const style = require('./style');
+import * as Styles from './style.scss';
 
-import { Location, History } from 'history';
-import { PostsState } from 'Actions/Posts';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
+import { PostsState } from 'Actions/Posts';
+import { FormattedMessage, FormattedDate } from 'react-intl';
 import MoreList from 'Controls/MoreList';
 import Link from 'Controls/Link';
 
@@ -18,8 +17,6 @@ export type DispatchProps = {
 }
 
 type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
-	location: Location,
-	history: History,
 	Posts: PostsState
 };
 
@@ -46,14 +43,42 @@ export default class extends MoreList<Post, OwnProps, {}> {
 	}
 
 	protected RenderItem( item: Post ): JSX.Element {
-		// console.log(item);
 		return (
-			<article key={item.Key}>
-				<header>
-					<h3><Link to={item.Link}>{item.Title}</Link></h3>
-				</header>
+			<article key={item.Key} className={Styles.PostListItem}>
+				<div className={Styles.PostListItem__Content}>
+					<aside>
+						<span className="fa-stack fa-2x">
+							<i className="fas fa-comment-alt fa-stack-2x"></i>
+							<i className="fa-stack-1x fa-inverse">20</i>
+						</span>
 
-				<div dangerouslySetInnerHTML={{ __html: item.ShortContent }} />
+
+						<span className="fa-stack fa-2x">
+							<i className="fas fa-calendar fa-stack-2x"></i>
+							<i className="fa-stack-1x fa-inverse down-99">14</i>
+						</span>
+					</aside>
+
+					<img />
+
+					<header><Link to={item.Link}><h3>{item.Title}</h3></Link></header>
+
+					<div dangerouslySetInnerHTML={{ __html: item.Content }} />
+				</div>
+
+				<footer>
+					<div className={Styles.PostListItem__ReadMore}>
+						<Link to={item.Link}><FormattedMessage id='postlist.readmore.title' /></Link>
+					</div>
+
+					<div className={Styles.PostListItem__Stats}>
+						<FormattedMessage id='postlist.stats.text' values={{
+							category: 'category-1',
+							author: 'author-1',
+							date: item.Date
+						}} />
+					</div>
+				</footer>
 			</article>
 		);
 	}

@@ -3,8 +3,11 @@
 		".*": false,
 		"dist": true,
 		"node_modules": true,
-		"__generated__": true,
+		"**/__generated__/": true,
 		"vendor": true,
-		"*.lock": true
+		"*.lock": true,
+		"**/*.scss.d.ts": true,
+		"schema.json": true,
+		"*.log": true
 	}
 }

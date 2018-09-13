@@ -3,6 +3,9 @@
 
 	"morelist.showmore.title": "Show More",
 
+	"postlist.readmore.title": "Read More",
+	"postlist.stats.text": "Posted in {category} by {author} at {date, date}",
+
 	"searchbar.input.placeholder": "Search ...",
 
 	"footer.tags.title": "Tags",

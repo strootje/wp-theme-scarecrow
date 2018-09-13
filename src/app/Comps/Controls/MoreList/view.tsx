@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { bind } from 'decko';
+const style = require('./style');
+
 import Paged from 'Models/Paged';
 import { FormattedMessage } from 'react-intl';
 
@@ -25,7 +27,7 @@ export default abstract class<PagedType, TypedProps = {}, TypedState = {}> exten
 
 	render(): JSX.Element {
 		return (
-			<section>
+			<section className={style.ItemContainer}>
 				<div>{this.Sorted.map(post =>
 					this.RenderItem(post.node)
 				)}</div>
