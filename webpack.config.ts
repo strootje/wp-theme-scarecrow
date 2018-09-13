@@ -1,6 +1,7 @@
 import * as CleanPlugin from 'clean-webpack-plugin';
 import * as HtmlPlugin from 'html-webpack-plugin';
 import * as CssPlugin from 'mini-css-extract-plugin';
+import * as UglifyPlugin from 'uglifyjs-webpack-plugin';
 import * as Webpack from 'webpack';
 
 import Bundler from './scripts/Bundler';
@@ -28,7 +29,7 @@ const config: Webpack.Configuration = {
 
 		extensions: [
 			'.js', '.ts', '.tsx', '.gql',
-			'.json', '.css', '.scss',
+			'.json', '.css', '.scss'
 		]
 	},
 
@@ -87,6 +88,26 @@ const config: Webpack.Configuration = {
 		]
 	},
 
+
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'app.vendor',
+					chunks: 'all'
+				}
+			}
+		},
+		minimize: true,
+		minimizer: [
+			new UglifyPlugin({
+				sourceMap: true,
+				parallel: 4
+			}),
+		]
+	},
+
 	plugins: [
 		new Webpack.WatchIgnorePlugin([
 			/css\.d\.ts$/
@@ -116,48 +137,9 @@ const config: Webpack.Configuration = {
 	output: {
 		publicPath: '/',
 		path: Paths.Dist(),
-		filename: '[name].js'
+		filename: '[name].js',
+		chunkFilename: '[id].js'
 	}
 };
 
 export default config;
-
-
-// module.exports = {
-// 	optimization: {
-// 		splitChunks: {
-// 			cacheGroups: {
-// 				commons: {
-// 					test: /[\\/]node_modules[\\/]/,
-// 					name: 'app.vendor',
-// 					chunks: 'all'
-// 				}
-// 			}
-// 		},
-// 		minimize: true,
-// 		minimizer: [
-// 			new WebpackUglifyJsPlugin({
-// 				sourceMap: true,
-// 				parallel: 4
-// 			}),
-// 		]
-// 	},
-
-// 	output: {
-// 		path: paths.dist('assets', 'js'),
-// 		publicPath: '/wp-content/themes/wp-theme-scarecrow/dist/assets/js/',
-// 		filename: '[name].js',
-// 		chunkFilename: '[id].js'
-// 	},
-
-// 	plugins: [
-// 		new Webpack.SourceMapDevToolPlugin({
-// 			filename: '[name].js.map'
-// 		}),
-// 		new WebpackHtmlPlugin({
-// 			inject: false,
-// 			template: paths.src('template.php'),
-// 			filename: paths.dist('index.php'),
-// 		})
-// 	]
-// }
