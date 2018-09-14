@@ -23,12 +23,3 @@ body {
 		$dot-color;
 	background-size: $dot-space $dot-space;
 }
-
-a, a:visited {
-	color: $primary-color;
-	text-decoration: none;
-
-	&:hover {
-		color: darken($primary-color, 20%);
-	}
-}

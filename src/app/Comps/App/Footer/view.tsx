@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { MenuState } from 'Actions/Menus';
 import { TagsState } from 'Actions/Tags';
-import AboutSection from 'Controls/AboutSection';
 import Link from 'Controls/Link';
 import BaseComponent from 'Partials/BaseComponent';
 
@@ -56,52 +55,50 @@ export default class Footer extends BaseComponent<OwnProps, Props> {
 		} = this.props;
 
 		return (
-			<div>
-				<AboutSection />
+			<footer>
+				<Section hero>
+					<Section.Row>
+						<Section.Column columns='eight'>
+							{tags && <div>
+								<h5><FormattedMessage id='footer.tags.title' /></h5>
+								<ul className={Styles.Footer__TagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
+									<li key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
+								)}</ul>
+							</div>}
+						</Section.Column>
 
-				<footer>
-					<Section>
-						<Section.Row>
-							<Section.Column columns='eight'>
-								{tags && <div>
-									<h5><FormattedMessage id='footer.tags.title' /></h5>
-									<ul className={Styles.Footer__TagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
-										<li key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
-									)}</ul>
-								</div>}
-							</Section.Column>
+						<Section.Column columns='four'>
+							{footer && <div>
+								<h5>{footer.Name}</h5>
+								<ul className='fa-ul'>{footer.Items.map(item =>
+									<li key={item.Key}>
+										<span className='fa-li'><i className={item.CssClasses}></i></span>
+										<Link to={item.Link} target={item.Target}>{item.Label}</Link>
+									</li>
+								)}</ul>
+							</div>}
+						</Section.Column>
+					</Section.Row>
+				</Section>
 
-							<Section.Column columns='four'>
-								{footer && <div>
-									<h5>{footer.Name}</h5>
-									<ul className='fa-ul'>{footer.Items.map(item =>
-										<li key={item.Key}>
-											<span className='fa-li'><i className={item.CssClasses}></i></span>
-											<Link to={item.Link} target={item.Target}>{item.Label}</Link>
-										</li>
-									)}</ul>
-								</div>}
-							</Section.Column>
-						</Section.Row>
+				<Section>
+					<Section.Row>
+						<Section.Column className={Styles.Footer__Legal}>
+							{sitemap && sitemap.Items.map(item => (
+								<span key={item.Key}><Link to={item.Link} target={item.Target}>{item.Label}</Link></span>
+							))}
 
-						<Section.Row>
-							<Section.Column className={Styles.Footer__Legal}>
-								{sitemap && sitemap.Items.map(item => (
-									<span key={item.Key}><Link to={item.Link} target={item.Target}>{item.Label}</Link></span>
-								))}
+							{/* TODO: Fetch username via graphql */}
+							<span>Bas Stroosnijder &copy; <FormattedDate value={new Date()} year='numeric' /></span>
 
-								{/* TODO: Fetch username via graphql */}
-								<span>Bas Stroosnijder &copy; <FormattedDate value={new Date()} year='numeric' /></span>
-
-								<span><FormattedMessage id='footer.legal.powered.text' values={{
-									wordpress: <a href='https://wordpress.org/' target='blank'>Wordpress</a>,
-									theme: <a href='https://github.com/strootje/wp-theme-scarecrow/' target='blank'>Scarecrow</a>
-								}} /></span>
-							</Section.Column>
-						</Section.Row>
-					</Section>
-				</footer>
-			</div>
+							<span><FormattedMessage id='footer.legal.powered.text' values={{
+								wordpress: <a href='https://wordpress.org/' target='blank'>Wordpress</a>,
+								theme: <a href='https://github.com/strootje/wp-theme-scarecrow/' target='blank'>Scarecrow</a>
+							}} /></span>
+						</Section.Column>
+					</Section.Row>
+				</Section>
+			</footer>
 		);
 	}
 }

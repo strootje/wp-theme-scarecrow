@@ -1,6 +1,11 @@
 @import 'Theme';
 
 .Section-Hero {
-	background-color: $tertiary-color;
-	background-color: rgba($tertiary-color, .65);
+	$spacing: 2rem;
+	$color: $primary-color;
+
+	padding: { top: $spacing; bottom: $spacing; };
+	margin: { top: $spacing; bottom: $spacing; };
+	background: { color: $color; };
+	background: { color: rgba($color, .65); };
 }

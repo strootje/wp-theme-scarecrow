@@ -1,9 +1,12 @@
+import Names from 'classnames';
 import * as React from 'react';
 
 import { SettingsState } from 'Actions/Settings';
 import BaseComponent from 'Partials/BaseComponent';
 
 import { Link as RouterLink } from 'react-router-dom';
+
+import * as Styles from './style.scss';
 
 export interface DispatchProps {
 }
@@ -29,7 +32,7 @@ export default class Link extends BaseComponent<OwnProps, Props> {
 		const url = to.replace(`http://${localhost}`, '').replace('http://localhost:8080', '');
 
 		return (url.search(localhost) > -1)
-			? <RouterLink to={url} {...{ title, target, className }}>{label}</RouterLink>
-			: <a href={url} {...{ title, target, className }}>{label}</a>
+			? <RouterLink className={Names(Styles.Link, className)} to={url} {...{ title, target }}>{label}</RouterLink>
+			: <a className={Names(Styles.Link, className)} href={url} {...{ title, target }}>{label}</a>
 	}
 }

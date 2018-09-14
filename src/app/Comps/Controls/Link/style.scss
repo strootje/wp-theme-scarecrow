@@ -1,0 +1,12 @@
+@import 'Theme';
+
+.Link, .Link:visited {
+	$color: $primary-color;
+
+	color: $color;
+	text-decoration: none;
+
+	&:hover {
+		color: darken($color, 20%);
+	}
+}
