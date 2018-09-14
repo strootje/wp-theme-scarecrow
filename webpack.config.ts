@@ -89,7 +89,9 @@ const config: Webpack.Configuration = {
 	},
 
 
-	optimization: {
+	optimization: devmode ? {
+		minimize: false
+	} : {
 		splitChunks: {
 			cacheGroups: {
 				commons: {

@@ -9,5 +9,6 @@
 	"searchbar.input.placeholder": "Search ...",
 
 	"footer.tags.title": "Tags",
-	"footer.social.title": "Social Links"
+	"footer.social.title": "Social Links",
+	"footer.legal.powered.text": "Powered by {wordpress} and {theme}"
 }

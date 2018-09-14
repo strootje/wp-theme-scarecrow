@@ -38,6 +38,7 @@
 	},
 	"devDependencies": {
 		"@types/archiver": "*",
+		"@types/classnames": "*",
 		"@types/clean-webpack-plugin": "*",
 		"@types/connect-history-api-fallback": "*",
 		"@types/graphql": "*",
@@ -59,6 +60,7 @@
 		"@types/webpack-serve": "*",
 		"apollo": "*",
 		"archiver": "*",
+		"classnames": "*",
 		"clean-webpack-plugin": "*",
 		"connect-history-api-fallback": "*",
 		"css-loader": "*",

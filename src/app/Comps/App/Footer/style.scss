@@ -1,43 +1,18 @@
 @import 'Theme';
 
-.FooterAbout {
-	padding-top: 1rem;
-	background-color: $tertiary-color;
-	background-color: rgba($tertiary-color, .65);
-}
-
-.FooterMain {
-	@extend .container;
-}
-
-.FooterRow {
-	@extend .row;
-}
-
-.FooterTags {
-	@extend .columns;
-	@extend .eight;
-}
-
-.FooterTagsList {
+.Footer__TagsList {
 	display: flex;
 	flex-flow: row wrap;
+
+	& > li {
+		list-style-type: none;
+	}
 }
 
-.FooterTagsListItem {
-	list-style-type: none;
-}
-
-.FooterSocial {
-	@extend .columns;
-	@extend .four;
-}
-
-.FooterLegal {
-	margin-bottom: 1rem;
-	font-size: 1rem;
-	font-weight: lighter;
-	text-align: center;
+.Footer__Legal {
+	margin: { bottom: 1rem; };
+	font: { size: 1rem; weight: lighter; };
+	text: { align: center; };
 
 	span {
 		&:not(:first-child) {

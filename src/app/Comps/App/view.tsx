@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { SettingsState } from 'Actions/Settings';
 import Footer from 'App/Footer';
 import Header from 'App/Header';
@@ -7,7 +9,7 @@ import HomePage from 'Pages/Home';
 import PageDetail from 'Pages/PageDetail';
 import PostDetail from 'Pages/PostDetail';
 import TagDetail from 'Pages/TagDetail';
-import * as React from 'react';
+
 import { Route, Switch } from 'react-router-dom';
 
 import * as Styles from './style.scss';
