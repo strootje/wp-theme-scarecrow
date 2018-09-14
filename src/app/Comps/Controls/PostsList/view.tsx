@@ -1,26 +1,28 @@
+import * as React from 'react';
+
 import { PostsState } from 'Actions/Posts';
 import Link from 'Controls/Link';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
 import MoreList from 'Partials/MoreList';
-import * as React from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+
+import { FormattedMessage } from 'react-intl';
 
 import * as Styles from './style.scss';
 
-interface OwnProps {
-	perPage: number
-}
-
-export type DispatchProps = {
+export interface DispatchProps {
 	GetPosts: (vars: { first?: number, last?: number, before?: string, after?: string }) => void
 }
 
-type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
+type OwnProps = React.HTMLAttributes<PostList> & {
+	perPage: number
+};
+
+type Props = OwnProps & DispatchProps & {
 	Posts: PostsState
 };
 
-export default class extends MoreList<Post, OwnProps, {}> {
+export default class PostList extends MoreList<Post, OwnProps, Props> {
 	static defaultProps: OwnProps = {
 		perPage: 2
 	}
@@ -28,7 +30,7 @@ export default class extends MoreList<Post, OwnProps, {}> {
 	protected get Sorted(): Paged<Post>[] {
 		const {
 			Posts: { posts }
-		} = this.props as Props;
+		} = this.props;
 
 		return posts.sort((a, b) => b.node.Date.getTime() - a.node.Date.getTime());
 	}
@@ -37,7 +39,7 @@ export default class extends MoreList<Post, OwnProps, {}> {
 		const {
 			perPage,
 			GetPosts
-		} = this.props as Props;
+		} = this.props;
 
 		GetPosts({ first: perPage, after: after });
 	}

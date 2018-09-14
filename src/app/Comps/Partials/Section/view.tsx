@@ -1,6 +1,8 @@
 import Names from 'classnames';
 import * as React from 'react';
 
+import BaseComponent from 'Partials/BaseComponent';
+
 import Column from 'Partials/Section/Column';
 import Row from 'Partials/Section/Row/view';
 
@@ -17,7 +19,9 @@ export interface DispatchProps {
 type Props = & OwnProps & DispatchProps & {
 };
 
-export default class Section extends React.Component<OwnProps, {}> {
+const x = class extends React.Component<React.HTMLAttributes<{}>, {}> { render(): JSX.Element { return (<section className={this.props.className}>{this.props.children}</section>); } };
+
+export default class Section extends BaseComponent<OwnProps, Props> {
 	static Row = Row;
 	static Column = Column
 	static defaultProps: OwnProps = {
@@ -29,7 +33,7 @@ export default class Section extends React.Component<OwnProps, {}> {
 			className,
 			children,
 			hero
-		} = this.props as Props;
+		} = this.props;
 
 		const _render = () => (
 			<section className={Names(className, Styles.container)}>

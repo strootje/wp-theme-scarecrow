@@ -25,7 +25,7 @@ export default class Row extends React.Component<OwnProps, {}> {
 			className,
 			children,
 			columns
-		} = this.props as Props;
+		} = this.props;
 
 		return (
 			<div className={Names(className, Styles.columns, columns)}>

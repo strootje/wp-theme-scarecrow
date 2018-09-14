@@ -1,30 +1,33 @@
+import * as React from 'react';
+
 import { PostsState } from 'Actions/Posts';
 import Loader from 'Controls/Loader';
 import Post from 'Models/Post';
-import * as React from 'react';
+import BaseComponent from 'Partials/BaseComponent';
+
 import { match } from 'react-router';
 
-const style = require('./style');
-
-interface OwnProps {
-}
+import * as Styles from './style.scss';
 
 export interface DispatchProps {
 	GetPostByUri: (postTitle: string) => void
 }
 
-type Props = React.HTMLAttributes<{}> & OwnProps & DispatchProps & {
+type OwnProps = React.HTMLAttributes<PostDetail> & {
+};
+
+type Props = OwnProps & DispatchProps & {
 	match: match<{ postUri: string }>
 	Posts: PostsState
 };
 
-export default class extends React.Component<OwnProps, {}> {
+export default class PostDetail extends BaseComponent<OwnProps, Props> {
 	componentWillMount(): void {
 		const {
 			match,
 			Posts: { posts },
 			GetPostByUri
-		} = this.props as Props;
+		} = this.props;
 
 		if (!posts.some(post => post.node.Link.search(match.params.postUri) >= 0)) {
 			GetPostByUri(match.params.postUri);
@@ -35,7 +38,7 @@ export default class extends React.Component<OwnProps, {}> {
 		const {
 			match,
 			Posts: { loading, posts }
-		} = this.props as Props;
+		} = this.props;
 
 		let post: Post;
 		if (loading) {
@@ -49,7 +52,7 @@ export default class extends React.Component<OwnProps, {}> {
 		}
 
 		return (
-			<section className={style.PostSection}>
+			<section className={Styles.PostSection}>
 				<article>
 					<header>
 						<h3>{post.Title}</h3>

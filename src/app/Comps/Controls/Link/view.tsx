@@ -1,31 +1,35 @@
-import { SettingsState } from 'Actions/Settings';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
-interface OwnProps {
+import { SettingsState } from 'Actions/Settings';
+import BaseComponent from 'Partials/BaseComponent';
+
+import { Link as RouterLink } from 'react-router-dom';
+
+export interface DispatchProps {
+}
+
+type OwnProps = React.HTMLAttributes<Link> & {
 	to: string
 	title?: string
 	target?: string
-	className?: string
-	children: string
-}
+};
 
-type Props = React.HTMLAttributes<{}> & OwnProps & {
+type Props = OwnProps & DispatchProps & {
 	Settings: SettingsState
 };
 
-export default class extends React.Component<OwnProps, {}> {
+export default class Link extends BaseComponent<OwnProps, Props> {
 	render(): JSX.Element {
 		const {
 			to, title, target, className,
 			children: label,
-		} = this.props as Props;
+		} = this.props;
 
 		const localhost = 'localhost:9000';
 		const url = to.replace(`http://${localhost}`, '').replace('http://localhost:8080', '');
 
 		return (url.search(localhost) > -1)
-			? <Link to={url} {...{ title, target, className }}>{label}</Link>
+			? <RouterLink to={url} {...{ title, target, className }}>{label}</RouterLink>
 			: <a href={url} {...{ title, target, className }}>{label}</a>
 	}
 }

@@ -9,24 +9,28 @@ import HomePage from 'Pages/Home';
 import PageDetail from 'Pages/PageDetail';
 import PostDetail from 'Pages/PostDetail';
 import TagDetail from 'Pages/TagDetail';
+import BaseComponent from 'Partials/BaseComponent';
 
 import { Route, Switch } from 'react-router-dom';
 
 import * as Styles from './style.scss';
 
-interface OwnProps {
+export interface DispatchProps {
+	GetSettings: () => void
 }
 
-type Props = React.HTMLAttributes<{}> & OwnProps & {
+type OwnProps = React.HTMLAttributes<{}> & {
+}
+
+type Props = OwnProps & DispatchProps & {
 	Settings: SettingsState
-	GetSettings: () => void
 };
 
-export default class extends React.Component<OwnProps, {}> {
+export default class extends BaseComponent<OwnProps, Props> {
 	componentWillMount() {
 		const {
 			GetSettings
-		} = this.props as Props;
+		} = this.props;
 
 		GetSettings();
 	}
@@ -34,7 +38,7 @@ export default class extends React.Component<OwnProps, {}> {
 	render(): JSX.Element {
 		const {
 			Settings,
-		} = this.props as Props;
+		} = this.props;
 
 		if (Settings.loading) {
 			return (<Loader />);

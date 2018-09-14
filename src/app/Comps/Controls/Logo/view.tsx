@@ -1,21 +1,24 @@
-import { SettingsState } from 'Actions/Settings';
-import Link from 'Controls/Link';
 import * as React from 'react';
 
-const style = require('./style');
+import { SettingsState } from 'Actions/Settings';
+import Link from 'Controls/Link';
+import BaseComponent from 'Partials/BaseComponent';
 
-interface OwnProps {
+export interface DispatchProps {
 }
 
-type Props = React.HTMLAttributes<{}> & OwnProps & {
+type OwnProps = React.HTMLAttributes<Logo> & {
+};
+
+type Props = OwnProps & {
 	Settings: SettingsState
 };
 
-export default class extends React.Component<OwnProps, {}> {
+export default class Logo extends BaseComponent<OwnProps, Props> {
 	render(): JSX.Element {
 		const {
 			Settings
-		} = this.props as Props;
+		} = this.props;
 
 		return (
 			<Link to='/'>{Settings.Title}</Link>

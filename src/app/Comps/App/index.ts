@@ -1,8 +1,9 @@
-import { FetchSettings } from 'Actions/Settings/FetchSettings';
 import Connect from 'Hocs/Connect';
 
-import view from './view';
+import { FetchSettings } from 'Actions/Settings/FetchSettings';
 
-export default Connect(view, dispatch => ({
+import View, { DispatchProps } from './view';
+
+export default Connect<DispatchProps>(View, dispatch => ({
 	GetSettings: () => dispatch(FetchSettings())
 }));

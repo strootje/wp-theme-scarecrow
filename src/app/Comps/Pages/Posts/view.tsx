@@ -1,15 +1,18 @@
-import PostsList from 'Controls/PostsList';
 import * as React from 'react';
 
-const style = require('./style');
+import PostsList from 'Controls/PostsList';
+import BaseComponent from 'Partials/BaseComponent';
 
-interface OwnProps {
+export interface DispatchProps {
 }
 
-type Props = React.HTMLAttributes<{}> & OwnProps & {
+type OwnProps = React.HTMLAttributes<Posts> & {
+}
+
+type Props = OwnProps & DispatchProps & {
 };
 
-export default class extends React.Component<OwnProps, {}> {
+export default class Posts extends BaseComponent<OwnProps, Props> {
 	render(): JSX.Element {
 		return (
 			<PostsList />

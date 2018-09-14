@@ -1,13 +1,14 @@
-import WordpressClient from 'Clients/WordpressClient';
 import * as React from 'react';
+
+import WordpressClient from 'Clients/WordpressClient';
+
 import { ApolloProvider } from 'react-apollo';
 
-interface OwnProps {
+type OwnProps = React.HTMLAttributes<ApiProvider> & {
 	endpoint: string,
-	children: any
 }
 
-export default class extends React.Component<OwnProps, {}> {
+export default class ApiProvider extends React.Component<OwnProps> {
 	private readonly client: WordpressClient;
 
 	constructor(props: OwnProps) {

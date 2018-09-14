@@ -1,7 +1,18 @@
-import Link from 'Controls/Link';
 import * as React from 'react';
 
-export default class extends React.Component<{}, {}> {
+import Link from 'Controls/Link';
+import BaseComponent from 'Partials/BaseComponent';
+
+export interface DispatchProps {
+}
+
+type OwnProps = React.HTMLAttributes<StackoverflowBadge> & {
+};
+
+type Props = OwnProps & DispatchProps & {
+};
+
+export default class StackoverflowBadge extends BaseComponent<OwnProps, Props> {
 	render(): JSX.Element {
 		return (
 			<Link to={'https://stackoverflow.com/users/9943786/strootje'}>

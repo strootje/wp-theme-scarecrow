@@ -1,25 +1,30 @@
+import * as React from 'react';
+
 import { PagesState } from 'Actions/Pages';
 import { SettingsState } from 'Actions/Settings';
 import Loader from 'Controls/Loader';
 import Page from 'Models/Page';
 import PostsPage from 'Pages/Posts';
-import * as React from 'react';
+import BaseComponent from 'Partials/BaseComponent';
+
 import { match } from 'react-router';
 
-interface OwnProps {
-	pageId?: number
-	match?: match<{ pageUri: string }>
-}
-
-type Props = React.HTMLAttributes<{}> & OwnProps & {
-	Settings: SettingsState,
-	Pages: PagesState
-
+export interface DispatchProps {
 	GetPageByPageId: (pageId: number) => void
 	GetPageByUri: (uri: string) => void
+}
+
+type OwnProps = React.HTMLAttributes<Home> & {
+	pageId?: number
+	match?: match<{ pageUri: string }>
 };
 
-export default class extends React.Component<OwnProps, {}> {
+type Props = OwnProps & DispatchProps & {
+	Settings: SettingsState,
+	Pages: PagesState
+};
+
+export default class Home extends BaseComponent<OwnProps, Props> {
 	componentWillMount(): void {
 		const {
 			Pages: { pages },
@@ -27,7 +32,7 @@ export default class extends React.Component<OwnProps, {}> {
 
 			GetPageByPageId,
 			GetPageByUri
-		} = this.props as Props;
+		} = this.props;
 
 		if (pageId && !pages.some(page => page.PageId == pageId)) {
 			GetPageByPageId(pageId);
@@ -41,7 +46,7 @@ export default class extends React.Component<OwnProps, {}> {
 			Settings: { IsHomepageStatic, PageIdForPosts },
 			Pages: { loading, pages },
 			pageId, match
-		} = this.props as Props;
+		} = this.props;
 
 		if (loading) {
 			return (<Loader />);

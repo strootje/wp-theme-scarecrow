@@ -1,17 +1,20 @@
-import Paged from 'Models/Paged';
 import { bind } from 'decko';
 import * as React from 'react';
+
+import Paged from 'Models/Paged';
+import BaseComponent from 'Partials/BaseComponent';
+
 import { FormattedMessage } from 'react-intl';
 
-const style = require('./style');
+import * as Styles from './style.scss';
 
 interface OwnProps {
-}
+};
 
 interface OwnState {
 }
 
-export default abstract class <PagedType, TypedProps = {}, TypedState = {}> extends React.Component<OwnProps & TypedProps, OwnState & TypedState> {
+export default abstract class MoreList<PagedType, TypedOwnProps = {}, TypedProps extends TypedOwnProps = TypedOwnProps, TypedState = {}> extends BaseComponent<OwnProps & TypedOwnProps, TypedOwnProps & TypedProps, OwnState & TypedState> {
 	protected abstract get Sorted(): Paged<PagedType>[];
 	protected abstract FetchPage(after?: string): void;
 	protected abstract RenderItem(item: PagedType): JSX.Element;
@@ -27,7 +30,7 @@ export default abstract class <PagedType, TypedProps = {}, TypedState = {}> exte
 
 	render(): JSX.Element {
 		return (
-			<section className={style.ItemContainer}>
+			<section className={Styles.ItemContainer}>
 				<div>{this.Sorted.map(post =>
 					this.RenderItem(post.node)
 				)}</div>

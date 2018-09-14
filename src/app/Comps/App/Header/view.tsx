@@ -1,26 +1,31 @@
+import * as React from 'react';
+
 import { MenuState } from 'Actions/Menus';
 import Link from 'Controls/Link';
 import Logo from 'Controls/Logo';
 import SearchBar from 'Controls/SearchBar';
-import * as React from 'react';
+import BaseComponent from 'Partials/BaseComponent';
 
 const style = require('./style');
 
-interface OwnProps {
+export interface DispatchProps {
+	GetMenu: () => void
 }
 
-type Props = React.HTMLAttributes<{}> & OwnProps & {
-	Menus: MenuState
+type OwnProps = React.HTMLAttributes<Header> & {
+}
 
-	GetMenu: () => void
+type Props = OwnProps & DispatchProps & {
+	Menus: MenuState
 };
 
-export default class extends React.Component<OwnProps, {}> {
+export default class Header extends BaseComponent<OwnProps, Props> {
 	componentWillMount(): void {
 		const {
 			Menus: { header },
+
 			GetMenu
-		} = this.props as Props;
+		} = this.props;
 
 		if (!header) {
 			GetMenu();
@@ -30,7 +35,7 @@ export default class extends React.Component<OwnProps, {}> {
 	render(): JSX.Element {
 		const {
 			Menus: { header }
-		} = this.props as Props;
+		} = this.props;
 
 		return (
 			<header className={style.AppHeader}>

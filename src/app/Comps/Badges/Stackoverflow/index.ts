@@ -1,3 +1,5 @@
-import view from './view';
+import Connect from 'Hocs/Connect';
 
-export default view;
+import View, { DispatchProps } from './view';
+
+export default Connect<DispatchProps>(View);

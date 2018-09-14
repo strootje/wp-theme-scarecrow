@@ -17,7 +17,7 @@ export default class Row extends React.Component<OwnProps, {}> {
 		const {
 			className,
 			children
-		} = this.props as Props;
+		} = this.props;
 
 		return (
 			<div className={Names(className, Styles.row)}>

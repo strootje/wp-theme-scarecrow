@@ -1,27 +1,27 @@
-import { AppReducer } from 'Actions/Reducers';
-import { ApolloClient } from 'apollo-client';
 import * as React from 'react';
+import { applyMiddleware, createStore } from 'redux';
+
+import { AppReducer } from 'Actions/Reducers';
+import BaseComponent from 'Partials/BaseComponent';
+
+import { ApolloClient } from 'apollo-client';
 import { withApollo } from 'react-apollo';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
 import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
-interface OwnProps {
-	children: any
-}
+type OwnProps = React.HTMLAttributes<StoreProvider> & {
+};
 
-interface StateProps {
+type Props = OwnProps & {
 	client: ApolloClient<{}>
-}
+};
 
-type Props = OwnProps & StateProps;
-
-class StoreProvider extends React.Component<Props, {}> {
+class StoreProvider extends BaseComponent<OwnProps, Props> {
 	render(): JSX.Element {
 		const {
 			client
-		} = this.props as Props;
+		} = this.props;
 
 		const store = createStore(AppReducer, applyMiddleware(logger, thunk.withExtraArgument(client)));
 

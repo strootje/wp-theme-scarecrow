@@ -4,14 +4,12 @@ import { MenuState } from 'Actions/Menus';
 import { TagsState } from 'Actions/Tags';
 import AboutSection from 'Controls/AboutSection';
 import Link from 'Controls/Link';
+import BaseComponent from 'Partials/BaseComponent';
 
 import Section from 'Partials/Section/view';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 
 import * as Styles from './style.scss';
-
-type OwnProps = React.HTMLAttributes<Footer> & {
-}
 
 export interface DispatchProps {
 	GetTags: () => void
@@ -19,12 +17,15 @@ export interface DispatchProps {
 	GetSocialLinks: () => void
 }
 
+type OwnProps = React.HTMLAttributes<Footer> & {
+}
+
 type Props = OwnProps & DispatchProps & {
 	Tags: TagsState
 	Menus: MenuState
 };
 
-export default class Footer extends React.Component<OwnProps, {}> {
+export default class Footer extends BaseComponent<OwnProps, Props> {
 	componentWillMount(): void {
 		const {
 			Tags: { tags },
@@ -33,7 +34,7 @@ export default class Footer extends React.Component<OwnProps, {}> {
 			GetTags,
 			GetSitemap,
 			GetSocialLinks
-		} = this.props as Props;
+		} = this.props;
 
 		if (tags.length == 0) {
 			GetTags();
@@ -52,7 +53,7 @@ export default class Footer extends React.Component<OwnProps, {}> {
 		const {
 			Tags: { tags },
 			Menus: { sitemap, footer },
-		} = this.props as Props;
+		} = this.props;
 
 		return (
 			<div>
