@@ -9,7 +9,7 @@ import BaseComponent from 'Partials/BaseComponent';
 const style = require('./style');
 
 export interface DispatchProps {
-	GetMenu: () => void
+	GetMenu: () => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<Header> & {
@@ -20,7 +20,7 @@ type Props = OwnProps & DispatchProps & {
 };
 
 export default class Header extends BaseComponent<OwnProps, Props> {
-	componentWillMount(): void {
+	async componentWillMount(): Promise<void> {
 		const {
 			Menus: { header },
 
@@ -28,7 +28,7 @@ export default class Header extends BaseComponent<OwnProps, Props> {
 		} = this.props;
 
 		if (!header) {
-			GetMenu();
+			await GetMenu();
 		}
 	}
 

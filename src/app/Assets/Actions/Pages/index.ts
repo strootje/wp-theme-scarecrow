@@ -17,10 +17,7 @@ const reducers: any[] = [
 	FetchPageByUriReducer
 ];
 
-const dstate: PagesState = {
-	loading: false,
-	pages: []
-}
+const dstate: PagesState = [];
 
 export function PagesReducer(state: PagesState = dstate, action: PagesAction): PagesState {
 	return reducers.reduce((state, reducer) => reducer(state, action), state);

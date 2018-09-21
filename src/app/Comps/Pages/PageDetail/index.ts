@@ -1,11 +1,10 @@
-import Connect from 'Hocs/Connect';
-
 import { FetchPageByPageId } from 'Actions/Pages/FetchPageByPageId';
 import { FetchPageByUri } from 'Actions/Pages/FetchPageByUri';
+import Connect from 'Hocs/Connect';
 
 import View, { DispatchProps } from './view';
 
 export default Connect<DispatchProps>(View, dispatch => ({
-	GetPageByPageId: (pageId: number) => dispatch(FetchPageByPageId(pageId)),
-	GetPageByUri: (uri: string) => dispatch(FetchPageByUri(uri))
+	GetPageByPageId: async (pageId: number) => await dispatch(FetchPageByPageId(pageId)),
+	GetPageByUri: async (uri: string) => await dispatch(FetchPageByUri(uri))
 }));

@@ -13,7 +13,6 @@ enum Actions {
 };
 
 export interface FetchSettingsState extends ISettings {
-	loading: boolean
 };
 
 export type FetchSettingsAction =
@@ -26,21 +25,26 @@ const Result = (settings: Settings) => ({ type: Actions.Result, settings });
 const ErrorHandler = (error: Error) => ({ type: Actions.Error, error });
 
 export function FetchSettings() {
-	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
-		dispatch(Request());
+	return async (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
+		await dispatch(Request());
 
-		client.query<WP_FetchSettings>({ query: FetchSettingsQuery }).then(
-			({ data: { allSettings } }) => dispatch(Result(SettingsMapper.Map(allSettings))),
-			(error) => dispatch(ErrorHandler(error))
-		);
+		try {
+			const { data: { allSettings }} = await client.query<WP_FetchSettings>({
+				query: FetchSettingsQuery
+			});
+
+			return await dispatch(Result(SettingsMapper.Map(allSettings)));
+		} catch( error ) {
+			return await dispatch(ErrorHandler(error));
+		}
 	}
 };
 
 export function FetchSettingsReducer(state: FetchSettingsState, action: FetchSettingsAction): FetchSettingsState {
 	switch (action.type) {
-		case Actions.Request: return { ...state, loading: true };
-		case Actions.Result: return { ...state, loading: false, ...action.settings.ToObject };
-		case Actions.Error: return { ...state, loading: false };
+		case Actions.Request: return { ...state };
+		case Actions.Result: return { ...state, ...action.settings.ToObject };
+		case Actions.Error: return { ...state };
 		default: return state;
 	}
 };

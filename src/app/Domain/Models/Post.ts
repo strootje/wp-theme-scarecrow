@@ -1,4 +1,6 @@
 import Category from 'Models/Category';
+import Comment from 'Models/Comment';
+import Paged from 'Models/Paged';
 import Thumbnails from 'Models/Thumbnails';
 
 export default class {
@@ -10,6 +12,7 @@ export default class {
 	private readonly content: string;
 	private readonly categories: Category[];
 	private readonly thumbnails: Thumbnails;
+	private readonly comments: Paged<Comment>[];
 
 	constructor(id: string, postId: number, title: string, date: Date, link: string, content: string, categories: Category[], thumbnails: Thumbnails) {
 		this.key = id;
@@ -20,6 +23,7 @@ export default class {
 		this.content = content;
 		this.categories = categories;
 		this.thumbnails = thumbnails;
+		this.comments = [];
 	}
 
 	get Key(): string {
@@ -59,5 +63,9 @@ export default class {
 
 	get Thumbnails(): Thumbnails {
 		return this.thumbnails;
+	}
+
+	get Comments(): Paged<Comment>[] {
+		return this.comments;
 	}
 }

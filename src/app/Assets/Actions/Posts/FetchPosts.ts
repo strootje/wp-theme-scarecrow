@@ -13,10 +13,7 @@ enum Actions {
 	Error = 'FETCH_POSTS__ERROR'
 };
 
-export interface FetchPostsState {
-	loading: boolean,
-	posts: Paged<Post>[]
-};
+export type FetchPostsState = Paged<Post>[];
 
 export type FetchPostsAction =
 	| { type: Actions.Request }
@@ -28,22 +25,27 @@ const Result = (posts: Paged<Post>[]) => ({ type: Actions.Result, posts });
 const ErrorHandler = (error: Error) => ({ type: Actions.Error, error });
 
 export function FetchPosts(args: any) {
-	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
-		if (getState().Posts.loading) { return; }
-		dispatch(Request());
+	return async (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
+		await dispatch(Request());
 
-		client.query<WP_FetchPosts>({ query: FetchPostsQuery, variables: { ...args } }).then(
-			({ data: { posts } }) => dispatch(Result(PostMapper.MapAll(posts))),
-			(error) => dispatch(ErrorHandler(error))
-		);
+		try {
+			const { data: { posts } } = await client.query<WP_FetchPosts>({
+				query: FetchPostsQuery,
+				variables: { ...args }
+			});
+
+			return await dispatch(Result(PostMapper.MapAll(posts)));
+		} catch (error) {
+			return await dispatch(ErrorHandler(error));
+		}
 	}
 };
 
 export function FetchPostsReducer(state: FetchPostsState, action: FetchPostsAction): FetchPostsState {
 	switch (action.type) {
-		case Actions.Request: return { ...state, loading: true };
-		case Actions.Result: return { ...state, loading: false, posts: [...state.posts, ...action.posts] };
-		case Actions.Error: return { ...state, loading: false };
+		case Actions.Request: return [...state];
+		case Actions.Result: return [...state, ...action.posts];
+		case Actions.Error: return [...state];
 		default: return state;
 	}
 };

@@ -14,7 +14,6 @@ enum Actions {
 };
 
 export interface FetchMenuByLocationState {
-	loading: boolean,
 	header?: Menu,
 	sidebar?: Menu,
 	footer?: Menu,
@@ -31,21 +30,27 @@ const Result = (location: MenuLocation, menu: Menu) => ({ type: Actions.Result, 
 const ErrorHandler = (location: MenuLocation, error: Error) => ({ type: Actions.Error, location, error });
 
 export function FetchMenuByLocation(location: MenuLocation) {
-	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
-		dispatch(Request(location));
+	return async (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
+		await dispatch(Request(location));
 
-		client.query<WP_FetchMenuByLocation>({ query: FetchMenuByLocationQuery, variables: { location } }).then(
-			({ data: { menus } }) => dispatch(Result(location, MenuMapper.MapSingle(menus))),
-			(error) => dispatch(ErrorHandler(location, error))
-		);
+		try {
+			const { data: { menus } } = await client.query<WP_FetchMenuByLocation>({
+				query: FetchMenuByLocationQuery,
+				variables: { location }
+			});
+
+			return await dispatch(Result(location, MenuMapper.MapSingle(menus)));
+		} catch (error) {
+			return await dispatch(ErrorHandler(location, error));
+		}
 	}
 };
 
 export function FetchMenuByLocationReducer(state: FetchMenuByLocationState, action: FetchMenuByLocationAction): FetchMenuByLocationState {
 	switch (action.type) {
-		case Actions.Request: return { ...state, loading: true };
-		case Actions.Result: return { ...state, loading: false, [action.location.toLowerCase()]: action.menu };
-		case Actions.Error: return { ...state, loading: false };
+		case Actions.Request: return { ...state };
+		case Actions.Result: return { ...state, [action.location.toLowerCase()]: action.menu };
+		case Actions.Error: return { ...state };
 		default: return state;
 	}
 };

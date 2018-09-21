@@ -8,7 +8,7 @@ import { FetchTags } from 'Actions/Tags/FetchTags';
 import View, { DispatchProps } from './view';
 
 export default Connect<DispatchProps>(View, dispatch => ({
-	GetTags: () => dispatch(FetchTags()),
-	GetSitemap: () => dispatch(FetchMenuByLocation(MenuLocation.SITEMAP)),
-	GetSocialLinks: () => dispatch(FetchMenuByLocation(MenuLocation.FOOTER))
+	GetTags: async () => await dispatch(FetchTags()),
+	GetSitemap: async () => await dispatch(FetchMenuByLocation(MenuLocation.SITEMAP)),
+	GetSocialLinks: async () => await dispatch(FetchMenuByLocation(MenuLocation.FOOTER))
 }));

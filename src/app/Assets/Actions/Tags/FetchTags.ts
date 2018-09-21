@@ -12,10 +12,7 @@ enum Actions {
 	Error = 'FETCH_TAGS__ERROR'
 };
 
-export interface FetchTagsState {
-	loading: boolean,
-	tags: Tag[]
-};
+export type FetchTagsState = Tag[];
 
 export type FetchTagsAction =
 	| { type: Actions.Request }
@@ -27,22 +24,26 @@ const Result = (tags: Tag[]) => ({ type: Actions.Result, tags });
 const ErrorHandler = (error: Error) => ({ type: Actions.Error, error });
 
 export function FetchTags() {
-	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
-		if (getState().Tags.loading) { return; }
-		dispatch(Request());
+	return async (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
+		await dispatch(Request());
 
-		client.query<WP_FetchTags>({ query: FetchTagsQuery }).then(
-			({ data: { tags } }) => dispatch(Result(TagMapper.MapAll(tags))),
-			(error) => dispatch(ErrorHandler(error))
-		);
+		try {
+			const { data: { tags }} = await client.query<WP_FetchTags>({
+				query: FetchTagsQuery
+			});
+
+			return await dispatch(Result(TagMapper.MapAll(tags)));
+		} catch (error) {
+			return await dispatch(ErrorHandler(error));
+		}
 	}
 };
 
 export function FetchTagsReducer(state: FetchTagsState, action: FetchTagsAction): FetchTagsState {
 	switch (action.type) {
-		case Actions.Request: return { ...state, loading: true };
-		case Actions.Result: return { ...state, loading: false, tags: [...state.tags, ...action.tags] };
-		case Actions.Error: return { ...state, loading: false };
+		case Actions.Request: return [ ...state ];
+		case Actions.Result: return [ ...state, ...action.tags ];
+		case Actions.Error: return [ ...state ];
 		default: return state;
 	}
 };

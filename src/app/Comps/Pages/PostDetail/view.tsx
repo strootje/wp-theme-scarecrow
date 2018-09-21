@@ -1,16 +1,15 @@
-import * as React from 'react';
-
 import { PostsState } from 'Actions/Posts';
 import Loader from 'Controls/Loader';
 import Post from 'Models/Post';
 import BaseComponent from 'Partials/BaseComponent';
-
+import * as React from 'react';
 import { match } from 'react-router';
 
 import * as Styles from './style.scss';
 
 export interface DispatchProps {
-	GetPostByUri: (postTitle: string) => void
+	GetPostByUri: (postTitle: string) => Promise<any>
+	GetCommentsForPost: (postUri: string) => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<PostDetail> & {
@@ -22,29 +21,29 @@ type Props = OwnProps & DispatchProps & {
 };
 
 export default class PostDetail extends BaseComponent<OwnProps, Props> {
-	componentWillMount(): void {
+	async componentWillMount(): Promise<void> {
 		const {
 			match,
-			Posts: { posts },
-			GetPostByUri
+			Posts,
+			GetPostByUri,
+			GetCommentsForPost
 		} = this.props;
 
-		if (!posts.some(post => post.node.Link.search(match.params.postUri) >= 0)) {
-			GetPostByUri(match.params.postUri);
+		if (!Posts.some(post => post.node.Link.search(match.params.postUri) >= 0)) {
+			await GetPostByUri(match.params.postUri);
+			await GetCommentsForPost(match.params.postUri);
 		}
 	}
 
 	render(): JSX.Element {
 		const {
 			match,
-			Posts: { loading, posts }
+			Posts
 		} = this.props;
 
 		let post: Post;
-		if (loading) {
-			return (<Loader />)
-		} else if (posts.some(post => post.node.Link.search(match.params.postUri) >= 0)) {
-			post = posts.filter(post => post.node.Link.search(match.params.postUri))[0].node;
+		if (Posts.some(post => post.node.Link.search(match.params.postUri) >= 0)) {
+			post = Posts.filter(post => post.node.Link.search(match.params.postUri))[0].node;
 		} else {
 			return (
 				<p>no post</p>

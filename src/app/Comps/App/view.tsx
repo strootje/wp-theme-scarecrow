@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { SettingsState } from 'Actions/Settings';
 import Footer from 'App/Footer';
 import Header from 'App/Header';
@@ -10,13 +8,13 @@ import PageDetail from 'Pages/PageDetail';
 import PostDetail from 'Pages/PostDetail';
 import TagDetail from 'Pages/TagDetail';
 import BaseComponent from 'Partials/BaseComponent';
-
+import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import * as Styles from './style.scss';
 
 export interface DispatchProps {
-	GetSettings: () => void
+	GetSettings: () => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<{}> & {
@@ -27,22 +25,18 @@ type Props = OwnProps & DispatchProps & {
 };
 
 export default class extends BaseComponent<OwnProps, Props> {
-	componentWillMount() {
+	async componentWillMount() {
 		const {
 			GetSettings
 		} = this.props;
 
-		GetSettings();
+		await GetSettings();
 	}
 
 	render(): JSX.Element {
 		const {
-			Settings,
+			Settings
 		} = this.props;
-
-		if (Settings.loading) {
-			return (<Loader />);
-		}
 
 		const postPath = Settings.PermalinkStructure.replace('%postname%', ':postUri');
 		const categoryPath = Settings.CategoryBase != '' ? `/${Settings.CategoryBase}/:categoryUri`

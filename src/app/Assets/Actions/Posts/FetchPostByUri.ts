@@ -13,10 +13,7 @@ enum Actions {
 	Error = 'FETCH_POST_BY_URI__ERROR'
 };
 
-export interface FetchPostByUriState {
-	loading: boolean,
-	posts: Paged<Post>[]
-};
+export type FetchPostByUriState = Paged<Post>[];
 
 export type FetchPostByUriAction =
 	| { type: Actions.Request, uri: string }
@@ -28,21 +25,27 @@ const Result = (uri: string, post: Paged<Post>) => ({ type: Actions.Result, uri,
 const ErrorHandler = (uri: string, error: Error) => ({ type: Actions.Error, uri, error });
 
 export function FetchPostByUri(uri: string) {
-	return (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
-		dispatch(Request(uri));
+	return async (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
+		await dispatch(Request(uri));
 
-		client.query<WP_FetchPostByUri>({ query: FetchPostByUriQuery, variables: { uri } }).then(
-			({ data: { postBy } }) => dispatch(Result(uri, PostMapper.MapSingle(postBy))),
-			(error) => dispatch(ErrorHandler(uri, error))
-		);
+		try {
+			const { data: { postBy } } = await client.query<WP_FetchPostByUri>({
+				query: FetchPostByUriQuery,
+				variables: { uri }
+			});
+
+			return await dispatch(Result(uri, PostMapper.MapSingle(postBy)));
+		} catch (error) {
+			return await dispatch(ErrorHandler(uri, error));
+		}
 	}
 };
 
 export function FetchPostByUriReducer(state: FetchPostByUriState, action: FetchPostByUriAction): FetchPostByUriState {
 	switch (action.type) {
-		case Actions.Request: return { ...state, loading: true };
-		case Actions.Result: return { ...state, loading: false, posts: [...state.posts, action.post] };
-		case Actions.Error: return { ...state, loading: false };
+		case Actions.Request: return [...state];
+		case Actions.Result: return [...state, action.post];
+		case Actions.Error: return [...state];
 		default: return state;
 	}
 };

@@ -8,7 +8,6 @@ const reducers: ((state: SettingsState, action: SettingsAction) => SettingsState
 ];
 
 const dstate: SettingsState = {
-	loading: false,
 	Title: '...',
 	Description: '...',
 	Url: '...',

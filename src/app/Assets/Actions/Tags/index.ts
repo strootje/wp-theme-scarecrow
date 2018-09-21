@@ -7,10 +7,7 @@ const reducers: ((state: TagsState, action: TagsAction) => TagsState)[] = [
 	FetchTagsReducer
 ];
 
-const dstate: TagsState = {
-	loading: false,
-	tags: []
-}
+const dstate: TagsState = [];
 
 export function TagsReducer(state: TagsState = dstate, action: TagsAction): TagsState {
 	return reducers.reduce((state, reducer) => reducer(state, action), state);

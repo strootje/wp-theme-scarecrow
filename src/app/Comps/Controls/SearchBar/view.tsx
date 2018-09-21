@@ -1,7 +1,5 @@
-import * as React from 'react';
-
 import BaseComponent from 'Partials/BaseComponent';
-
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 export interface DispatchProps {

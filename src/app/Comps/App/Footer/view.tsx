@@ -11,9 +11,9 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import * as Styles from './style.scss';
 
 export interface DispatchProps {
-	GetTags: () => void
-	GetSitemap: () => void
-	GetSocialLinks: () => void
+	GetTags: () => Promise<any>
+	GetSitemap: () => Promise<any>
+	GetSocialLinks: () => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<Footer> & {
@@ -25,9 +25,9 @@ type Props = OwnProps & DispatchProps & {
 };
 
 export default class Footer extends BaseComponent<OwnProps, Props> {
-	componentWillMount(): void {
+	async componentWillMount(): Promise<void> {
 		const {
-			Tags: { tags },
+			Tags,
 			Menus: { sitemap, footer },
 
 			GetTags,
@@ -35,22 +35,26 @@ export default class Footer extends BaseComponent<OwnProps, Props> {
 			GetSocialLinks
 		} = this.props;
 
-		if (tags.length == 0) {
-			GetTags();
+		const tasks: Promise<any>[] = [];
+
+		if (Tags.length == 0) {
+			tasks.push(GetTags());
 		}
 
 		if (!sitemap) {
-			GetSitemap();
+			tasks.push(GetSitemap());
 		}
 
 		if (!footer) {
-			GetSocialLinks();
+			tasks.push(GetSocialLinks());
 		}
+
+		await Promise.all(tasks);
 	}
 
 	render(): JSX.Element {
 		const {
-			Tags: { tags },
+			Tags,
 			Menus: { sitemap, footer },
 		} = this.props;
 
@@ -59,9 +63,9 @@ export default class Footer extends BaseComponent<OwnProps, Props> {
 				<Section hero>
 					<Section.Row>
 						<Section.Column columns='eight'>
-							{tags && <div>
+							{Tags && <div>
 								<h5><FormattedMessage id='footer.tags.title' /></h5>
-								<ul className={Styles.Footer__TagsList}>{tags.sort((a, b) => a.Count - b.Count).map(item =>
+								<ul className={Styles.Footer__TagsList}>{Tags.sort((a, b) => a.Count - b.Count).map(item =>
 									<li key={item.Key}><Link to={item.Link}><code>{item.Name}</code></Link></li>
 								)}</ul>
 							</div>}

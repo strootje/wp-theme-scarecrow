@@ -8,10 +8,11 @@ import BaseComponent from 'Partials/BaseComponent';
 
 import Section from 'Partials/Section/view';
 
-import * as Styles from './style.scss';
+// import * as Styles from './style.scss';
+const Styles = require('./style');
 
 export interface DispatchProps {
-	GetPageById: (pageId: number) => void
+	GetPageById: (pageId: number) => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<AboutSection> & {
@@ -24,29 +25,29 @@ type Props = OwnProps & DispatchProps & {
 };
 
 export default class AboutSection extends BaseComponent<OwnProps, Props> {
-	componentWillMount(): void {
+	async componentWillMount(): Promise<void> {
 		const {
 			Settings: { PageIdForFooterAboutSection },
-			Pages: { pages },
+			Pages,
 
 			GetPageById
 		} = this.props;
 
-		if (!pages.some(page => page.PageId == PageIdForFooterAboutSection)) {
-			GetPageById(PageIdForFooterAboutSection);
+		if (!Pages.some(page => page.PageId == PageIdForFooterAboutSection)) {
+			await GetPageById(PageIdForFooterAboutSection);
 		}
 	}
 
 	render(): JSX.Element | null {
 		const {
 			Settings: { PageIdForFooterAboutSection },
-			Pages: { pages },
+			Pages,
 			location
 		} = this.props;
 
 		let page: null | Page = null;
-		if (pages.some(page => page.PageId == PageIdForFooterAboutSection && location.pathname.search(page.Uri) < 0)) {
-			page = pages.filter(page => page.PageId == PageIdForFooterAboutSection)[0];
+		if (Pages.some(page => page.PageId == PageIdForFooterAboutSection && location.pathname.search(page.Uri) < 0)) {
+			page = Pages.filter(page => page.PageId == PageIdForFooterAboutSection)[0];
 		}
 
 		if (!page) {

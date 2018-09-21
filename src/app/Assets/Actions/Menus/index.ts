@@ -10,7 +10,6 @@ const reducers: ((state: MenuState, action: MenuAction) => MenuState)[] = [
 ];
 
 const dstate: MenuState = {
-	loading: false
 }
 
 export function MenuReducer(state: MenuState = dstate, action: MenuAction): MenuState {

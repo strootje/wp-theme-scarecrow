@@ -1,17 +1,15 @@
-import * as React from 'react';
-
 import { PagesState } from 'Actions/Pages';
 import { SettingsState } from 'Actions/Settings';
 import Loader from 'Controls/Loader';
 import Page from 'Models/Page';
 import PostsPage from 'Pages/Posts';
 import BaseComponent from 'Partials/BaseComponent';
-
+import * as React from 'react';
 import { match } from 'react-router';
 
 export interface DispatchProps {
-	GetPageByPageId: (pageId: number) => void
-	GetPageByUri: (uri: string) => void
+	GetPageByPageId: (pageId: number) => Promise<any>
+	GetPageByUri: (uri: string) => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<Home> & {
@@ -25,38 +23,34 @@ type Props = OwnProps & DispatchProps & {
 };
 
 export default class Home extends BaseComponent<OwnProps, Props> {
-	componentWillMount(): void {
+	async componentWillMount(): Promise<void> {
 		const {
-			Pages: { pages },
+			Pages,
 			pageId, match,
 
 			GetPageByPageId,
 			GetPageByUri
 		} = this.props;
 
-		if (pageId && !pages.some(page => page.PageId == pageId)) {
-			GetPageByPageId(pageId);
-		} else if (match && !pages.some(page => match.url.search(page.Uri) >= 0)) {
-			GetPageByUri(match.url);
+		if (pageId && !Pages.some(page => page.PageId == pageId)) {
+			await GetPageByPageId(pageId);
+		} else if (match && !Pages.some(page => match.url.search(page.Uri) >= 0)) {
+			await GetPageByUri(match.url);
 		}
 	}
 
 	render(): JSX.Element {
 		const {
 			Settings: { IsHomepageStatic, PageIdForPosts },
-			Pages: { loading, pages },
+			Pages,
 			pageId, match
 		} = this.props;
 
-		if (loading) {
-			return (<Loader />);
-		}
-
 		let page: Page;
-		if (pageId && pages.some(page => page.PageId == pageId)) {
-			page = pages.filter(page => page.PageId == pageId)[0];
-		} else if (match && pages.some(page => match.url.search(page.Uri) >= 0)) {
-			page = pages.filter(page => match.url.search(page.Uri) >= 0)[0];
+		if (pageId && Pages.some(page => page.PageId == pageId)) {
+			page = Pages.filter(page => page.PageId == pageId)[0];
+		} else if (match && Pages.some(page => match.url.search(page.Uri) >= 0)) {
+			page = Pages.filter(page => match.url.search(page.Uri) >= 0)[0];
 		} else {
 			return (
 				<p>no page found</p>

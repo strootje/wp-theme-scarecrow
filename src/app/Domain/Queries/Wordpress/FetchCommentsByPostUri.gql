@@ -1,0 +1,15 @@
+#import "./Fragments/CommentFields.gql"
+
+query WP_FetchCommentsByPostUri( $uri: String! ) {
+	postBy( uri: $uri ) {
+		id
+		comments {
+			edges {
+				cursor
+				node {
+					...WP_CommentFields
+				}
+			}
+		}
+	}
+}

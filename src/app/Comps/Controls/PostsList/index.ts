@@ -1,9 +1,8 @@
-import Connect from 'Hocs/Connect';
-
 import { FetchPosts } from 'Actions/Posts/FetchPosts';
+import Connect from 'Hocs/Connect';
 
 import View, { DispatchProps } from './view';
 
 export default Connect<DispatchProps>(View, dispatch => ({
-	GetPosts: (args) => dispatch(FetchPosts(args))
+	GetPosts: async (args) => await dispatch(FetchPosts(args))
 }));

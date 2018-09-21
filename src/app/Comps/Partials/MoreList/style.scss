@@ -1,5 +1,13 @@
 @import 'Theme';
 
-.ItemContainer {
+.MoreList {
 	@extend .row;
+
+	& > footer {
+		text: { align: center; };
+
+		& > button {
+			width: 100%;
+		}
+	}
 }

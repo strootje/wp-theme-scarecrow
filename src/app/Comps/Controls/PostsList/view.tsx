@@ -1,17 +1,15 @@
-import * as React from 'react';
-
 import { PostsState } from 'Actions/Posts';
 import Link from 'Controls/Link';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
 import MoreList from 'Partials/MoreList';
-
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import * as Styles from './style.scss';
 
 export interface DispatchProps {
-	GetPosts: (vars: { first?: number, last?: number, before?: string, after?: string }) => void
+	GetPosts: (vars: { first?: number, last?: number, before?: string, after?: string }) => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<PostList> & {
@@ -29,19 +27,19 @@ export default class PostList extends MoreList<Post, OwnProps, Props> {
 
 	protected get Sorted(): Paged<Post>[] {
 		const {
-			Posts: { posts }
+			Posts
 		} = this.props;
 
-		return posts.sort((a, b) => b.node.Date.getTime() - a.node.Date.getTime());
+		return Posts.sort((a, b) => b.node.Date.getTime() - a.node.Date.getTime());
 	}
 
-	protected FetchPage(after?: string) {
+	protected async FetchPage(after?: string): Promise<void> {
 		const {
 			perPage,
 			GetPosts
 		} = this.props;
 
-		GetPosts({ first: perPage, after: after });
+		await GetPosts({ first: perPage, after: after });
 	}
 
 	protected RenderItem(item: Post): JSX.Element {

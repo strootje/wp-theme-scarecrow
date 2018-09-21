@@ -7,5 +7,5 @@ import { FetchMenuByLocation } from 'Actions/Menus/FetchMenuByLocation';
 import View, { DispatchProps } from './view';
 
 export default Connect<DispatchProps>(View, dispatch => ({
-	GetMenu: () => dispatch(FetchMenuByLocation(MenuLocation.HEADER))
+	GetMenu: async () => await dispatch(FetchMenuByLocation(MenuLocation.HEADER))
 }));

@@ -1,0 +1,5 @@
+fragment WP_CommentFields on Comment {
+	id
+	date
+	content
+}
