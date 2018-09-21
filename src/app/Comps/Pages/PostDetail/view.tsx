@@ -58,6 +58,14 @@ export default class PostDetail extends BaseComponent<OwnProps, Props> {
 					</header>
 
 					<div dangerouslySetInnerHTML={{ __html: post.Content }} />
+
+					<footer>
+						<section>{post.Comments.map(comment => (
+							<article key={comment.node.Key}>
+								<div dangerouslySetInnerHTML={{ __html: comment.node.Content }} />
+							</article>
+						))}</section>
+					</footer>
 				</article>
 			</section>
 		);
