@@ -6,7 +6,7 @@
 		"download:schema": "apollo schema:download",
 		"pregenerate:queries": "yarn download:schema",
 		"generate:queries": "apollo codegen:generate --target=typescript --addTypename",
-		"generate:types": "webpack",
+		"generate:types": "webpack || exit 0",
 		"generate": "yarn generate:queries && yarn generate:types",
 		"preanalyze:bundle": "yarn build --mode production",
 		"analyze:bundle": "source-map-explorer ./dist/app.bundle.js",
