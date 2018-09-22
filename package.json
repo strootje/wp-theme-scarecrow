@@ -70,6 +70,7 @@
 		"es6-promise": "*",
 		"html-webpack-plugin": "*",
 		"koa-connect": "*",
+		"linkstate": "*",
 		"lodash": "*",
 		"mini-css-extract-plugin": "*",
 		"node-sass": "*",

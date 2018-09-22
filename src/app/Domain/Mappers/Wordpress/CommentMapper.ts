@@ -5,15 +5,26 @@ import {
 	WP_FetchCommentsByPostUri_postBy, WP_FetchCommentsByPostUri_postBy_comments,
 	WP_FetchCommentsByPostUri_postBy_comments_edges_node
 } from 'Queries/Wordpress/__generated__/WP_FetchCommentsByPostUri';
+import {
+	WP_PostCommentWithPostId_createComment, WP_PostCommentWithPostId_createComment_comment
+} from 'Queries/Wordpress/__generated__/WP_PostCommentWithPostId';
 
 type WPComment = null
-	| WP_FetchCommentsByPostUri_postBy_comments_edges_node;
+	| WP_FetchCommentsByPostUri_postBy_comments_edges_node
+	| WP_PostCommentWithPostId_createComment_comment;
 type WPComments = null
 	| WP_FetchCommentsByPostUri_postBy_comments;
 type WPPost = null
 	| WP_FetchCommentsByPostUri_postBy;
 
 export default class CommentMapper {
+	static MapAfterCreate(comment: WP_PostCommentWithPostId_createComment | null): Comment {
+		if (comment == null) { throw Error('comment cannot be null'); }
+		if (comment.comment == null) { throw Error('comment.comment cannot be null'); }
+
+		return this.Map(comment.comment);
+	}
+
 	static Map(comment: WPComment): Comment {
 		if (comment == null) { throw Error('comment cannot be null'); }
 		if (comment.date == null) { throw Error('comment.date cannot be null'); }

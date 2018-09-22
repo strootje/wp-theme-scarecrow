@@ -1,0 +1,22 @@
+#import "./Fragments/CommentFields.gql"
+
+mutation WP_PostCommentWithPostId(
+	$postId: Int,
+	$date: String,
+	$author: String,
+	$authorEmail: String,
+	$content: String
+) {
+	createComment(input: {
+		clientMutationId: "",
+		postId: $postId,
+		date: $date,
+		author: $author,
+		authorEmail: $authorEmail,
+		content: $content
+	}) {
+		comment {
+			...WP_CommentFields
+		}
+	}
+}

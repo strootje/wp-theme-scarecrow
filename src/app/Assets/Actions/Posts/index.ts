@@ -5,22 +5,28 @@ import {
 import {
 	FetchPostByUriAction, FetchPostByUriReducer, FetchPostByUriState
 } from 'Actions/Posts/FetchPostByUri';
+import {
+	PostCommentWithPostIdAction, PostCommentWithPostIdReducer, PostCommentWithPostIdState
+} from 'Actions/Posts/PostCommentWithPostId';
 
 import { FetchPostsAction, FetchPostsReducer, FetchPostsState } from './FetchPosts';
 
 export type PostsState =
 	& FetchCommentsForPostByPostUriState
 	& FetchPostByUriState
-	& FetchPostsState;
+	& FetchPostsState
+	& PostCommentWithPostIdState;
 export type PostsAction =
 	| FetchCommentsForPostByPostUriAction
 	| FetchPostByUriAction
-	| FetchPostsAction;
+	| FetchPostsAction
+	| PostCommentWithPostIdAction;
 
 const reducers: any[] = [
 	FetchCommentsForPostByPostUriReducer,
 	FetchPostByUriReducer,
-	FetchPostsReducer
+	FetchPostsReducer,
+	PostCommentWithPostIdReducer
 ];
 
 const dstate: PostsState = [];

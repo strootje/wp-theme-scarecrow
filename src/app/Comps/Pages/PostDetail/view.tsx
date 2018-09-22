@@ -1,7 +1,9 @@
 import { PostsState } from 'Actions/Posts';
-import Loader from 'Controls/Loader';
 import Post from 'Models/Post';
 import BaseComponent from 'Partials/BaseComponent';
+import { bind } from 'decko';
+import linkedState from 'linkstate';
+import { find, includes } from 'lodash';
 import * as React from 'react';
 import { match } from 'react-router';
 
@@ -10,6 +12,7 @@ import * as Styles from './style.scss';
 export interface DispatchProps {
 	GetPostByUri: (postTitle: string) => Promise<any>
 	GetCommentsForPost: (postUri: string) => Promise<any>
+	PostCommentForPost: (postId: number, comment: any) => Promise<any>
 }
 
 type OwnProps = React.HTMLAttributes<PostDetail> & {
@@ -20,8 +23,15 @@ type Props = OwnProps & DispatchProps & {
 	Posts: PostsState
 };
 
-export default class PostDetail extends BaseComponent<OwnProps, Props> {
-	async componentWillMount(): Promise<void> {
+type State = {
+	post: Post,
+	comment: {
+		text: string
+	}
+};
+
+export default class PostDetail extends BaseComponent<OwnProps, Props, State> {
+	async componentDidMount(): Promise<void> {
 		const {
 			match,
 			Posts,
@@ -29,10 +39,35 @@ export default class PostDetail extends BaseComponent<OwnProps, Props> {
 			GetCommentsForPost
 		} = this.props;
 
-		if (!Posts.some(post => post.node.Link.search(match.params.postUri) >= 0)) {
-			await GetPostByUri(match.params.postUri);
+		if (!find(Posts, post => includes(post.node.Link, match.params.postUri))) {
+			const data = await GetPostByUri(match.params.postUri);
+			this.setState({ post: data.post.node });
 			await GetCommentsForPost(match.params.postUri);
 		}
+	}
+
+	@bind
+	private async submitComment(): Promise<void> {
+		const {
+			PostCommentForPost
+		} = this.props;
+
+		const {
+			post,
+			comment
+		} = this.state;
+
+		if (!post) {
+			return;
+		}
+
+		console.debug('submitting a comment... /// TODO ///', this.state);
+		await PostCommentForPost(post.PostId, {
+			author: 'test',
+			authorEmail: 'test@example.com',
+			date: new Date().toISOString(),
+			content: comment.text
+		});
 	}
 
 	render(): JSX.Element {
@@ -41,10 +76,8 @@ export default class PostDetail extends BaseComponent<OwnProps, Props> {
 			Posts
 		} = this.props;
 
-		let post: Post;
-		if (Posts.some(post => post.node.Link.search(match.params.postUri) >= 0)) {
-			post = Posts.filter(post => post.node.Link.search(match.params.postUri))[0].node;
-		} else {
+		let post = find(Posts, post => includes(post.node.Link, match.params.postUri));
+		if (!post) {
 			return (
 				<p>no post</p>
 			);
@@ -54,17 +87,23 @@ export default class PostDetail extends BaseComponent<OwnProps, Props> {
 			<section className={Styles.PostSection}>
 				<article>
 					<header>
-						<h3>{post.Title}</h3>
+						<h3>{post.node.Title}</h3>
 					</header>
 
-					<div dangerouslySetInnerHTML={{ __html: post.Content }} />
+					<div dangerouslySetInnerHTML={{ __html: post.node.Content }} />
 
 					<footer>
-						<section>{post.Comments.map(comment => (
-							<article key={comment.node.Key}>
-								<div dangerouslySetInnerHTML={{ __html: comment.node.Content }} />
-							</article>
-						))}</section>
+						<section>
+							<section>
+								<textarea onChange={linkedState(this, 'comment.text')}></textarea>
+								<input type='button' value='submit' onClick={this.submitComment} />
+							</section>
+
+							{post.node.Comments.map(comment => (
+								<article key={comment.node.Key}>
+									<div dangerouslySetInnerHTML={{ __html: comment.node.Content }} />
+								</article>
+							))}</section>
 					</footer>
 				</article>
 			</section>

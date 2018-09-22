@@ -15,10 +15,15 @@ enum Actions {
 
 export type FetchPostByUriState = Paged<Post>[];
 
+export type FetchcPostByUriActionRequest = { type: Actions.Request, uri: string };
+export type FetchcPostByUriActionResult = { type: Actions.Result, uri: string, post: Paged<Post> };
+export type FetchcPostByUriActionError = { type: Actions.Error, uri: string, error: Error };
+export type FetchPostByUriActionOutcome = FetchcPostByUriActionResult | FetchcPostByUriActionError;
+
 export type FetchPostByUriAction =
-	| { type: Actions.Request, uri: string }
-	| { type: Actions.Result, uri: string, post: Paged<Post> }
-	| { type: Actions.Error, uri: string, error: Error };
+	| FetchcPostByUriActionRequest
+	| FetchcPostByUriActionResult
+	| FetchcPostByUriActionError;
 
 const Request = (uri: string) => ({ type: Actions.Request, uri });
 const Result = (uri: string, post: Paged<Post>) => ({ type: Actions.Result, uri, post });
