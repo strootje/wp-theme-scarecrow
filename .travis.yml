@@ -5,6 +5,7 @@ nodejs:
 
 before_install:
   - yarn install
+  - yarn build
 
 install:
   - yarn build
