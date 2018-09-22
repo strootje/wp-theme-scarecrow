@@ -51,7 +51,8 @@ export function PostCommentWithPostIdReducer(state: PostCommentWithPostIdState, 
 		case Actions.Request: return [...state];
 		case Actions.Result:
 			state.filter(post => post.node.PostId == action.postId).forEach(post => {
-				post.node.Comments.push({ cursor: '', node: action.comment });
+				post.node.Comments.unshift({ cursor: '', node: action.comment });
+				post.node.Comments.sort((c1, c2) => c2.node.Date.getTime() - c1.node.Date.getTime());
 			});
 
 			return [...state];

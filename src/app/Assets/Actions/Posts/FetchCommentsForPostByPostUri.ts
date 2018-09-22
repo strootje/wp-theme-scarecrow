@@ -49,7 +49,10 @@ export function FetchCommentsForPostByPostUriReducer(state: FetchCommentsForPost
 		case Actions.Request: return [...state];
 		case Actions.Result:
 			state.filter(post => post.node.Link.search(action.postUri) >= 0).forEach(post => {
-				action.comments.forEach(comment => post.node.Comments.push(comment));
+				action.comments.forEach(comment => {
+					post.node.Comments.push(comment);
+					post.node.Comments.sort((c1, c2) => c2.node.Date.getTime() - c1.node.Date.getTime());
+				});
 			});
 
 			return [...state];
