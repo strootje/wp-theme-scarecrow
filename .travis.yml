@@ -9,7 +9,8 @@ nodejs:
 
 before_install:
   - yarn install
-  - yarn build
+  - yarn generate:queries
+  - yarn generate:types
 
 install:
   - yarn build
