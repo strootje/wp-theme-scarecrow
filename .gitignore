@@ -5,5 +5,5 @@ yarn*
 *.lock
 wp-theme-scarecrow.zip
 schema.json
-*.scss.d.ts
-__generated__
+#*.scss.d.ts
+#__generated__
