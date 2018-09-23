@@ -9,11 +9,9 @@ nodejs:
 
 before_install:
   - yarn install
-  - yarn generate:queries
-  - yarn generate:types
 
 install:
-  - yarn build
+  - yarn build --mode production
 
 script:
   - yarn test

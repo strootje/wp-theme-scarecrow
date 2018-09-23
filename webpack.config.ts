@@ -115,7 +115,7 @@ const config: Webpack.Configuration = {
 			/css\.d\.ts$/
 		]),
 
-		new CleanPlugin([
+		new CleanPlugin(!devmode ? [] : [
 			Paths.Dist(),
 			Bundler.OutPath
 		]),

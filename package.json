@@ -12,7 +12,6 @@
 		"analyze:bundle": "source-map-explorer ./dist/app.bundle.js",
 		"analyze:vendor": "source-map-explorer ./dist/app.vendor.js",
 		"test": "mocha-webpack --opts ./test/mocha.opts",
-		"prebuild": "yarn generate",
 		"build": "webpack --progress --colors",
 		"preserve": "yarn generate",
 		"serve": "ts-node --files ./src/app/server",
