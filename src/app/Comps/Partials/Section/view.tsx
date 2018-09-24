@@ -19,8 +19,6 @@ export interface DispatchProps {
 type Props = & OwnProps & DispatchProps & {
 };
 
-const x = class extends React.Component<React.HTMLAttributes<{}>, {}> { render(): JSX.Element { return (<section className={this.props.className}>{this.props.children}</section>); } };
-
 export default class Section extends BaseComponent<OwnProps, Props> {
 	static Row = Row;
 	static Column = Column

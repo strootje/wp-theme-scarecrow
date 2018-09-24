@@ -1,12 +1,9 @@
-import * as React from 'react';
-
 import { SettingsState } from 'Actions/Settings';
 import PostsList from 'Controls/PostsList';
-import Sidebar from 'Controls/Sidebar';
 import PageDetail from 'Pages/PageDetail';
 import BaseComponent from 'Partials/BaseComponent';
-
-import * as Styles from './style.scss';
+import PageWithSidebar from 'Partials/PageWithSidebar';
+import * as React from 'react';
 
 export interface DispatchProps {
 }
@@ -25,16 +22,10 @@ export default class extends BaseComponent<OwnProps, Props> {
 		} = this.props;
 
 		return (
-			<div className={Styles.Content}>
-				<div className={Styles.Page}>{IsHomepageStatic
-					? <PageDetail pageId={PageIdOnFront} />
-					: <PostsList />
-				}</div>
-
-				<div className={Styles.Sidebar}>
-					<Sidebar />
-				</div>
-			</div>
+			<PageWithSidebar>{IsHomepageStatic
+				? <PageDetail pageId={PageIdOnFront} />
+				: <PostsList />
+			}</PageWithSidebar>
 		);
 	}
 }

@@ -1,9 +1,9 @@
 #import "./Fragments/CommentFields.gql"
 
-query WP_FetchCommentsByPostUri( $uri: String! ) {
-	postBy( uri: $uri ) {
+query WP_FetchCommentsByPostId( $postId: Int! ) {
+	postBy( postId: $postId ) {
 		id
-		comments {
+		comments( first: 9 ) {
 			edges {
 				cursor
 				node {

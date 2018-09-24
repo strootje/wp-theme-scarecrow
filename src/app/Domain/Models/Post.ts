@@ -3,7 +3,7 @@ import Comment from 'Models/Comment';
 import Paged from 'Models/Paged';
 import Thumbnails from 'Models/Thumbnails';
 
-export default class {
+export default class Post {
 	private readonly key: string
 	private readonly postId: number;
 	private readonly title: string;

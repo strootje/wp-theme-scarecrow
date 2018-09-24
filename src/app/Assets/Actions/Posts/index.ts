@@ -1,7 +1,7 @@
 import {
-	FetchCommentsForPostByPostUriAction, FetchCommentsForPostByPostUriReducer,
-	FetchCommentsForPostByPostUriState
-} from 'Actions/Posts/FetchCommentsForPostByPostUri';
+	FetchCommentsForPostByPostIdAction, FetchCommentsForPostByPostIdReducer,
+	FetchCommentsForPostByPostIdState
+} from 'Actions/Posts/FetchCommentsForPostByPostId';
 import {
 	FetchPostByUriAction, FetchPostByUriReducer, FetchPostByUriState
 } from 'Actions/Posts/FetchPostByUri';
@@ -12,18 +12,18 @@ import {
 import { FetchPostsAction, FetchPostsReducer, FetchPostsState } from './FetchPosts';
 
 export type PostsState =
-	& FetchCommentsForPostByPostUriState
+	& FetchCommentsForPostByPostIdState
 	& FetchPostByUriState
 	& FetchPostsState
 	& PostCommentWithPostIdState;
 export type PostsAction =
-	| FetchCommentsForPostByPostUriAction
+	| FetchCommentsForPostByPostIdAction
 	| FetchPostByUriAction
 	| FetchPostsAction
 	| PostCommentWithPostIdAction;
 
 const reducers: any[] = [
-	FetchCommentsForPostByPostUriReducer,
+	FetchCommentsForPostByPostIdReducer,
 	FetchPostByUriReducer,
 	FetchPostsReducer,
 	PostCommentWithPostIdReducer

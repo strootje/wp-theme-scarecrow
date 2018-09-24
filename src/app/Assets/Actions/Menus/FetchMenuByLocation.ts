@@ -34,7 +34,7 @@ export function FetchMenuByLocation(location: MenuLocation) {
 		await dispatch(Request(location));
 
 		try {
-			const { data: { menus } } = await client.query<WP_FetchMenuByLocation>({
+			const { data: { menus }} = await client.query<WP_FetchMenuByLocation>({
 				query: FetchMenuByLocationQuery,
 				variables: { location }
 			});

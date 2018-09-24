@@ -2,10 +2,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: WP_FetchCommentsByPostUri
+// GraphQL query operation: WP_FetchCommentsByPostId
 // ====================================================
 
-export interface WP_FetchCommentsByPostUri_postBy_comments_edges_node {
+export interface WP_FetchCommentsByPostId_postBy_comments_edges_node {
   __typename: "Comment";
   /**
    * The globally unique identifier for the user
@@ -21,7 +21,7 @@ export interface WP_FetchCommentsByPostUri_postBy_comments_edges_node {
   content: string | null;
 }
 
-export interface WP_FetchCommentsByPostUri_postBy_comments_edges {
+export interface WP_FetchCommentsByPostId_postBy_comments_edges {
   __typename: "PostCommentsEdge";
   /**
    * A cursor for use in pagination
@@ -30,18 +30,18 @@ export interface WP_FetchCommentsByPostUri_postBy_comments_edges {
   /**
    * The item at the end of the edge
    */
-  node: WP_FetchCommentsByPostUri_postBy_comments_edges_node | null;
+  node: WP_FetchCommentsByPostId_postBy_comments_edges_node | null;
 }
 
-export interface WP_FetchCommentsByPostUri_postBy_comments {
+export interface WP_FetchCommentsByPostId_postBy_comments {
   __typename: "PostCommentsConnection";
   /**
    * Information to aid in pagination
    */
-  edges: (WP_FetchCommentsByPostUri_postBy_comments_edges | null)[] | null;
+  edges: (WP_FetchCommentsByPostId_postBy_comments_edges | null)[] | null;
 }
 
-export interface WP_FetchCommentsByPostUri_postBy {
+export interface WP_FetchCommentsByPostId_postBy {
   __typename: "Post";
   /**
    * The globally unique ID for the object
@@ -50,16 +50,16 @@ export interface WP_FetchCommentsByPostUri_postBy {
   /**
    * A collection of comment objects
    */
-  comments: WP_FetchCommentsByPostUri_postBy_comments | null;
+  comments: WP_FetchCommentsByPostId_postBy_comments | null;
 }
 
-export interface WP_FetchCommentsByPostUri {
+export interface WP_FetchCommentsByPostId {
   /**
    * A post object
    */
-  postBy: WP_FetchCommentsByPostUri_postBy | null;
+  postBy: WP_FetchCommentsByPostId_postBy | null;
 }
 
-export interface WP_FetchCommentsByPostUriVariables {
+export interface WP_FetchCommentsByPostIdVariables {
   postId: number;
 }

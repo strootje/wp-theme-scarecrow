@@ -3,6 +3,8 @@
 .Content {
 	@extend .container;
 	@extend .row;
+
+	width: 100%;
 }
 
 .Page {

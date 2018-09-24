@@ -2,20 +2,20 @@ import NoNull from 'Helpers/NoNull';
 import Comment from 'Models/Comment';
 import Paged from 'Models/Paged';
 import {
-	WP_FetchCommentsByPostUri_postBy, WP_FetchCommentsByPostUri_postBy_comments,
-	WP_FetchCommentsByPostUri_postBy_comments_edges_node
-} from 'Queries/Wordpress/__generated__/WP_FetchCommentsByPostUri';
+	WP_FetchCommentsByPostId_postBy, WP_FetchCommentsByPostId_postBy_comments,
+	WP_FetchCommentsByPostId_postBy_comments_edges_node
+} from 'Queries/Wordpress/__generated__/WP_FetchCommentsByPostId';
 import {
 	WP_PostCommentWithPostId_createComment, WP_PostCommentWithPostId_createComment_comment
 } from 'Queries/Wordpress/__generated__/WP_PostCommentWithPostId';
 
 type WPComment = null
-	| WP_FetchCommentsByPostUri_postBy_comments_edges_node
+	| WP_FetchCommentsByPostId_postBy_comments_edges_node
 	| WP_PostCommentWithPostId_createComment_comment;
 type WPComments = null
-	| WP_FetchCommentsByPostUri_postBy_comments;
+	| WP_FetchCommentsByPostId_postBy_comments;
 type WPPost = null
-	| WP_FetchCommentsByPostUri_postBy;
+	| WP_FetchCommentsByPostId_postBy;
 
 export default class CommentMapper {
 	static MapAfterCreate(comment: WP_PostCommentWithPostId_createComment | null): Comment {
