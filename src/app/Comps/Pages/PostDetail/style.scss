@@ -6,11 +6,11 @@
 
 	width: 100%;
 
-	header > h3 {
+	& > article > header > h2 {
 		text-align: center;
 	}
 
-	footer {
+	& > article > footer {
 		padding: { top: 3rem; };
 		border: { top: 1px dashed $tertiary-color; };
 	}

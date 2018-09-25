@@ -12,19 +12,14 @@ export interface DispatchProps {
 	GetPosts: (vars: { first?: number, last?: number, before?: string, after?: string }) => Promise<any>
 }
 
-type OwnProps = React.HTMLAttributes<PostList> & {
-	perPage: number
+type OwnProps = React.HTMLAttributes<PostsList> & {
 };
 
 type Props = OwnProps & DispatchProps & {
 	Posts: PostsState
 };
 
-export default class PostList extends MoreList<Post, OwnProps, Props> {
-	static defaultProps: OwnProps = {
-		perPage: 2
-	}
-
+export default class PostsList extends MoreList<Post, OwnProps, Props> {
 	protected get Sorted(): Paged<Post>[] {
 		const {
 			Posts

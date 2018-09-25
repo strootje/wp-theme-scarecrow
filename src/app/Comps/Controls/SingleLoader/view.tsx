@@ -5,14 +5,14 @@ import BaseComponent from 'Partials/BaseComponent';
 export interface DispatchProps {
 }
 
-type OwnProps = React.HTMLAttributes<Loader> & {
+type OwnProps = React.HTMLAttributes<SingleLoader> & {
 };
 
 type Props = OwnProps & DispatchProps & {
 };
 
-export default class Loader extends BaseComponent<OwnProps, Props> {
+export default class SingleLoader extends BaseComponent<OwnProps, Props> {
 	render(): JSX.Element {
-		return <span>---%%%---</span>
+		return (<span>loading...</span>);
 	}
 }

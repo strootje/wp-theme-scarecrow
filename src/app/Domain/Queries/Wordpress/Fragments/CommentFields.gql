@@ -2,4 +2,11 @@ fragment WP_CommentFields on Comment {
 	id
 	date
 	content
+	author {
+		... on CommentAuthor {
+			name
+			email
+			url
+		}
+	}
 }

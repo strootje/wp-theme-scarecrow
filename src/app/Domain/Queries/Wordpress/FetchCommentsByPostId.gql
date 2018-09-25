@@ -1,13 +1,17 @@
 #import "./Fragments/CommentFields.gql"
 
-query WP_FetchCommentsByPostId( $postId: Int! ) {
+query WP_FetchCommentsByPostId( $postId: Int!, $first: Int, $before: String, $last: Int, $after: String  ) {
 	postBy( postId: $postId ) {
 		id
-		comments( first: 9 ) {
+		comments( first: $first, before: $before, last: $last, after: $after ) {
 			edges {
 				cursor
 				node {
 					...WP_CommentFields
+
+					parent {
+						...WP_CommentFields
+					}
 				}
 			}
 		}

@@ -17,6 +17,10 @@ mutation WP_PostCommentWithPostId(
 	}) {
 		comment {
 			...WP_CommentFields
+
+			parent {
+				...WP_CommentFields
+			}
 		}
 	}
 }

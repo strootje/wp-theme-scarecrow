@@ -8,6 +8,13 @@
 
 	"searchbar.input.placeholder": "Search ...",
 
+	"commentslist.author.name.text": "On {date, date} {name} sayd:",
+
+	"postcommentform.name.placeholder": "Enter a name",
+	"postcommentform.email.placeholder": "Enter an email",
+	"postcommentform.content.placeholder": "Write a comment ...",
+	"postcommentform.submit.text": "Post Comment",
+
 	"footer.tags.title": "Tags",
 	"footer.social.title": "Social Links",
 	"footer.legal.powered.text": "Powered by {wordpress} and {theme}"

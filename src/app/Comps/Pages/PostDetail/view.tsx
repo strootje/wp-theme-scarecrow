@@ -3,6 +3,7 @@ import CommentSection from 'Controls/CommentSection';
 import Post from 'Models/Post';
 import BaseComponent from 'Partials/BaseComponent';
 import PageWithSidebar from 'Partials/PageWithSidebar';
+import Loader from 'Utils/Loader';
 import { find, includes } from 'lodash';
 import * as React from 'react';
 import { match } from 'react-router';
@@ -24,11 +25,6 @@ type Props = OwnProps & DispatchProps & {
 type State = {
 	post?: Post
 };
-
-const rempty = function <Type>(item: (Type | undefined), getter: (item: Type) => any) {
-	if (item != null) { return getter(item); }
-	return (<span>___empty___</span>);
-}
 
 export default class PostDetail extends BaseComponent<OwnProps, Props, State> {
 	state: State = {
@@ -55,10 +51,10 @@ export default class PostDetail extends BaseComponent<OwnProps, Props, State> {
 				<section className={Styles.PostSection}>
 					<article>
 						<header>
-							<h3>{rempty(post, post => post.Title)}</h3>
+							<h2>{Loader(post, post => post.Title)}</h2>
 						</header>
 
-						<div dangerouslySetInnerHTML={{ __html: rempty(post, post => post.Content) }} />
+						<div dangerouslySetInnerHTML={{ __html: Loader(post, post => post.Content) }} />
 
 						<footer>
 							{post && <CommentSection post={post} />}

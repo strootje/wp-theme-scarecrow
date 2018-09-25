@@ -7,12 +7,18 @@ import { FormattedMessage } from 'react-intl';
 import * as Styles from './style.scss';
 
 interface OwnProps {
+	perPage: number
 };
 
 interface OwnState {
 }
 
-export default abstract class MoreList<PagedType, TypedOwnProps = {}, TypedProps extends TypedOwnProps = TypedOwnProps, TypedState = {}> extends BaseComponent<OwnProps & TypedOwnProps, TypedOwnProps & TypedProps, OwnState & TypedState> {
+export default abstract class MoreList<PagedType, TypedOwnProps = {}, TypedProps = TypedOwnProps, TypedState = {}> extends BaseComponent<OwnProps & TypedOwnProps, TypedOwnProps & TypedProps, OwnState & TypedState> {
+	static defaultProps: OwnProps = {
+		// TODO: perPage: 9
+		perPage: 2
+	};
+
 	protected abstract get Sorted(): Paged<PagedType>[];
 	protected abstract FetchPage(after?: string): Promise<void>;
 	protected abstract RenderItem(item: PagedType): JSX.Element;

@@ -4,6 +4,7 @@ import Comment from 'Models/Comment';
 import Paged from 'Models/Paged';
 import Post from 'Models/Post';
 import { WP_FetchCommentsByPostId } from 'Queries/Wordpress/__generated__/WP_FetchCommentsByPostId';
+import { Paging } from 'Types/Paging';
 import { ApolloClient } from 'apollo-client';
 import * as Redux from 'redux';
 
@@ -26,14 +27,14 @@ const Request = (postId: number) => ({ type: Actions.Request, postId });
 const Result = (postId: number, comments: Paged<Comment>[]) => ({ type: Actions.Result, postId, comments });
 const ErrorHandler = (postId: number, error: Error) => ({ type: Actions.Error, postId, error });
 
-export function FetchCommentsForPostByPostId(postId: number) {
+export function FetchCommentsForPostByPostId(postId: number, paging: Paging) {
 	return async (dispatch: Redux.Dispatch, getState: () => AppState, client: ApolloClient<{}>) => {
 		await dispatch(Request(postId));
 
 		try {
 			const { data: { postBy } } = await client.query<WP_FetchCommentsByPostId>({
 				query: FetchCommentsByPostId,
-				variables: { postId: postId }
+				variables: { postId, ...paging }
 			});
 
 			return await dispatch(Result(postId, CommentMapper.MapAllFromPost(postBy)));

@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-export default abstract class BaseComponent<OwnProps, Props extends OwnProps = OwnProps, OwnState = {}> extends React.Component<OwnProps, OwnState> {
-	private _props: Props;
+export default abstract class BaseComponent<OwnProps, Props = OwnProps, OwnState = {}> extends React.Component<OwnProps & Props, OwnState> {
+	private _props: OwnProps & Props;
 
-	constructor(props: Props) {
+	constructor(props: OwnProps & Props) {
 		super(props);
 		this._props = props;
 	}
 
-	get props(): Props {
-		return this._props as Props;
+	get props(): OwnProps & Props {
+		return this._props as OwnProps & Props;
 	}
 
-	set props(value: Props) {
+	set props(value: OwnProps & Props) {
 		this._props = value;
 	}
 }

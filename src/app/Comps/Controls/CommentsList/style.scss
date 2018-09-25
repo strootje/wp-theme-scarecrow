@@ -1,0 +1,21 @@
+@import 'Theme';
+
+.CommentsListItem {
+	$spacing: .5rem;
+
+	padding: $spacing;
+	padding: { left: $spacing * 2 }
+	clear: both;
+	position: relative;
+	border-top: 1px solid $tertiary-color;
+
+	&:not(:first-child) {
+		border-top: 1px solid $tertiary-color;
+	}
+
+	header {
+		float: left;
+		padding: { right: $spacing; bottom: $spacing; }
+		margin: { top: $spacing; right: $spacing; bottom: $spacing; }
+	}
+}
