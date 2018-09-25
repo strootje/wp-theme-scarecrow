@@ -9,6 +9,7 @@ import * as React from 'react';
 import { match } from 'react-router';
 
 import * as Styles from './style.scss';
+import DetailSection from 'Partials/DetailSection/view';
 
 export interface DispatchProps {
 	GetPostByUri: (postTitle: string) => Promise<any>
@@ -48,19 +49,13 @@ export default class PostDetail extends BaseComponent<OwnProps, Props, State> {
 
 		return (
 			<PageWithSidebar>
-				<section className={Styles.PostSection}>
-					<article>
-						<header>
-							<h2>{Loader(post, post => post.Title)}</h2>
-						</header>
+				<DetailSection title={Loader(post, post => post.Title)}>
+					<div dangerouslySetInnerHTML={{ __html: Loader(post, post => post.Content) }} />
 
-						<div dangerouslySetInnerHTML={{ __html: Loader(post, post => post.Content) }} />
-
-						<footer>
-							{post && <CommentSection post={post} />}
-						</footer>
-					</article>
-				</section>
+					<footer>
+						{post && <CommentSection post={post} />}
+					</footer>
+				</DetailSection>
 			</PageWithSidebar>
 		);
 	}

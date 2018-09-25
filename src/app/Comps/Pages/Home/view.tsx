@@ -1,8 +1,7 @@
 import { SettingsState } from 'Actions/Settings';
-import PostsList from 'Controls/PostsList';
 import PageDetail from 'Pages/PageDetail';
+import PostsPage from 'Pages/Posts';
 import BaseComponent from 'Partials/BaseComponent';
-import PageWithSidebar from 'Partials/PageWithSidebar';
 import * as React from 'react';
 
 export interface DispatchProps {
@@ -21,11 +20,9 @@ export default class extends BaseComponent<OwnProps, Props> {
 			Settings: { IsHomepageStatic, PageIdOnFront }
 		} = this.props;
 
-		return (
-			<PageWithSidebar>{IsHomepageStatic
-				? <PageDetail pageId={PageIdOnFront} />
-				: <PostsList />
-			}</PageWithSidebar>
+		return (IsHomepageStatic
+			? <PageDetail pageId={PageIdOnFront} />
+			: <PostsPage />
 		);
 	}
 }

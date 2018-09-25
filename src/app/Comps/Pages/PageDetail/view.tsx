@@ -4,8 +4,12 @@ import Loader from 'Controls/Loader';
 import Page from 'Models/Page';
 import PostsPage from 'Pages/Posts';
 import BaseComponent from 'Partials/BaseComponent';
+import PageWithSidebar from 'Partials/PageWithSidebar';
+import { find, includes } from 'lodash';
 import * as React from 'react';
 import { match } from 'react-router';
+import Post from 'Models/Post';
+import DetailSection from 'Partials/DetailSection/view';
 
 export interface DispatchProps {
 	GetPageByPageId: (pageId: number) => Promise<any>
@@ -22,8 +26,15 @@ type Props = OwnProps & DispatchProps & {
 	Pages: PagesState
 };
 
-export default class Home extends BaseComponent<OwnProps, Props> {
-	async componentWillMount(): Promise<void> {
+type State = {
+	page?: Page
+};
+
+export default class Home extends BaseComponent<OwnProps, Props, State> {
+	state: State = {
+	};
+
+	async componentDidMount(): Promise<void> {
 		const {
 			Pages,
 			pageId, match,
@@ -32,37 +43,31 @@ export default class Home extends BaseComponent<OwnProps, Props> {
 			GetPageByUri
 		} = this.props;
 
-		if (pageId && !Pages.some(page => page.PageId == pageId)) {
-			await GetPageByPageId(pageId);
-		} else if (match && !Pages.some(page => match.url.search(page.Uri) >= 0)) {
-			await GetPageByUri(match.url);
+		if (pageId && !find(Pages, page => page.PageId == pageId)) {
+			const data = await GetPageByPageId(pageId);
+			this.setState({ page: data.page });
+		} else if (match && !find(Pages, page => includes(match.url, page.Uri))) {
+			const data = await GetPageByUri(match.url);
+			this.setState({ page: data.page });
+		} else {
+			throw Error('missing pageId or match`url`');
 		}
 	}
 
 	render(): JSX.Element {
-		const {
-			Settings: { IsHomepageStatic, PageIdForPosts },
-			Pages,
-			pageId, match
-		} = this.props;
+		const { Settings: { IsHomepageStatic, PageIdForPosts } } = this.props;
+		const { page } = this.state;
 
-		let page: Page;
-		if (pageId && Pages.some(page => page.PageId == pageId)) {
-			page = Pages.filter(page => page.PageId == pageId)[0];
-		} else if (match && Pages.some(page => match.url.search(page.Uri) >= 0)) {
-			page = Pages.filter(page => match.url.search(page.Uri) >= 0)[0];
-		} else {
-			return (
-				<p>no page found</p>
-			);
+		if (!page) {
+			return (<p>no page found</p>);
 		}
 
-		if (IsHomepageStatic && page.PageId == PageIdForPosts) {
-			return (<PostsPage />);
-		}
-
-		return (
-			<p>{page.Title}</p>
-		);
+		return ((IsHomepageStatic && page.PageId == PageIdForPosts) ? <PostsPage /> : (
+			<PageWithSidebar>
+				<DetailSection title={page.Title}>
+					<div dangerouslySetInnerHTML={{ __html: page.Content }} />
+				</DetailSection>
+			</PageWithSidebar>
+		));
 	}
 }

@@ -45,3 +45,5 @@ export const omega: string;
 export const clearfix: string;
 export const clear: string;
 export const alignleft: string;
+export const DetailSection: string;
+export const detailSection: string;

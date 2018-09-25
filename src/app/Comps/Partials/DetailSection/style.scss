@@ -1,0 +1,14 @@
+@import 'Theme';
+
+.DetailSection {
+	width: 100% !important;
+
+	& > .row > .columns > article > header > h2 {
+		text-align: center;
+	}
+
+	& > .row > .columns > article > footer {
+		padding: { top: 3rem; };
+		border: { top: 1px dashed $tertiary-color; };
+	}
+}
