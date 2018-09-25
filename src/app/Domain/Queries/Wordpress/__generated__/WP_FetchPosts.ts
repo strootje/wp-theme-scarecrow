@@ -17,6 +17,38 @@ export interface WP_FetchPosts_posts_pageInfo {
   hasPreviousPage: boolean;
 }
 
+export interface WP_FetchPosts_posts_edges_node_author {
+  __typename: "User";
+  /**
+   * The globally unique identifier for the user
+   */
+  id: string;
+  /**
+   * The Id of the user. Equivelant to WP_User-&gt;ID
+   */
+  userId: number | null;
+  /**
+   * Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property.
+   */
+  name: string | null;
+  /**
+   * Email of the user. This is equivalent to the WP_User-&gt;user_email property.
+   */
+  email: string | null;
+  /**
+   * The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename
+   */
+  nicename: string | null;
+  /**
+   * The slug for the user. This field is equivalent to WP_User-&gt;user_nicename
+   */
+  slug: string | null;
+  /**
+   * A website url that is associated with the user.
+   */
+  url: string | null;
+}
+
 export interface WP_FetchPosts_posts_edges_node_categories_nodes {
   __typename: "Category";
   /**
@@ -72,6 +104,10 @@ export interface WP_FetchPosts_posts_edges_node {
    */
   content: string | null;
   thumbnail: string | null;
+  /**
+   * The author field will return a queryable User type matching the post&#039;s author.
+   */
+  author: WP_FetchPosts_posts_edges_node_author | null;
   /**
    * A collection of categories objects
    */

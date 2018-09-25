@@ -1,4 +1,5 @@
 #import "./CategoryFields.gql"
+#import "./UserFields.gql"
 
 fragment WP_PostFields on Post {
 	id
@@ -9,6 +10,10 @@ fragment WP_PostFields on Post {
 	content
 
 	thumbnail
+
+	author {
+		...WP_UserFields
+	}
 
 	categories {
 		nodes {

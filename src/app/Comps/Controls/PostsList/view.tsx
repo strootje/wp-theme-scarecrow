@@ -68,8 +68,8 @@ export default class PostsList extends MoreList<Post, OwnProps, Props> {
 
 					<div className={Styles.PostListItem__Stats}>
 						<FormattedMessage id='postlist.stats.text' values={{
-							category: 'category-1',
-							author: 'author-1',
+							category: <Link to={item.FirstCategory.Link}>{item.FirstCategory.Name}</Link>,
+							author: <Link to={item.Author.Slug}>{item.Author.Nicename}</Link>,
 							date: item.Date
 						}} />
 					</div>

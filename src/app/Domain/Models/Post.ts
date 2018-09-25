@@ -2,6 +2,7 @@ import Category from 'Models/Category';
 import Comment from 'Models/Comment';
 import Paged from 'Models/Paged';
 import Thumbnails from 'Models/Thumbnails';
+import User from 'Models/User';
 
 export default class Post {
 	private readonly key: string
@@ -9,17 +10,19 @@ export default class Post {
 	private readonly title: string;
 	private readonly date: Date;
 	private readonly link: string;
+	private readonly author: User;
 	private readonly content: string;
 	private readonly categories: Category[];
 	private readonly thumbnails: Thumbnails;
 	private readonly comments: Paged<Comment>[];
 
-	constructor(id: string, postId: number, title: string, date: Date, link: string, content: string, categories: Category[], thumbnails: Thumbnails) {
+	constructor(id: string, postId: number, title: string, date: Date, link: string, author: User, content: string, categories: Category[], thumbnails: Thumbnails) {
 		this.key = id;
 		this.postId = postId;
 		this.title = title;
 		this.date = date;
 		this.link = link;
+		this.author = author;
 		this.content = content;
 		this.categories = categories;
 		this.thumbnails = thumbnails;
@@ -46,6 +49,10 @@ export default class Post {
 		return this.link;
 	}
 
+	get Author(): User {
+		return this.author;
+	}
+
 	get Content(): string {
 		return this.content;
 	}
@@ -59,6 +66,14 @@ export default class Post {
 
 	get Categories(): Category[] {
 		return this.categories;
+	}
+
+	get FirstCategory(): Category {
+		if (this.categories.length < 1) {
+			throw Error('requires atleast 1 category');
+		}
+
+		return this.categories[0];
 	}
 
 	get Thumbnails(): Thumbnails {

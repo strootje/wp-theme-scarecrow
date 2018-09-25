@@ -6,6 +6,7 @@ import Post from 'Models/Post';
 import {
 	WP_FetchPosts_posts, WP_FetchPosts_posts_edges_node
 } from 'Queries/Wordpress/__generated__/WP_FetchPosts';
+import UserMapper from 'Mappers/Wordpress/UserMapper';
 
 type WPPost = WP_FetchPosts_posts_edges_node | null;
 type WPPosts = WP_FetchPosts_posts | null;
@@ -23,6 +24,7 @@ export default class {
 			post.title,
 			new Date(post.date),
 			post.link,
+			UserMapper.Map(post.author),
 			post.content || '',
 			CategoryMapper.MapAll(post.categories),
 			ThumbnailsMapper.Map({

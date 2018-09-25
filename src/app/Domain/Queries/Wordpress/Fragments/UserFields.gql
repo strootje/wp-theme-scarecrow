@@ -1,0 +1,9 @@
+fragment WP_UserFields on User {
+	id
+	userId
+	name
+	email
+	nicename
+	slug
+	url
+}
